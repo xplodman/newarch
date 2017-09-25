@@ -12,7 +12,7 @@ if (!isset($_SESSION['5inarch']['authenticate']) and $_SESSION['5inarch']['authe
  */
 if (($_SESSION['5inarch']['authenticate']))
 {
-    if(time() - $_SESSION['5inarch']['timestamp'] > 900) { //subtract new timestamp from the old one
+    if(time() - $_SESSION['5inarch']['timestamp'] > 15000) { //subtract new timestamp from the old one
         header('Location: php/logout.php');
     } else {
         $_SESSION['5inarch']['timestamp'] = time(); //set new timestamp

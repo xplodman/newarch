@@ -6,7 +6,7 @@ include_once "php/checkauthentication.php";
 <html>
 
 <?php
-$pageTitle = 'Students';
+$pageTitle = 'X-Students';
 include_once "layout/header.php";
 ?>
 
@@ -21,17 +21,12 @@ include_once "layout/header.php";
         ?>
         <div class="row wrapper border-bottom white-bg page-heading animated fadeInLeftBig">
             <div class="col-sm-4">
-                <h2><p>Students</p></h2>
+                <h2><p>X students</p></h2>
             </div>
             <div class="col-sm-8">
                 <font face="myFirstFont">
                     <div class="title-action">
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addstudent"><i class="fa fa-plus"></i> Add</button>
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#Absence"><i class="fa fa-plus"></i> Absence</button>
                         <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#multiuseredit"><i class="fa fa-snowflake-o"></i> Multi edit</button>
-                        <a href="xstudents.php" class="btn btn-primary">
-                            <b>X students</b>
-                        </a>
                     </div>
                 </font>
             </div>
@@ -69,7 +64,7 @@ include_once "layout/header.php";
                                         <tbody>
 
                                         <?php
-                                        $result4 = mysqli_query($con,"select t1.* from students t1 where t1.sttype2 not in ('c','e') and t1.styear not in ('5')");
+                                        $result4 = mysqli_query($con,"select t1.* from students t1 where t1.sttype2 in ('c','e') or t1.styear in ('5')");
                                         while($row4 = mysqli_fetch_assoc($result4))
                                         {
                                             ?>
@@ -96,7 +91,7 @@ include_once "layout/header.php";
                                                     <?php echo $row4['stid'] ?>
                                                 </td><!--order column-->
                                                 <td>
-                                                    <a class="green" href="stprofile.php?student_id=<?php echo $row4['stid'] ?>"><?php echo $row4['stname'] ?></a>
+                                                    <a class="green" href="stprofile.php?profileid=<?php echo $row4['stid'] ?>"><?php echo $row4['stname'] ?></a>
                                                 </td>
                                                 <td><?php
                                                     if($row4['sttype2'] == "C"):
@@ -231,11 +226,7 @@ include_once "layout/modals.php";
                 visible: false
             }],
 
-            order: [2, 'desc'],
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
+            order: [2, 'desc']
         });
 
     });

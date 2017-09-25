@@ -23,6 +23,9 @@ include_once "layout/header.php";
             <div class="col-sm-4">
                 <h2><p>Professors</p></h2>
             </div>
+            <?php
+            if ($_SESSION['5inarch']['role'] == 1){
+                ?>
             <div class="col-sm-8">
                 <font face="myFirstFont">
                     <div class="title-action">
@@ -30,6 +33,9 @@ include_once "layout/header.php";
                     </div>
                 </font>
             </div>
+            <?php
+            }
+            ?>
         </div>
         <div class="wrapper wrapper-content animated fadeInRightBig">
             <div class="row">
@@ -202,6 +208,8 @@ include_once "layout/modals.php";
 <!-- Toastr -->
 <script src="js/plugins/toastr/toastr.min.js"></script>
 
+<!-- iCheck -->
+<script src="js/plugins/iCheck/icheck.min.js"></script>
 
 <script src="js/plugins/dataTables/datatables.min.js"></script>
 <script>
@@ -360,6 +368,14 @@ include_once "layout/modals.php";
             e.preventDefault();
             $(this).parent('div').remove(); //Remove field html
             x--; //Decrement field counter
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
         });
     });
 </script>

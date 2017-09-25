@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if (!empty($materials)) {
         $len = count($materials);
+        $query3 = mysqli_query($con, "DELETE FROM prmat WHERE professors_prid='$professorid';");
         for($x=0 ; $x < $len ; $x++){
             $query3 = mysqli_query($con, "INSERT INTO `5inarch`.`prmat` (`prmatid`, `professors_prid`, `material_matid`) VALUES (NULL, '$professorid', '$materials[$x]');");
         }
