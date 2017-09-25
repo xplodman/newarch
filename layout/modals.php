@@ -550,6 +550,111 @@
             </div>
         </div>
     </div>
+    <div class="modal inmodal" id="addreceiptin" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Insert a receipt in</h4>
+                </div>
+                <div class="modal-body">
+                    Information
+                    <form method="post" action="php/insertstudent.php" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Number </label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="form-field-2" name="number" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Recipint </label>
+                            <div class="col-sm-10">
+                                <select class="dual_select" multiple="multiple" size="16" name="material_matid1[]" id="form-field-13">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `professors`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo $row2['prid'] ?>"> <?php echo $row2['prname'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Donor </label>
+                            <div class="col-sm-10">
+                                <select class="dual_select" multiple="multiple" size="16" name="material_matid1[]" id="form-field-13">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `students`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo $row2['stid'] ?>">
+                                            <?php echo $row2['stname']." - ".$row2['styear']." - ".$row2['stgroup'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Amount </label>
+                            <div class="col-sm-10">
+                                <input type="text" value="750" name="amount"/>
+                            </div>
+                        </div>
+                        <div class="form-group" id="data_1">
+                            <label class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" name="date">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Reason</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-10">
+                                    <font size="3">
+                                        <span class="lbl">Course</span>
+                                        <input name="reason" type="radio" class="ace" value="p1" />
+                                        &nbsp; &nbsp;
+                                        <span class="lbl">Notes</span>
+                                        <input name="reason" type="radio" class="ace" value="p2" />
+                                        &nbsp; &nbsp;
+                                        <span class="lbl">Final revesion</span>
+                                        <input name="reason" type="radio" class="ace" value="p3" />
+                                        &nbsp; &nbsp;
+                                        <span class="lbl">Other</span>
+                                        <input name="reason" type="radio" class="ace" value="p4" />
+                                    </font>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Note </label>
+                            <div class="col-sm-10">
+                                <textarea id="form-field-8" class="autosize-transition form-control" name="description" ></textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                                <button class="btn btn-info" type="Submit" name="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </font>
 <div id="blueimp-gallery" class="blueimp-gallery">
     <div class="slides"></div>

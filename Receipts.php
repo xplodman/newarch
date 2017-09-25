@@ -26,8 +26,9 @@ include_once "layout/header.php";
             <div class="col-sm-8">
                 <font face="myFirstFont">
                     <div class="title-action">
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addimport"><i class="fa fa-plus"></i> Imoprt</button>
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addexport"><i class="fa fa-minus"></i> Export</button>
+                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptin"><i class="fa fa-plus"></i> In</button>
+                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptout"><i class="fa fa-minus"></i> Out</button>
+                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptaid"><i class="fa fa-minus"></i> Aid</button>
                     </div>
                 </font>
             </div>
@@ -52,170 +53,183 @@ include_once "layout/header.php";
                                         <tr>
                                             <th>extn</th>
                                             <th style="width:1em"></th>
-                                            <th style="width:1em"></th>
                                             <th style="width:1em"></th><!--order column-->
-                                            <th>From</th>
-                                            <th>To</th>
-                                            <th>Sign</th>
+                                            <?php
+                                            if ($_SESSION['5inarch']['role'] == 1){
+                                                ?>
+                                                <th style="width:4em">edit</th>
+                                                <?php
+                                            }
+                                            ?>
+                                            <th>Amount</th>
+                                            <th>Donor</th>
+                                            <th>Recipient</th>
                                             <th>Date</th>
+                                            <th>Reason</th>
                                             <th>Type</th>
+                                            <th>#</th>
+                                            <th>Note</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php
-                                        $result22 = mysqli_query($con,"
-                                                Select receipt.receiptid,
-                                                  receipt.receiptdate,
-                                                  receipt.receipttype,
-                                                  receipt.receiptsign,
-                                                  receipt.createddate,
-                                                  receipt.toid,
-                                                  receipt.fromid
-                                                From receipt") or die(mysqli_error($con));
+                                        $result22 = mysqli_query($con,"SELECT * FROM `tickets` ORDER BY `tickets`.`tiid` desc") or die(mysqli_error($con));
                                         while($row22 = mysqli_fetch_assoc($result22)) {
                                             ?>
-                                            <tr data-child-value="
-                                             <?php
-                                            if ($row22['receipttype'] == 1){
-                                                $result2 = mysqli_query($con,"
-Select Count(ownitem.ownitemid) As countitem,
-  ownitem.ownitemname,
-  ownitem.ownitemtype,
-  owncategory.owncategoryname,
-  receipt.receiptid
-From ownitem
-  Inner Join receipt On receipt.receiptid = ownitem.receiptinid
-  Inner Join owncategory On ownitem.owncategoryid = owncategory.owncategoryid
-Where receipt.receiptid = $row22[receiptid] AND ownitem.ownitemtype = '1'
-Group By ownitem.ownitemname,
-  owncategory.owncategoryname,
-  receipt.receiptid") or die(mysqli_error($con));
-                                                while($row2 = mysqli_fetch_assoc($result2)) {
-                                                    echo $row2['countitem']." - ".$row2['owncategoryname']." - ".$row2['ownitemname'];
-                                                    if (mysqli_num_rows($result2) > 1) {
-                                                        echo "<br>";
-                                                    }
-                                                }
-                                            }else{
-                                                $result2 = mysqli_query($con,"
-Select Count(ownitem.ownitemid) As countitem,
-  ownitem.ownitemname,
-  ownitem.ownitemtype,
-  owncategory.owncategoryname,
-  receipt.receiptid
-From ownitem
-  Inner Join receipt On receipt.receiptid = ownitem.receiptoutid
-  Inner Join owncategory On ownitem.owncategoryid = owncategory.owncategoryid
-Where receipt.receiptid = $row22[receiptid] AND ownitem.ownitemtype = '2'
-Group By ownitem.ownitemname,
-  owncategory.owncategoryname,
-  receipt.receiptid") or die(mysqli_error($con));
-                                                while($row2 = mysqli_fetch_assoc($result2)) {
-                                                    echo $row2['countitem']." - ".$row2['owncategoryname']." - ".$row2['ownitemname'];
-                                                    if (mysqli_num_rows($result2) > 1) {
-                                                        echo "<br>";
-                                                    }
-                                                }
-                                            }
-
-                                            ?> ">
-                                                <td>
-                                                    <?php
-                                                    if ($row22['receipttype'] == 1){
-                                                        $result2 = mysqli_query($con,"
-Select Count(ownitem.ownitemid) As countitem,
-  ownitem.ownitemname,
-  ownitem.ownitemtype,
-  owncategory.owncategoryname,
-  receipt.receiptid
-From ownitem
-  Inner Join receipt On receipt.receiptid = ownitem.receiptinid
-  Inner Join owncategory On ownitem.owncategoryid = owncategory.owncategoryid
-Where receipt.receiptid = $row22[receiptid] AND ownitem.ownitemtype = '1'
-Group By ownitem.ownitemname,
-  owncategory.owncategoryname,
-  receipt.receiptid") or die(mysqli_error($con));
-                                                        while($row2 = mysqli_fetch_assoc($result2)) {
-                                                            echo $row2['countitem']." - ".$row2['owncategoryname']." - ".$row2['ownitemname'];
-
-                                                        }
-                                                    }else{
-                                                        $result2 = mysqli_query($con,"
-Select Count(ownitem.ownitemid) As countitem,
-  ownitem.ownitemname,
-  ownitem.ownitemtype,
-  owncategory.owncategoryname,
-  receipt.receiptid
-From ownitem
-  Inner Join receipt On receipt.receiptid = ownitem.receiptoutid
-  Inner Join owncategory On ownitem.owncategoryid = owncategory.owncategoryid
-Where receipt.receiptid = $row22[receiptid] AND ownitem.ownitemtype = '2'
-Group By ownitem.ownitemname,
-  owncategory.owncategoryname,
-  receipt.receiptid") or die(mysqli_error($con));
-                                                        while($row2 = mysqli_fetch_assoc($result2)) {
-                                                            echo $row2['countitem']." - ".$row2['owncategoryname']." - ".$row2['ownitemname'];
-                                                        }
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <div class="lightBoxGallery">
-                                                        <?php
-                                                        $query = "SELECT * FROM `image` WHERE `receiptid` = $row22[receiptid]";
-                                                        $results = mysqli_query($con, $query);
-                                                        if (mysqli_num_rows($results)>0){
-
-                                                            foreach ($results as $newresults) {
-                                                                ?>
-                                                                <a href="data:image/jpeg;base64, <?php echo base64_encode($newresults['imagedata']) ?>" title="Image from Unsplash" data-gallery="#<?php echo $row22['receiptid'] ?>">
-                                                                <?php
-                                                            } ?>
-                                                                    <i class="fa fa-eye  fa-2x"></i></a>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </div>
+                                            <tr data-child-value=""> <!--info plus-->
+                                                <td><!--search in info plus-->
                                                 </td>
                                                 <td class="details-control"></td>
-                                                <td><?php echo $row22['receiptid'] ?></td><!--order column-->
-                                                <td class="middle wrap"><!--from-->
-                                                    <?php
-                                                    if ($row22['receipttype'] == 1){
-                                                            $result222 = mysqli_query($con,"Select `from`.fromname From `from` Where `from`.fromid = $row22[fromid]") or die(mysqli_error($con));
-                                                        while($row222 = mysqli_fetch_assoc($result222)) {
-                                                            echo $row222['fromname'];
-                                                        }
-                                                    }
-                                                    else{
-                                                        echo "Alex pic";
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td class="middle wrap"><!--to-->
-                                                    <?php
-                                                    if ($row22['receipttype'] == 1){
-                                                        echo "Alex pic";
-                                                    }else{
-                                                        $result222 = mysqli_query($con,"Select prosecution.prosecutionname From prosecution Where prosecution.prosecutionid = $row22[toid]") or die(mysqli_error($con));
-                                                        while($row222 = mysqli_fetch_assoc($result222)) {
-                                                            echo $row222['prosecutionname'];
-                                                        }
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td class="middle wrap">aaa</td>
-                                                <td class="middle wrap"><font size="3"><?php echo $row22['receiptdate'] ?></font></td>
+                                                <td>
+                                                    <?php echo $row22['tiid'] ?>
+                                                </td><!--order column-->
                                                 <td class="middle wrap">
-
                                                     <font size="3">
                                                         <?php
-                                                        if ($row22['receipttype'] == 1){
-                                                            echo "Import";
-                                                        }else{
-                                                            echo "Export";
+                                                        if ($_SESSION['5inarch']['role'] == 1){
+                                                            ?>
+                                                            <a class="green" href="receipt.php?receiptid=<?php echo $row22['tiid'] ?>"><?php echo $row22['tiid'] ?></a>
+                                                            <?php
                                                         }
                                                         ?>
+                                                    </font>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php echo $row22['tiamount'] ?>
+                                                    </font>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php
+                                                        if ($row22['tidonortype'] == "1")
+                                                        {
+                                                        $result=mysqli_query($con, "select * FROM professors where prid = $row22[tidonor];");
+                                                        while($x = mysqli_fetch_assoc($result))
+                                                        {	?>
+                                                <a class="green" href="prprofile.php?profileid=<?php echo $x['prid'] ?>"><?php echo $x['prname'] ?></a>
+                                                <?php
+                                                };
+                                                } elseif ($row22['tidonortype'] == "2")
+                                                {
+                                                    $result=mysqli_query($con, "select * FROM students where stid = $row22[tidonor];");
+                                                    while($x = mysqli_fetch_assoc($result))
+                                                    {	?>
+                                                        <a class="green" href="stprofile.php?profileid=<?php echo $x['stid'] ?>"><?php echo $x['stname'] ?></a>
+                                                        <?php
+                                                    };
+                                                }
+                                                elseif ($row22['tidonortype'] == "3")
+                                                {
+                                                    $result=mysqli_query($con, "select * FROM expenses where exid = $row22[tidonor];");
+                                                    while($x = mysqli_fetch_assoc($result))
+                                                    {	?>
+                                                        <a class="green" href="matprofile.php?profileid=<?php echo $x['matid'] ?>"><?php echo $x['matname'] ?></a>
+                                                        <?php
+                                                    };
+                                                }
+
+                                                ?>
+                                                    </font>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php
+                                                        if ($row22['tirecipienttype'] == "1")
+                                                        {
+                                                        $result=mysqli_query($con, "select * FROM professors where prid = $row22[tirecipient];");
+                                                        while($y = mysqli_fetch_assoc($result))
+                                                        {	?>
+                                                <a class="green" href="prprofile.php?profileid=<?php echo $y['prid'] ?>"><?php echo $y['prname'] ?></a>
+                                                <?php
+                                                };
+                                                } elseif ($row22['tirecipienttype'] == "2")
+                                                {
+                                                    $result=mysqli_query($con, "select * FROM students where stid = $row22[tirecipient];");
+                                                    while($y = mysqli_fetch_assoc($result))
+                                                    {	?>
+                                                        <a class="green" href="stprofile.php?profileid=<?php echo $y['stid'] ?>"><?php echo $y['stname'] ?></a>
+                                                        <?php
+                                                    };
+                                                }
+                                                elseif ($row22['tirecipienttype'] == "3")
+                                                {
+                                                    $result=mysqli_query($con, "select * FROM expenses where exid = $row22[tirecipient];");
+                                                    while($y = mysqli_fetch_assoc($result))
+                                                    {	?>
+                                                        <a class="green" href="exprofile.php?profileid=<?php echo $y['exid'] ?>"><?php echo $y['exname'] ?></a>
+                                                        <?php
+                                                    };
+                                                }
+
+                                                ?>
+                                                    </font>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php echo $row22['tirealdate'] ?>
+                                                    </font>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php
+                                                        if($row22['tireason'] == 'p1'):
+                                                            echo "كورس";
+                                                        elseif($row22['tireason'] == 'p2'):
+                                                            echo "مذكرات";
+                                                        elseif($row22['tireason'] == 'p3'):
+                                                            echo "مراجعة نهائية";
+                                                        elseif($row22['tireason'] == 'p4'):
+                                                            echo "آخري";
+                                                        elseif($row22['tireason'] == 'm0'):
+                                                            echo "دعم";
+                                                        elseif($row22['tireason'] == 'm1'):
+                                                            echo "سلفة";
+                                                        elseif($row22['tireason'] == 'm2'):
+                                                            echo "محمول";
+                                                        elseif($row22['tireason'] == 'm3'):
+                                                            echo "راتب";
+                                                        elseif($row22['tireason'] == 'm4'):
+                                                            echo "تصوير";
+                                                        elseif($row22['tireason'] == 'm5'):
+                                                            echo "طباعة";
+                                                        elseif($row22['tireason'] == 'm6'):
+                                                            echo "مواصلات";
+                                                        elseif($row22['tireason'] == 'm7'):
+                                                            echo "دعاية";
+                                                        elseif($row22['tireason'] == 'm8'):
+                                                            echo "مكافأة";
+                                                        elseif($row22['tireason'] == 'm9'):
+                                                            echo "آخري";
+                                                        elseif($row22['tireason'] == 'm10'):
+                                                            echo "أدوات مكتبية";
+                                                        endif;
+                                                        ?>
+                                                    </font>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php
+                                                        if($row22['titype'] == '1'):
+                                                            echo "إستلام";
+                                                        elseif($row22['titype'] == '2'):
+                                                            echo "صرف";
+                                                        elseif($row22['titype'] == '25'):
+                                                            echo "%دعم 25";
+                                                        elseif($row22['titype'] == '50'):
+                                                            echo "%دعم 50";
+                                                        endif;
+                                                        ?>
+                                                    </font>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php echo $row22['tinumber'] ?>
+                                                    </font>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php echo $row22['tidescription'] ?>
                                                     </font>
                                                 </td>
                                             </tr>
@@ -225,9 +239,12 @@ Group By ownitem.ownitemname,
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -301,11 +318,11 @@ include_once "layout/modals.php";
                 targets: [ 1 ]
             }],
             columnDefs: [{
-                targets: [ 0,3 ],
+                targets: [ 0,2 ],
                 visible: false
             }],
 
-            order: [3, 'desc']
+            order: [2, 'desc']
         });
 
     });
