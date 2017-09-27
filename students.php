@@ -32,9 +32,9 @@ include_once "layout/header.php";
                             <button class="btn btn-primary " type="button" data-toggle="modal"
                                     data-target="#addstudent"><i class="fa fa-plus"></i> Add
                             </button>
-                            <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#Absence">
-                                <i class="fa fa-plus"></i> Absence
-                            </button>
+                            <a href="absence.php" class="btn btn-primary">
+                                <i class="fa fa-address-book"></i> <b> Absence</b>
+                            </a>
                             <button class="btn btn-primary " type="button" data-toggle="modal"
                                     data-target="#multiuseredit"><i class="fa fa-snowflake-o"></i> Multi edit
                             </button>
@@ -440,6 +440,15 @@ include_once "layout/modals.php";
             $('#balance_content').slideDown();
         else
             $('#balance_content').slideUp();
+    });
+    $(document).ready(function () {
+        $('#nature_content').slideUp();
+    });
+    $('input[id="nature_check"]').click(function(){
+        if(this.checked)
+            $('#nature_content').slideDown();
+        else
+            $('#nature_content').slideUp();
     });
 </script>
 <script>

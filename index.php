@@ -1,6 +1,7 @@
 <?php
 include_once "php/connection.php";
- include_once "php/checkauthentication.php";
+include_once "php/checkauthentication.php";
+include_once "php/functions.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,12 +25,112 @@ include_once "layout/header.php";
                 <h2><p>Dashboard</p></h2>
             </div>
         </div>
+
         <div class="wrapper wrapper-content animated bounceInDown">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-3">
+                    <div class="widget-head-color-box navy-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h2 class="font-bold no-margins">
+                                First year
+                            </h2>
+                        </div>
+                        <img src="images/first-year-plan_0.png" height="120">
+                        <div>
+                            <h2 class="font-bold no-margins">
+                                <?php
+                                student_count("1");
+                                ?>
+                                 student
+                            </h2>
+                        </div>
+                        <div>
+                            <span>Gourp A : <?php student_summary("1","students.stgroup","A")?></span> |
+                            <span>Gourp B : <?php student_summary("1","students.stgroup","B")?></span> <br>
+                            <span>Gourp C : <?php student_summary("1","students.stgroup","C")?></span> |
+                            <span>Gourp E : <?php student_summary("1","students.stgroup","E")?></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="widget-head-color-box navy-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h2 class="font-bold no-margins">
+                                Second year
+                            </h2>
+                        </div>
+                        <img src="images/second-year-plan_0.png" height="120">
+                        <div>
+                            <h2 class="font-bold no-margins">
+                                <?php
+                                student_count("2");
+                                ?>
+                                student
+                            </h2>
+                        </div>
+                        <div>
+                            <span>Gourp A : <?php student_summary("2","students.stgroup","A")?></span> |
+                            <span>Gourp B : <?php student_summary("2","students.stgroup","B")?></span> <br>
+                            <span>Gourp C : <?php student_summary("2","students.stgroup","C")?></span> |
+                            <span>Gourp E : <?php student_summary("2","students.stgroup","E")?></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="widget-head-color-box navy-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h2 class="font-bold no-margins">
+                                Third year
+                            </h2>
+                        </div>
+                        <img src="images/third-year-plan_0.png" height="120">
+                        <div>
+                            <h2 class="font-bold no-margins">
+                                <?php
+                                student_count("3");
+                                ?>
+                                student
+                            </h2>
+                        </div>
+                        <div>
+                            <span>Gourp A : <?php student_summary("3","students.stgroup","A")?></span> |
+                            <span>Gourp B : <?php student_summary("3","students.stgroup","B")?></span> <br>
+                            <span>Gourp C : <?php student_summary("3","students.stgroup","C")?></span> |
+                            <span>Gourp E : <?php student_summary("3","students.stgroup","E")?></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="widget-head-color-box navy-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h2 class="font-bold no-margins">
+                                Fourth year
+                            </h2>
+                        </div>
+                        <img src="images/fourth-year-plan_0.png" height="120">
+                        <div>
+                            <h2 class="font-bold no-margins">
+                                <?php
+                                student_count("4");
+                                ?>
+                                student
+                            </h2>
+                        </div>
+                        <div>
+                            <span>Gourp A : <?php student_summary("4","students.stgroup","A")?></span> |
+                            <span>Gourp B : <?php student_summary("4","students.stgroup","B")?></span> <br>
+                            <span>Gourp C : <?php student_summary("4","students.stgroup","C")?></span> |
+                            <span>Gourp E : <?php student_summary("4","students.stgroup","E")?></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>This chart shows the count of items per prosecution</h5>
+                            <h5>This chart shows the count of student per year by nature</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -38,19 +139,34 @@ include_once "layout/header.php";
                         </div>
                         <div class="ibox-content">
                             <div id="collapseOne" class="panel-collapse collapse in">
-                                <div id="lineChart3"></div>
+                                <div id="chart1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>This chart shows the count of student per year by type</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div id="chart2"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="wrapper wrapper-content animated bounceInUp">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>This chart shows the count of items in storage per prosecution</h5>
+                            <h5>This chart shows the count of student per material by nature</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -59,7 +175,49 @@ include_once "layout/header.php";
                         </div>
                         <div class="ibox-content">
                             <div id="collapseOne" class="panel-collapse collapse in">
-                                <div id="lineChart2"></div>
+                                <table id="example" class=" dataTables-example table table-striped table-hover dt-responsive" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Material / Nature</th>
+                                        <th>إنتظام</th>
+                                        <th>إنتساب</th>
+                                        <th>المجموع</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <?php
+                                    $result4 = mysqli_query($con, "SELECT * FROM `material`");
+                                    while($row4 = mysqli_fetch_assoc($result4))
+                                    {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row4['matname'] ?></td>
+                                            <td><?php
+                                                $matid=$row4['matid'];
+                                                echo $first_entezam = material_summary_detail($matid,'students.sttype','1');
+                                                ?>
+                                            </td>
+                                            <td><?php
+                                                $matid=$row4['matid'];
+                                                echo $first_entesab = material_summary_detail($matid,'students.sttype','2');
+                                                ?>
+                                            </td>
+                                            <td><?php echo $first_entezam+$first_entesab ?></td>
+                                        </tr>
+                                        <?php
+                                    };
+                                    ?>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -117,12 +275,10 @@ include_once "layout/header.php";
                 orderable: false,
                 targets: 1
             }],
-            columnDefs: [{
-                targets: 0,
-                visible: false
-            }],
-            order: [2, 'asc']
-
+            dom: 'Blfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         });
 
     });
@@ -183,7 +339,7 @@ include_once "layout/header.php";
             allowClear: true
         });
         // Setup - add a text input to each footer cell
-        $('#example tfoot th').not(":eq(0)").each(function() {
+        $('#example tfoot th').not("").each(function() {
             var title = $(this).text();
             $(this).html('<input type="text" />');
         });
@@ -203,207 +359,155 @@ include_once "layout/header.php";
     });
 
 </script>
+
+<?php
+$first_entzam = student_summary_detail(1,'students.sttype',1);
+$second_entzam = student_summary_detail(2,'students.sttype',1);
+$third_entzam = student_summary_detail(3,'students.sttype',1);
+$fourth_entzam = student_summary_detail(4,'students.sttype',1);
+
+$first_entesab = student_summary_detail(1,'students.sttype',2);
+$second_entesab = student_summary_detail(2,'students.sttype',2);
+$third_entesab = student_summary_detail(3,'students.sttype',2);
+$fourth_entesab = student_summary_detail(4,'students.sttype',2);
+$php_data = array(
+    'x_labels' => array('First', 'Second', 'Third', 'Fourth', ),
+    'إنتظام' => array($first_entzam, $second_entzam, $third_entzam, $fourth_entzam),
+    'إنتساب' => array($first_entesab, $second_entesab, $third_entesab, $fourth_entesab)
+);
+?>
 <script>
-    $(document).ready(function () {
-        c3.generate({
-            bindto: '#lineChart',
-            size: {
-                height: '100%',
+    var json_data = <?php echo json_encode($php_data) ?>;
+    var chart1 = c3.generate({
+        bindto: "#chart1",
+        data: {
+            x: 'x_labels',
+            json: json_data,
+            type: 'bar',
+            groups: [
+                ['إنتظام', 'إنتساب']
+            ]
+        },
+        axis: {
+            x: {
+                type: 'category'
             },
-            data: {
-                x : 'x',
-                columns: [
-                    ['x', 'منشية', 'باب شرقي', 'إستئناف'],
-                    ['case',  10, 18, 24],
-                    ['printer', 5, 9, 13],
-                    ['ups', 4, 2, 3],
-                ],
-            },
-            axis: {
-                x: {
-                    type: 'category',
-                    tick: {
-                        rotate: 0,
-                        size: 15,
-                        multiline: false,
-                    },
-                }
-            }
-        });
+        }
     });
+
 </script>
 <?php
+$first_new = student_summary_detail(1,'students.sttype2','A');
+$second_new = student_summary_detail(2,'students.sttype2','A');
+$third_new = student_summary_detail(3,'students.sttype2','A');
+$fourth_new = student_summary_detail(4,'students.sttype2','A');
 
-$result = mysqli_query($con, "Select category.categoryid,
-  category.categoryname
-From hardware
-  Inner Join prosecution On prosecution.prosecutionid = hardware.prosecutionid
-  Inner Join category On category.categoryid = hardware.categoryid
-  Left Join user_has_hardware On user_has_hardware.hardwareid =
-    hardware.hardwareid
-Where (user_has_hardware.hardwareid Is Null Or user_has_hardware.status = 0)
-Group By category.categoryid") or die(mysqli_error($con));
+$first_old = student_summary_detail(1,'students.sttype2','B');
+$second_old = student_summary_detail(2,'students.sttype2','B');
+$third_old = student_summary_detail(3,'students.sttype2','B');
+$fourth_old = student_summary_detail(4,'students.sttype2','B');
 
-$result2 = mysqli_query($con, "Select prosecution.prosecutionid,
-  prosecution.prosecutionname
-From hardware
-  Inner Join prosecution On prosecution.prosecutionid = hardware.prosecutionid
-  Inner Join category On category.categoryid = hardware.categoryid
-  Left Join user_has_hardware On user_has_hardware.hardwareid =
-    hardware.hardwareid
-Where (user_has_hardware.hardwareid Is Null Or user_has_hardware.status = 0)
-Group By prosecution.prosecutionid") or die(mysqli_error($con));
-
-$ids = array();
-$names = array();
-while($row = mysqli_fetch_assoc($result)){
-    $ids[] = $row["categoryid"];
-    $names[] = $row["categoryname"];
-}
-$ids2 = array();
-while($row2 = mysqli_fetch_assoc($result2)){
-    $ids2[] = $row2["prosecutionid"];
-    $names2[] = $row2["prosecutionname"];
-}
-$prosecutions= "['x','".implode("' , '", $names2)."'],";
-$results="";
-$len = count($ids);
-$len2 = count($ids2);
-for($y=0 ; $y < $len ; $y++)
-{
-    $results.= "['".$names[$y];
-
-    for($z=0 ; $z < $len2 ; $z++) {
-        $result3 = mysqli_query($con, "SELECT COUNT(*) as countnumber
-From hardware
-  Inner Join prosecution On prosecution.prosecutionid = hardware.prosecutionid
-  Inner Join category On category.categoryid = hardware.categoryid
-  Left Join user_has_hardware On user_has_hardware.hardwareid =
-    hardware.hardwareid
-Where (user_has_hardware.hardwareid Is Null Or user_has_hardware.status = 0) AND prosecution.prosecutionid = $ids2[$z] AND category.categoryid = $ids[$y]") or die(mysqli_error($con));
-        $row3 = mysqli_fetch_row($result3);
-        $row3 = implode("", $row3);
-        $results.= "' , '".$row3;
-
-    }
-    $results.= "'],";
-}
+$first_final = student_summary_detail(1,'students.sttype2','C');
+$second_final = student_summary_detail(2,'students.sttype2','C');
+$third_final = student_summary_detail(3,'students.sttype2','C');
+$fourth_final = student_summary_detail(4,'students.sttype2','C');
+unset($php_data);
+$php_data = array(
+    'x_labels' => array('First', 'Second', 'Third', 'Fourth', ),
+    'مستجد' => array($first_new, $second_new, $third_new, $fourth_new),
+    'باقي إعادة' => array($first_old, $second_old, $third_old, $fourth_old),
+    'مراجعة نهائية' => array($first_final, $second_final, $third_final, $fourth_final)
+);
 ?>
-
-
 <script>
-    $(document).ready(function () {
-        c3.generate({
-            bindto: '#lineChart2',
-            size: {
-                height: '100%',
+    var json_data = <?php echo json_encode($php_data) ?>;
+    var chart2 = c3.generate({
+        bindto: "#chart2",
+        data: {
+            x: 'x_labels',
+            json: json_data,
+            type: 'bar',
+            groups: [
+                ['مستجد', 'باقي إعادة', 'مراجعة نهائية']
+            ]
+        },
+        axis: {
+            x: {
+                type: 'category'
             },
-            data: {
-                x : 'x',
-                columns: [
-                    <?php echo $prosecutions;
-
-                    echo $results; ?>
-                ],
-            },
-            axis: {
-                x: {
-                    type: 'category',
-                    tick: {
-                        rotate: 40,
-                        size: 15,
-                        multiline: false,
-                    },
-                }
-            }
-        });
+        }
     });
+
 </script>
 <?php
+$first_new = student_summary_detail(1,'students.sttype2','A');
+$second_new = student_summary_detail(2,'students.sttype2','A');
+$third_new = student_summary_detail(3,'students.sttype2','A');
+$fourth_new = student_summary_detail(4,'students.sttype2','A');
 
-$resultof2 = mysqli_query($con, "Select category.categoryid,
-  category.categoryname
-From hardware
-  Inner Join prosecution On prosecution.prosecutionid = hardware.prosecutionid
-  Inner Join category On category.categoryid = hardware.categoryid
-  Left Join user_has_hardware On user_has_hardware.hardwareid =
-    hardware.hardwareid
-Group By category.categoryid") or die(mysqli_error($con));
+$first_old = student_summary_detail(1,'students.sttype2','B');
+$second_old = student_summary_detail(2,'students.sttype2','B');
+$third_old = student_summary_detail(3,'students.sttype2','B');
+$fourth_old = student_summary_detail(4,'students.sttype2','B');
 
-$resultof22 = mysqli_query($con, "Select prosecution.prosecutionid,
-  prosecution.prosecutionname
-From hardware
-  Inner Join prosecution On prosecution.prosecutionid = hardware.prosecutionid
-  Inner Join category On category.categoryid = hardware.categoryid
-  Left Join user_has_hardware On user_has_hardware.hardwareid =
-    hardware.hardwareid
-Group By prosecution.prosecutionid") or die(mysqli_error($con));
-
-$id2s = array();
-$name2s = array();
-while($row = mysqli_fetch_assoc($resultof2)){
-    $id2s[] = $row["categoryid"];
-    $name2s[] = $row["categoryname"];
-}
-$id2s2 = array();
-while($row2 = mysqli_fetch_assoc($resultof22)){
-    $id2s2[] = $row2["prosecutionid"];
-    $name2s2[] = $row2["prosecutionname"];
-}
-$prosecutionsof2= "['x','".implode("' , '", $name2s2)."'],";
-$resultof2s="";
-$lenof2 = count($id2s);
-$lenof22 = count($id2s2);
-for($y=0 ; $y < $lenof2 ; $y++)
-{
-    $resultof2s.= "['".$name2s[$y];
-
-    for($z=0 ; $z < $lenof22 ; $z++) {
-        $resultof23 = mysqli_query($con, "SELECT COUNT(*) as countnumber
-From hardware
-  Inner Join prosecution On prosecution.prosecutionid = hardware.prosecutionid
-  Inner Join category On category.categoryid = hardware.categoryid
-  Left Join user_has_hardware On user_has_hardware.hardwareid =
-    hardware.hardwareid
-Where  prosecution.prosecutionid = $id2s2[$z] AND category.categoryid = $id2s[$y]") or die(mysqli_error($con));
-        $row3 = mysqli_fetch_row($resultof23);
-        $row3 = implode("", $row3);
-        $resultof2s.= "' , '".$row3;
-
-    }
-    $resultof2s.= "'],";
-}
+$first_final = student_summary_detail(1,'students.sttype2','C');
+$second_final = student_summary_detail(2,'students.sttype2','C');
+$third_final = student_summary_detail(3,'students.sttype2','C');
+$fourth_final = student_summary_detail(4,'students.sttype2','C');
+unset($php_data);
+$php_data = array(
+    'x_labels' => array('First', 'Second', 'Third', 'Fourth', ),
+    'مستجد' => array($first_new, $second_new, $third_new, $fourth_new),
+    'باقي إعادة' => array($first_old, $second_old, $third_old, $fourth_old),
+    'مراجعة نهائية' => array($first_final, $second_final, $third_final, $fourth_final)
+);
 ?>
-
-
 <script>
-    $(document).ready(function () {
-        c3.generate({
-            bindto: '#lineChart3',
-            size: {
-                height: '100%',
+    var json_data = <?php echo json_encode($php_data) ?>;
+    var chart2 = c3.generate({
+        bindto: "#chart2",
+        data: {
+            x: 'x_labels',
+            json: json_data,
+            type: 'bar',
+            groups: [
+                ['مستجد', 'باقي إعادة', 'مراجعة نهائية']
+            ]
+        },
+        axis: {
+            x: {
+                type: 'category'
             },
-            data: {
-                x : 'x',
-                columns: [
-                    <?php echo $prosecutionsof2;
-
-                    echo $resultof2s; ?>
-                ],
-            },
-            axis: {
-                x: {
-                    type: 'category',
-                    tick: {
-                        rotate: 40,
-                        size: 15,
-                        multiline: false,
-                    },
-                }
-            }
-        });
+        }
     });
+
 </script>
+
+<?php
+$first_entezam = material_summary_detail(1,'students.sttype','1');
+$fourth_entesab = material_summary_detail(1,'students.sttype','2');
+?>
+<script>
+    var json_data = <?php echo json_encode($php_data) ?>;
+    var chart2 = c3.generate({
+        bindto: "#chart2",
+        data: {
+            x: 'x_labels',
+            json: json_data,
+            type: 'bar',
+            groups: [
+                ['مستجد', 'باقي إعادة', 'مراجعة نهائية']
+            ]
+        },
+        axis: {
+            x: {
+                type: 'category'
+            },
+        }
+    });
+
+</script>
+
 </body>
 <!-- Mirrored from webapplayers.com/inspinia_admin-v2.7.1/empty_page.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2017 11:39:12 GMT -->
 

@@ -68,12 +68,26 @@ function active($currect_page){
                 <li class="<?php active('materials.php');?>">
                     <a href="materials.php"><i class="fa fa-database fa-1x"></i> <span class="nav-label">Materials</span></a>
                 </li>
-                <li class="<?php active('receipts.php');?>">
-                    <a href="receipts.php"><i class="fa fa-money fa-1x"></i> <span class="nav-label">Receipts</span></a>
-                </li>
-                <li class="<?php active('reports.php');?>">
-                    <a href="reports.php"><i class="fa fa-thermometer-full fa-1x"></i> <span class="nav-label">Reports</span></a>
-                </li>
+                <?php
+                if ($_SESSION['5inarch']['role'] < 3){
+                    ?>
+                    <li class="<?php active('receipts.php');?>">
+                        <a href="receipts.php"><i class="fa fa-money fa-1x"></i> <span class="nav-label">Receipts</span></a>
+                    </li>
+                    <?php
+                }
+                ?>
+
+                <?php
+                if ($_SESSION['5inarch']['role'] == 1){
+                    ?>
+                    <li class="<?php active('reports.php');?>">
+                        <a href="reports.php"><i class="fa fa-thermometer-full fa-1x"></i> <span class="nav-label">Reports</span></a>
+                    </li>
+                    <?php
+                }
+                ?>
+
             </ul>
         </font>
     </div>

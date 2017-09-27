@@ -294,7 +294,7 @@ include_once "layout/modals.php";
         forceParse: false,
         calendarWeeks: true,
         autoclose: true,
-        format: 'm/d/yyyy'
+        format: 'yyyy-m-d'
     });
 </script>
 <script type="text/javascript">

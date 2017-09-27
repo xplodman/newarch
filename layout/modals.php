@@ -1,9 +1,7 @@
 <?php
 function sumincome($styear) {
-    $db = '5inarch';
-    $db_admin = 'root';
-    $db_password = 'root';
-    $con = mysqli_connect("localhost", "$db_admin", "$db_password", "$db");                                    $result = mysqli_query($con,"Select Sum(students.stbalance) As stbalance
+    include "php/connection.php";
+    $result = mysqli_query($con,"Select Sum(students.stbalance) As stbalance
 				From students
 				Where students.sttype2 != 'E' And students.styear = '$styear'");
     $row = mysqli_fetch_assoc($result);
@@ -12,10 +10,8 @@ function sumincome($styear) {
     echo $sum;
 }
 function sumallincome($titype) {
-    $db = '5inarch';
-    $db_admin = 'root';
-    $db_password = 'root';
-    $con = mysqli_connect("localhost", "$db_admin", "$db_password", "$db");                                    $result = mysqli_query($con,"Select Sum(students.stbalance) As stbalance
+    include "php/connection.php";
+    $result = mysqli_query($con,"Select Sum(students.stbalance) As stbalance
 				From students
 				Where students.sttype2 != 'E' And students.styear != '5'");
     $row = mysqli_fetch_assoc($result);
@@ -333,6 +329,27 @@ function sumallincome($titype) {
                                         <label>
                                             <input type="radio" value="E" name="type">
                                             منسحب
+                                        </label>
+                                    </div>
+                                </div>
+                            </font>
+                        </div>
+                        <div class="form-group">
+                            <font face="myFirstFont">
+                                <label class="col-sm-2 control-label">Nature
+                                    <input type="checkbox" name="nature_check" id="nature_check">
+                                </label>
+                                <div class="col-xs-10" id="nature_content">
+                                    <div class="i-checks">
+                                        <label>
+                                            <input type="radio" value="1" name="nature">
+إنتظام
+                                        </label>
+                                    </div>
+                                    <div class="i-checks">
+                                        <label>
+                                            <input type="radio" value="2" name="nature">
+                                            إنتساب
                                         </label>
                                     </div>
                                 </div>
@@ -930,6 +947,77 @@ function sumallincome($titype) {
                     </form>
                 </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="addabsence" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Add absence</h4>
+                </div>
+                <div class="modal-body">
+                    Information
+                    <form class="form-horizontal" method="post" action="php/insertabs.php">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="form-field-3"> المادة </label>
+                            <div class="col-sm-10">
+                                <select class="chosen-select" required id="form-field-3" name="material_matid">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `material`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        unset($id2, $name2);
+                                        $matid = $row2['matid'];
+                                        $matname = $row2['matname'];
+                                        $matyear = $row2['matyear'];
+                                        $matterm = $row2['matterm'];
+                                        ?>
+                                        <option value="<?php echo $row2['matid'] ?>"> <?php echo $row2['matname']." - الترم ".$row2['matterm']." - السنة ".$row2['matyear'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="form-field-4"> الطلاب </label>
+                            <div class="col-sm-10">
+                                <select class="dual_select" required id="form-field-4" name="students_stid[]" multiple="">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `students`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo $row2['stid'] ?>"> <?php echo $row2['stname']." - ".$row2['styear']." - ".$row2['stgroup'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="data_1">
+                            <label class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <input type="text" required class="form-control" name="date">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info"  type="Submit"  name="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -119,7 +119,7 @@ $.extend($.jgrid,{
 				//    j - Day of the month without leading zeros
 				//    Y - A full numeric representation of a year, 4 digits
 				// example: 3/1/2012 which means 1 March 2012
-				ShortDate: "n/j/Y", // in jQuery UI Datepicker: "M/d/yyyy"
+				ShortDate: "n/j/Y", // in jQuery UI Datepicker: "yyyy-m-d"
 				// long date:
 				//    l - A full textual representation of the day of the week
 				//    F - A full textual representation of a month

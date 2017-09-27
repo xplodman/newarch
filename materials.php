@@ -235,7 +235,7 @@ include_once "layout/modals.php";
             allowClear: true
         });
         // Setup - add a text input to each footer cell
-        $('#example tfoot th').not(":eq(0)").each(function() {
+        $('#example tfoot th').not("").each(function() {
             var title = $(this).text();
             $(this).html('<input type="text" />');
         });

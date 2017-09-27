@@ -1,18 +1,27 @@
-<script src="js/jquery-3.1.1.min.js"></script>
+<?php
+function summary_all_in($id , $year) {
+    include "php/connection.php";
+    $result = mysqli_query($con,"SELECT 
+CASE 
+    WHEN tickets.tireason = 'p1' then 'كورس'
+    WHEN tickets.tireason = 'p2' then 'مذكرات'
+    WHEN tickets.tireason = 'p3' then 'مراجعة نهائية' 
+    WHEN tickets.tireason = 'p4' then 'آخري'   
+    ELSE 'Maybe'                                 
+END AS reason ,    
+  Sum(tickets.tiamount)  AS amount                 
+From tickets
+  Inner Join students On students.stid = tickets.tidonor
+Where tickets.titype in ('$id') And students.styear = '$year' 
+Group By tickets.titype,
+  tickets.tireason,
+  students.styear");
+    return $result;
+}
 
-<button type="button">Click Me</button>
-<p></p>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("button").click(function(){
+$first_new = summary_all_in(1,'1');
 
-            $.ajax({
-                type: 'POST',
-                url: 'p.php',
-                success: function(data) {
-                    alert("done");
-                }
-            });
-        });
-    });
-</script>
+while($y = mysqli_fetch_assoc($first_new)) {
+    echo "['".$y['reason']."','".$y['amount']."'],";
+}
+?>

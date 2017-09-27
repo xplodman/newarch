@@ -1,6 +1,7 @@
 <?php
 include_once "php/connection.php";
 include_once "php/checkauthentication.php";
+include_once "php/functions.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,10 +27,10 @@ include_once "layout/header.php";
         </div>
         <div class="wrapper wrapper-content animated bounceInDown">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>This chart shows the count of items per prosecution</h5>
+                            <h5>In first year</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -38,19 +39,112 @@ include_once "layout/header.php";
                         </div>
                         <div class="ibox-content">
                             <div id="collapseOne" class="panel-collapse collapse in">
-                                <div id="lineChart3"></div>
+                                <div id="chart1"></div>
+                                Total :
+                                <?php
+                                $result = mysqli_query($con,"SELECT   
+  Sum(tickets.tiamount)  AS amount                 
+From tickets
+  Inner Join students On students.stid = tickets.tidonor
+Where tickets.titype in ('1') And students.styear = '1'");
+                                $y = mysqli_fetch_assoc($result);
+
+                                echo $y['amount'];
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>In second year</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div id="chart2"></div>
+                                Total :
+                                <?php
+                                $result = mysqli_query($con,"SELECT   
+  Sum(tickets.tiamount)  AS amount                 
+From tickets
+  Inner Join students On students.stid = tickets.tidonor
+Where tickets.titype in ('1') And students.styear = '2'");
+                                $y = mysqli_fetch_assoc($result);
+
+                                echo $y['amount'];
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>In third year</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div id="chart3"></div>
+                                Total :
+                                <?php
+                                $result = mysqli_query($con,"SELECT   
+  Sum(tickets.tiamount)  AS amount                 
+From tickets
+  Inner Join students On students.stid = tickets.tidonor
+Where tickets.titype in ('1') And students.styear = '3'");
+                                $y = mysqli_fetch_assoc($result);
+
+                                echo $y['amount'];
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>In fourth year</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div id="chart4"></div>
+                                Total :
+                                <?php
+                                $result = mysqli_query($con,"SELECT   
+  Sum(tickets.tiamount)  AS amount                 
+From tickets
+  Inner Join students On students.stid = tickets.tidonor
+Where tickets.titype in ('1') And students.styear = '4'");
+                                $y = mysqli_fetch_assoc($result);
+
+                                echo $y['amount'];
+                                ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="wrapper wrapper-content animated bounceInUp">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>This chart shows the count of items in storage per prosecution</h5>
+                            <h5>Out summary</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -59,7 +153,44 @@ include_once "layout/header.php";
                         </div>
                         <div class="ibox-content">
                             <div id="collapseOne" class="panel-collapse collapse in">
+                                <div id="chart5"></div>
+                                Total :
+                                <?php
+                                $result = mysqli_query($con,"SELECT    
+  Sum(tickets.tiamount) AS amount                 
+From tickets
+Where tickets.titype = '2'");
+                                $y = mysqli_fetch_assoc($result);
 
+                                echo $y['amount'];
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Aid summary</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div id="chart6"></div>
+                                Total :
+                                <?php
+                                $result = mysqli_query($con,"SELECT    
+  Sum(tickets.tiamount) AS amount        
+From tickets
+Where tickets.tireason = 'm0'");
+                                $y = mysqli_fetch_assoc($result);
+
+                                echo $y['amount'];
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -204,8 +335,168 @@ include_once "layout/header.php";
 
 </script>
 
+<script>
+    var chart = c3.generate({
+        bindto: "#chart1",
+        data: {
+            columns: [
+                <?php
+                    $first_new = summary_all_in(1,'1');
+                    while($y = mysqli_fetch_assoc($first_new)) {
+                        echo "['".$y['reason']."','".$y['amount']."'],";
+                    }
+                ?>
+            ],
+            type: 'pie',
+            empty: {
+                label: {
+                    text: "No Data Available"
+                }
+            }
+        },
+        pie: {
+            label: {
+                format: function(value, ratio, id) {
+                    return value;
+                }
+            }
+        }
+    });
+    var chart = c3.generate({
+        bindto: "#chart2",
+        data: {
+            columns: [
+                <?php
+                    $first_new = summary_all_in(1,'2');
+                    while($y = mysqli_fetch_assoc($first_new)) {
+                        echo "['".$y['reason']."','".$y['amount']."'],";
+                    }
+                ?>
+
+            ],
+            type: 'pie',
+            empty: {
+                label: {
+                    text: "No Data Available"
+                }
+            }
+        },
+        pie: {
+            label: {
+                format: function(value, ratio, id) {
+                    return value;
+                }
+            }
+        }
+    });
+    var chart = c3.generate({
+        bindto: "#chart3",
+        data: {
+            columns: [
+                <?php
+                $first_new = summary_all_in(1,'3');
+                while($y = mysqli_fetch_assoc($first_new)) {
+                    echo "['".$y['reason']."','".$y['amount']."'],";
+                }
+                ?>
+
+            ],
+            type: 'pie',
+            empty: {
+                label: {
+                    text: "No Data Available"
+                }
+            }
+        },
+        pie: {
+            label: {
+                format: function(value, ratio, id) {
+                    return value;
+                }
+            }
+        }
+    });
+    var chart = c3.generate({
+        bindto: "#chart4",
+        data: {
+            columns: [
+                <?php
+                $first_new = summary_all_in(1,'4');
+                while($y = mysqli_fetch_assoc($first_new)) {
+                    echo "['".$y['reason']."','".$y['amount']."'],";
+                }
+                ?>
+
+            ],
+            type: 'pie',
+            empty: {
+                label: {
+                    text: "No Data Available"
+                }
+            }
+        },
+        pie: {
+            label: {
+                format: function(value, ratio, id) {
+                    return value;
+                }
+            }
+        }
+    });
+    var chart = c3.generate({
+        bindto: "#chart5",
+        data: {
+            columns: [
+                <?php
+                $first_new = summary_all_out(2);
+                while($y = mysqli_fetch_assoc($first_new)) {
+                    echo "['".$y['reason']."','".$y['amount']."'],";
+                }
+                ?>
+
+            ],
+            type: 'donut',
+            empty: {
+                label: {
+                    text: "No Data Available"
+                }
+            }
+        },
+        donut: {
+            label: {
+                format: function(value, ratio, id) {
+                    return value;
+                }
+            }
+        }
+    });
+    var chart = c3.generate({
+        bindto: "#chart6",
+        data: {
+            columns: [
+                <?php
+                $first_new = summary_all_aid();
+                while($y = mysqli_fetch_assoc($first_new)) {
+                    echo "['".$y['year']."','".$y['amount']."'],";
+                }
+                ?>
+
+            ],
+            type: 'donut',
+            empty: {
+                label: {
+                    text: "No Data Available"
+                }
+            }
+        },
+        donut: {
+            label: {
+                format: function(value, ratio, id) {
+                    return value;
+                }
+            }
+        }
+    });
+</script>
 </body>
-<!-- Mirrored from webapplayers.com/inspinia_admin-v2.7.1/empty_page.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2017 11:39:12 GMT -->
-
-
 </html>

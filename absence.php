@@ -6,7 +6,7 @@ include_once "php/checkauthentication.php";
 <html>
 
 <?php
-$pageTitle = 'X-Students';
+$pageTitle = 'Absence';
 include_once "layout/header.php";
 ?>
 
@@ -21,12 +21,12 @@ include_once "layout/header.php";
         ?>
         <div class="row wrapper border-bottom white-bg page-heading animated fadeInLeftBig">
             <div class="col-sm-4">
-                <h2><p>X students</p></h2>
+                <h2><p>Student absence</p></h2>
             </div>
             <div class="col-sm-8">
                 <font face="myFirstFont">
                     <div class="title-action">
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#multiuseredit"><i class="fa fa-snowflake-o"></i> Multi edit</button>
+                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addabsence"><i class="fa fa-plus"></i> Add</button>
                     </div>
                 </font>
             </div>
@@ -36,7 +36,7 @@ include_once "layout/header.php";
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Search and view Students</h5>
+                            <h5>Search and view student absence</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -49,97 +49,52 @@ include_once "layout/header.php";
                                     <table id="example" class=" dataTables-example table table-striped table-hover dt-responsive" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
-                                            <th>extn</th>
-                                            <th style="width:1em"></th>
-                                            <th style="width:1em"></th><!--order column-->
-                                            <th>Name</th>
-                                            <th>Type</th>
-                                            <th>Nature</th>
-                                            <th>Year</th>
-                                            <th>Group</th>
-                                            <th>Mob</th>
-                                            <th>Balance</th>
+                                            <th>الأسم</th>
+                                            <th>موبايل</th>
+                                            <th>السنة</th>
+                                            <th>المجموعة</th>
+                                            <th>المادة</th>
+                                            <th>التاريخ</th>
+                                            <th class="hidden-480">صفة - أسم - رقم ولي الأمر</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
 
+                                        <tbody>
                                         <?php
-                                        $result4 = mysqli_query($con,"select t1.* from students t1 where t1.sttype2 in ('c','e') or t1.styear in ('5')");
+                                        $result4 = mysqli_query($con, "SELECT * FROM `absall`");
                                         while($row4 = mysqli_fetch_assoc($result4))
                                         {
                                             ?>
-                                                <?php
-                                                $matresult = mysqli_query($con, "SELECT * FROM `stmatall` where stid='".$row4['stid']."'");
-                                                $color = "purple";
-
-                                                ?>
-                                            <tr data-child-value="
-                                            <?php
-                                            while ($row = $matresult->fetch_assoc()) {
-                                                $matid= $row['matid'];
-                                                $productname = $row['matname'];
-
-                                                echo $productname.' & ';
-                                            };
-                                            ?>
-                                            "> <!--info plus-->
-                                                <td><!--search in info plus-->
-
-                                                </td>
-                                                <td class="details-control"></td>
+                                            <tr>
+                                                <td><a class="green" href="stprofile.php?profileid=<?php echo $row4['stid'] ?>"><?php echo $row4['stname'] ?></a></td>
+                                                <td><?php echo $row4['stmob'] ?></td>
+                                                <td><?php echo $row4['styear'] ?></td>
+                                                <td><?php echo $row4['stgroup'] ?></td>
                                                 <td>
-                                                    <?php echo $row4['stid'] ?>
-                                                </td><!--order column-->
-                                                <td>
-                                                    <a class="green" href="stprofile.php?profileid=<?php echo $row4['stid'] ?>"><?php echo $row4['stname'] ?></a>
-                                                </td>
-                                                <td><?php
-                                                    if($row4['sttype2'] == "C"):
-                                                        echo "مراجعة نهائية";
-                                                    elseif($row4['sttype2'] == 'E'):
-                                                        echo "منسحب";
-                                                    elseif($row4['sttype2'] == "A"):
-                                                        echo "باقي إعادة";
-                                                    elseif($row4['sttype2'] == "B"):
-                                                        echo "مستجد";
-                                                    else:
-                                                        echo "???????";
-                                                    endif;
-                                                    ?></td>
-                                                <td><?php
-                                                    if($row4['sttype'] == 1):
-                                                        echo "إنتظام";
-                                                    elseif($row4['sttype'] == 2):
-                                                        echo "إنتساب";
-                                                    endif;
+                                                    <?php
+                                                    $color = "purple";
+                                                    $productname = $row4['matname'];
+                                                    $matid = $row4['matid'];
+                                                    echo '<a href="'?>matprofile.php?profileid=<?php echo $matid ?> <?php echo'" class="btn btn-xs btn-'.$color.'">';
+                                                    echo $productname;
+                                                    echo '</a>'."&nbsp;&nbsp;&nbsp;";
                                                     ?>
                                                 </td>
-                                                <td><?php
-                                                    if($row4['styear'] == "1"):
-                                                        echo "الأولى";
-                                                    elseif($row4['styear'] == "2"):
-                                                        echo "الثانية";
-                                                    elseif($row4['styear'] == "3"):
-                                                        echo "الثالثة";
-                                                    elseif($row4['styear'] == "4"):
-                                                        echo "الرابعة";
-                                                    elseif($row4['styear'] == "5"):
-                                                        echo "متخرج";
-                                                    endif;
+                                                <td><?php echo $row4['date'] ?></td>
+                                                <td><?php echo
+                                                        '<span class="btn btn-xs btn-danger">'.
+                                                        $row4['stparenttype'].
+                                                        '</span>'.
+                                                        '&nbsp;&nbsp;&nbsp;'.
+                                                        '<span class="btn btn-xs btn-warning">'.
+                                                        $row4['stparentname'].
+                                                        '</span>'.
+                                                        '&nbsp;&nbsp;&nbsp;'.
+                                                        '<span class="btn btn-xs btn-pink">'.
+                                                        $row4['stparentmob'].
+                                                        '</span>';
                                                     ?></td>
 
-                                                <td><?php echo $row4['stgroup'] ?></td>
-                                                <td><?php echo $row4['stmob'] ?></td>
-                                                <td><?php
-                                                    if($row4['stbalance'] > 0):
-                                                        $varb='<span class="btn btn-xs btn-success">';
-                                                    elseif($row4['stbalance'] < 0):
-                                                        $varb='<span class="btn btn-xs btn-danger">';
-                                                    elseif($row4['stbalance'] == 0):
-                                                        $varb='<span class="btn btn-xs btn-warning">';
-                                                    endif;
-                                                    echo $varb.$row4['stbalance'];?></span>
-                                                </td>
                                             </tr>
                                             <?php
                                         };
@@ -147,9 +102,6 @@ include_once "layout/header.php";
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -221,12 +173,7 @@ include_once "layout/modals.php";
                     target: 'tr'
                 }
             },
-            columnDefs: [{
-                targets: [ 0 ,  2 ],
-                visible: false
-            }],
-
-            order: [2, 'desc']
+            order: [5, 'desc']
         });
 
     });
@@ -259,23 +206,7 @@ include_once "layout/modals.php";
 </script>
 
 <script>
-    $(document).ready(function() {
-        var table = $('.dataTables-example').DataTable();
-        // Add event listener for opening and closing details
-        $('#example').on('click', 'td.details-control', function() {
-            var tr = $(this).closest('tr');
-            var row = table.row(tr);
-            if (row.child.isShown()) {
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
-            } else {
-                // Open this row
-                row.child(format(tr.data('child-value'))).show();
-                tr.addClass('shown');
-            }
-        });
-    });
+
     $(document).ready(function() {
         $('.dual_select').bootstrapDualListbox({
             selectorMinimalHeight: 160
@@ -291,7 +222,7 @@ include_once "layout/modals.php";
             allowClear: true
         });
         // Setup - add a text input to each footer cell
-        $('#example tfoot th').not(":eq(0)").each(function() {
+        $('#example tfoot th').not("").each(function() {
             var title = $(this).text();
             $(this).html('<input type="text" />');
         });
