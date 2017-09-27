@@ -113,16 +113,7 @@ include_once "layout/header.php";
                                                 </td><!--order column-->
                                                 <td class="middle wrap">
                                                     <font size="3">
-                                                        <?php
-                                                        if ($_SESSION['5inarch']['role'] == 1){
-                                                            ?>
                                                         <a class="green" href="professor.php?professorid=<?php echo $row22['prid'] ?>"><?php echo $row22['prname'] ?>
-                                                        </a>
-                                                        <?php
-                                                        }else {
-                                                            echo $row22['prname'];
-                                                        }
-                                                        ?>
                                                     </font>
                                                 </td>
                                                 <td class="middle wrap">
@@ -235,7 +226,11 @@ include_once "layout/modals.php";
                 visible: false
             }],
 
-            order: [2, 'desc']
+            order: [2, 'desc'],
+            dom: 'Blfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         });
 
     });
@@ -327,7 +322,7 @@ include_once "layout/modals.php";
         forceParse: false,
         calendarWeeks: true,
         autoclose: true,
-        format: 'm/d/yyyy'
+        format: 'yyyy-m-d'
     });
 </script>
 <script type="text/javascript">

@@ -1,162 +1,73 @@
 <?php
+//var_dump(get_defined_vars());
+
 include_once "connection.php";
-$type=$_POST['type'];
+$uri_parts = explode('?', $_SERVER['HTTP_REFERER'], 2);
 
-if ($type=="1"){
-    $fromid=$_POST['fromid'];
-    $receiptsign=$_POST['receiptsign'];
+$receipttype=$_POST['receipttype'];
+
+if ($receipttype=="1"){
+    $number=$_POST['number'];
+    $recipient=$_POST['recipient'];
+    $donor=$_POST['donor'];
+    $reason=$_POST['reason'];
+    $amount=$_POST['amount'];
     $date=$_POST['date'];
+    $description=$_POST['description'];
+    $result1 = mysqli_query($con, "INSERT INTO `5inarch`.`tickets` (`tiid`, `tiamount`, `tidonor`, `tidonortype`, `tirecipient`, `tirecipienttype`, `tirealdate`, `tisysdate`, `tireason`, `tinumber`, `tidescription`, `titype`) VALUES (NULL, '$amount', '$donor', '2', '$recipient', '1', '$date', now(), '$reason', '$number', '$description', '1');");
 
-    $maxreceiptid = mysqli_query($con, "Select Max(`receipt`.`receiptid`) From `receipt`");
-    $maxreceiptid = mysqli_fetch_row($maxreceiptid);
-    $maxreceiptid = implode("", $maxreceiptid);
-    $maxreceiptid=$maxreceiptid+1;
-
-    $query = mysqli_query($con, "INSERT INTO `receipt`(`receiptid`, `fromid`, `toid`, `receiptsign`, `receiptdate`, `receipttype`, `createddate`, `updatedate`) VALUES ('$maxreceiptid','$fromid',NULL,'$receiptsign','$date','$type',NOW(),NULL);")or die(mysqli_error($con));
-	
-
-// inserting image
-    foreach($_FILES['userfile']['tmp_name'] as $key => $tmp_name ){
-        $file_name = $key.$_FILES['userfile']['name'][$key];
-        $file_size =$_FILES['userfile']['size'][$key];
-        $file_tmp =$_FILES['userfile']['tmp_name'][$key];
-        $file_type=$_FILES['userfile']['type'][$key];
-
-        if (file_exists($file_tmp)) {
-        // database connection
-
-        $maximageid = mysqli_query($con, "Select Max(`image`.`imageid`) From `image`");
-        $maximageid = mysqli_fetch_row($maximageid);
-        $maximageid = implode("", $maximageid);
-        $maximageid=$maximageid+1;
-
-        $imgData =addslashes (file_get_contents($file_tmp));
-
-        // put the image in the db...
-
-        // insert the image
-        $query = mysqli_query($con, "INSERT INTO image
-	(`imageid`, `imagedata`, `receiptid`, `createddate`, `updatedate`)
-	VALUES
-	($maximageid,'{$imgData}',$maxreceiptid, NOW(),NULL);") or die(mysqli_error($con));
-    }
-
-	
-};
-
-
-// insert items
-    $itemquantity=$_POST['itemquantity'];
-    $itemcategory=$_POST['itemcategory'];
-    $itemname=$_POST['itemname'];
-    $lenitemquantity = count($itemquantity);
-    $lenitemcategory = count($itemcategory);
-    $lenitemname = count($itemname);
-
-    $maxitemid = mysqli_query($con, "Select Max(`ownitem`.`ownitemid`) From `ownitem`");
-    $maxitemid = mysqli_fetch_row($maxitemid);
-    $maxitemid = implode("", $maxitemid);
-    $maxitemid=$maxitemid+1;
-
-    for($z=0 ; $z < $lenitemname ; $z++)
-    {
-        for($y=0 ; $y < $itemquantity[$z] ; $y++)
-        {
-
-            $query = mysqli_query($con, "INSERT INTO `ownitem` (`ownitemid`, `owncategoryid`, `ownitemname`,  `ownitemtype`, `receiptinid`) VALUES ($maxitemid, '$itemcategory[$z]', '$itemname[$z]', '1', $maxreceiptid);") or die(mysqli_error($con));
-            $maxitemid=$maxitemid+1;
-
-        }
-    }
-
-
-// return back with backresult
-    $uri_parts = explode('?', $_SERVER['HTTP_REFERER'], 2);
-    if ($query) {
-        mysqli_commit($con);
-
-        header('Location: '.$uri_parts[0].'?backresult=1');
-        $fh = fopen('/tmp/track.txt','a');
-        fwrite($fh, $_SERVER['REMOTE_ADDR'].' '.date('c')."\n");
-        fclose($fh);
-        exit;
-    }
-    else {
-
-        header('Location: '.$uri_parts[0].'?backresult=0');
-        $fh = fopen('/tmp/track.txt','a');
-        fwrite($fh, $_SERVER['REMOTE_ADDR'].' '.date('c')."\n");
-        fclose($fh);
-        exit;}
-
-}else{
-    $toid=$_POST['toid'];
-    $receiptsign=$_POST['receiptsign'];
+    if ($reason == "p1") {
+        $result2 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `stbalance` = `stbalance`+$amount WHERE `students`.`stid` = $donor;");
+    };
+}elseif ($receipttype=="2"){
+    $number=$_POST['number'];
+    $recipient=$_POST['recipient'];
+    $donor=$_POST['donor'];
+    $reason=$_POST['reason'];
+    $amount=$_POST['amount'];
+    $amount=$amount*-1;
     $date=$_POST['date'];
-    if ($_POST['ownitemid']){
-        $ownitemid=$_POST['ownitemid'];
-    }
+    $description=$_POST['description'];
 
-    $maxreceiptid = mysqli_query($con, "Select Max(`receipt`.`receiptid`) From `receipt`");
-    $maxreceiptid = mysqli_fetch_row($maxreceiptid);
-    $maxreceiptid = implode("", $maxreceiptid);
-    $maxreceiptid=$maxreceiptid+1;
+    $result1 = mysqli_query($con, "INSERT INTO `5inarch`.`tickets` (`tiid`, `tiamount`, `tidonor`, `tidonortype`, `tirecipient`, `tirecipienttype`, `tirealdate`, `tisysdate`, `tireason`, `tinumber`, `tidescription`, `titype`) VALUES (NULL, '$amount', '$donor', '1', '$recipient', '1', '$date', now(), '$reason', '$number', '$description', '2');");
 
-    $query = mysqli_query($con, "INSERT INTO `receipt`(`receiptid`, `fromid`, `toid`, `receiptsign`, `receiptdate`, `receipttype`, `createddate`, `updatedate`) VALUES ('$maxreceiptid',NULL,'$toid','$receiptsign','$date','$type',NOW(),NULL);")or die(mysqli_error($con));
+}elseif ($receipttype=="3"){
+    $number=$_POST['number'];
+    $recipient=$_POST['recipient'];
+    $donor=$_POST['donor'];
+    $percent=$_POST['percent'];
+    $amount=$_POST['amount'];
+    $amount=$percent/100*$amount;
+    $amountconv=$amount;
+    $amount=$amount*-1;
+    $date=$_POST['date'];
+    $description=$_POST['description'];
 
-
-    // inserting image
-    foreach($_FILES['userfile']['tmp_name'] as $key => $tmp_name ){
-        $file_name = $key.$_FILES['userfile']['name'][$key];
-        $file_size =$_FILES['userfile']['size'][$key];
-        $file_tmp =$_FILES['userfile']['tmp_name'][$key];
-        $file_type=$_FILES['userfile']['type'][$key];
-
-        if (file_exists($file_tmp)) {
-            $maximageid = mysqli_query($con, "Select Max(`image`.`imageid`) From `image`");
-        $maximageid = mysqli_fetch_row($maximageid);
-        $maximageid = implode("", $maximageid);
-        $maximageid=$maximageid+1;
-
-        $imgData =addslashes (file_get_contents($file_tmp));
-
-        // put the image in the db...
-
-        // insert the image
-        $query = mysqli_query($con, "INSERT INTO image
-	(`imageid`, `imagedata`, `receiptid`, `createddate`, `updatedate`)
-	VALUES
-	($maximageid,'{$imgData}',$maxreceiptid, NOW(),NULL);") or die(mysqli_error($con));
-    }
-};
-
-    // update items
-    $ownitemidlen = count($ownitemid);
-    for($x=0 ; $x < $ownitemidlen ; $x++) {
-        $query2 = mysqli_query($con, "UPDATE `ownitem` SET `ownitemtype` = '$type', `receiptoutid` = '$maxreceiptid' WHERE `ownitem`.`ownitemid` = '$ownitemid[$x]'") or die(mysqli_error($con));
-    }
-
-
-// return back with backresult
-    $uri_parts = explode('?', $_SERVER['HTTP_REFERER'], 2);
-    if ($query) {
-        mysqli_commit($con);
-
-        header('Location: '.$uri_parts[0].'?backresult=1');
-        $fh = fopen('/tmp/track.txt','a');
-        fwrite($fh, $_SERVER['REMOTE_ADDR'].' '.date('c')."\n");
-        fclose($fh);
-        exit;
-    }
-    else {
-
-        header('Location: '.$uri_parts[0].'?backresult=0');
-        $fh = fopen('/tmp/track.txt','a');
-        fwrite($fh, $_SERVER['REMOTE_ADDR'].' '.date('c')."\n");
-        fclose($fh);
-        exit;}
-
+    $result1 = mysqli_query($con, "INSERT INTO `5inarch`.`tickets` (`tiid`, `tiamount`, `tidonor`, `tidonortype`, `tirecipient`, `tirecipienttype`, `tirealdate`, `tisysdate`, `tireason`, `tinumber`, `tidescription`, `titype`) VALUES (NULL, '$amount', '$donor', '1', '$recipient', '2', '$date', now(), 'm0', '$number', '$description', '$percent');");
+    $result2 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `stbalance` = `stbalance`+$amountconv WHERE `students`.`stid` = $recipient;");
 }
+
+
+
+// return back with backresult
+    $uri_parts = explode('?', $_SERVER['HTTP_REFERER'], 2);
+    if ($result1) {
+        mysqli_commit($con);
+
+        header('Location: '.$uri_parts[0].'?backresult=1');
+        $fh = fopen('/tmp/track.txt','a');
+        fwrite($fh, $_SERVER['REMOTE_ADDR'].' '.date('c')."\n");
+        fclose($fh);
+        exit;
+    }
+    else {
+
+        header('Location: '.$uri_parts[0].'?backresult=0');
+        $fh = fopen('/tmp/track.txt','a');
+        fwrite($fh, $_SERVER['REMOTE_ADDR'].' '.date('c')."\n");
+        fclose($fh);
+        exit;
+    }
 
 
 ?>

@@ -47,8 +47,6 @@ function active($currect_page){
                             </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="chat.php">Chat</a></li>
-                            <li class="divider"></li>
                             <li><a href="php/logout.php">Logout</a></li>
                         </ul>
                     </div>
@@ -65,13 +63,16 @@ function active($currect_page){
                     <a href="professors.php"><i class="fa fa-user-circle"></i> <span class="nav-label">Professors</span></a>
                 </li>
                 <li class="<?php active('students.php');?>">
-                    <a href="students.php"><i class="fa fa-microchip"></i> <span class="nav-label">Students</span></a>
+                    <a href="students.php"><i class="fa fa-users"></i> <span class="nav-label">Students</span></a>
                 </li>
                 <li class="<?php active('materials.php');?>">
-                    <a href="materials.php"><i class="fa fa-cog fa-spin fa-1x"></i> <span class="nav-label">Materials</span></a>
+                    <a href="materials.php"><i class="fa fa-database fa-1x"></i> <span class="nav-label">Materials</span></a>
                 </li>
                 <li class="<?php active('receipts.php');?>">
-                    <a href="receipts.php"><i class="fa fa-users fa-1x"></i> <span class="nav-label">Receipts</span></a>
+                    <a href="receipts.php"><i class="fa fa-money fa-1x"></i> <span class="nav-label">Receipts</span></a>
+                </li>
+                <li class="<?php active('reports.php');?>">
+                    <a href="reports.php"><i class="fa fa-thermometer-full fa-1x"></i> <span class="nav-label">Reports</span></a>
                 </li>
             </ul>
         </font>

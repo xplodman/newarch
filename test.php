@@ -1,23 +1,18 @@
-<?php
-include_once "php/connection.php";
+<script src="js/jquery-3.1.1.min.js"></script>
 
-$username = "aa";
-$password = "dd";
+<button type="button">Click Me</button>
+<p></p>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("button").click(function(){
 
-$result = mysqli_query($con, "Select administrator.administratorappid,
-  administrator.administratorapppw,
-  administrator.administratorid,
-  administrator.administratorname,
-  administrator.administratorrole
-From administrator
-Where administrator.administratorappid = $username And administrator.administratorapppw = $password ");
-
-
-
-if (mysqli_num_rows($result) == 0) {
-   echo "hi";
-} else {
-    echo "aaaaaaa";
-
-}
-?>
+            $.ajax({
+                type: 'POST',
+                url: 'p.php',
+                success: function(data) {
+                    alert("done");
+                }
+            });
+        });
+    });
+</script>

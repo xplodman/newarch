@@ -27,9 +27,9 @@ $material_matid=$_POST['material_matid1'];
 $material_matidcount=count($material_matid);
 
 if ($sttype2 == "A") {
-    $stbalance = $material_matidcount * -150;
+    $stbalance = $material_matidcount * -175;
 } elseif ($sttype2 == "B") {
-    $stbalance = -650;
+    $stbalance = -750;
 } else {
     $stbalance=$_POST['stbalance'];
 }

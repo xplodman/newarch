@@ -23,18 +23,30 @@ include_once "layout/header.php";
             <div class="col-sm-4">
                 <h2><p>Students</p></h2>
             </div>
-            <div class="col-sm-8">
-                <font face="myFirstFont">
-                    <div class="title-action">
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addstudent"><i class="fa fa-plus"></i> Add</button>
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#Absence"><i class="fa fa-plus"></i> Absence</button>
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#multiuseredit"><i class="fa fa-snowflake-o"></i> Multi edit</button>
-                        <a href="xstudents.php" class="btn btn-primary">
-                            <b>X students</b>
-                        </a>
-                    </div>
-                </font>
-            </div>
+            <?php
+            if($_SESSION['5inarch']['role'] < 3) {
+                ?>
+                <div class="col-sm-8">
+                    <font face="myFirstFont">
+                        <div class="title-action">
+                            <button class="btn btn-primary " type="button" data-toggle="modal"
+                                    data-target="#addstudent"><i class="fa fa-plus"></i> Add
+                            </button>
+                            <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#Absence">
+                                <i class="fa fa-plus"></i> Absence
+                            </button>
+                            <button class="btn btn-primary " type="button" data-toggle="modal"
+                                    data-target="#multiuseredit"><i class="fa fa-snowflake-o"></i> Multi edit
+                            </button>
+                            <a href="xstudents.php" class="btn btn-primary">
+                                <b>X students</b>
+                            </a>
+                        </div>
+                    </font>
+                </div>
+                <?php
+            }
+            ?>
         </div>
         <div class="wrapper wrapper-content animated fadeInRightBig">
             <div class="row">
@@ -69,7 +81,11 @@ include_once "layout/header.php";
                                         <tbody>
 
                                         <?php
-                                        $result4 = mysqli_query($con,"select t1.* from students t1 where t1.sttype2 not in ('c','e') and t1.styear not in ('5')");
+                                        $query="select t1.* from students t1 where t1.sttype2 not in ('c','e') and t1.styear not in ('5')";
+                                        if($_SESSION['5inarch']['role']=="3"){
+                                            $query .= " AND  t1.stbalance < 0";
+                                        }
+                                        $result4 = mysqli_query($con, $query);
                                         while($row4 = mysqli_fetch_assoc($result4))
                                         {
                                             ?>
@@ -231,11 +247,19 @@ include_once "layout/modals.php";
                 visible: false
             }],
 
-            order: [2, 'desc'],
-            dom: 'Bfrtip',
+            order: [2, 'desc']
+            <?php
+            if($_SESSION['5inarch']['role'] < 3) {
+            ?>
+            ,
+            dom: 'Blfrtip'
+            ,
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
+            <?php
+            }
+                ?>
         });
 
     });
@@ -327,7 +351,7 @@ include_once "layout/modals.php";
         forceParse: false,
         calendarWeeks: true,
         autoclose: true,
-        format: 'm/d/yyyy'
+        format: 'yyyy-m-d'
     });
 </script>
 <script type="text/javascript">

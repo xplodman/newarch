@@ -59,7 +59,7 @@ include_once "layout/header.php";
                                         {
                                             ?>
                                             <tr>
-                                                <td><a class="green" href="material.php?materialid=<?php echo $row4['matid'] ?>"><?php echo $row4['matname'] ?></a></td>
+                                                <td><?php echo $row4['matname'] ?></td>
                                                 <td><?php echo $row4['matyear'] ?></td>
                                                 <td><?php echo $row4['matterm'] ?></td>
                                                 <td><?php
@@ -97,6 +97,8 @@ include_once "layout/header.php";
                                         </tbody>
                                         <tfoot>
                                         <tr>
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -164,7 +166,11 @@ include_once "layout/modals.php";
                     type: 'column',
                     target: 'tr'
                 }
-            }
+            },
+            dom: 'Blfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         });
 
     });
@@ -256,7 +262,7 @@ include_once "layout/modals.php";
         forceParse: false,
         calendarWeeks: true,
         autoclose: true,
-        format: 'm/d/yyyy'
+        format: 'yyyy-m-d'
     });
 </script>
 <script type="text/javascript">

@@ -29,6 +29,7 @@ include_once "layout/header.php";
                         <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptin"><i class="fa fa-plus"></i> In</button>
                         <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptout"><i class="fa fa-minus"></i> Out</button>
                         <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptaid"><i class="fa fa-minus"></i> Aid</button>
+                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#summary"><i class="fa fa-minus"></i> Fast summary</button>
                     </div>
                 </font>
             </div>
@@ -53,21 +54,14 @@ include_once "layout/header.php";
                                         <tr>
                                             <th>extn</th>
                                             <th style="width:1em"></th>
-                                            <th style="width:1em"></th><!--order column-->
-                                            <?php
-                                            if ($_SESSION['5inarch']['role'] == 1){
-                                                ?>
-                                                <th style="width:4em">edit</th>
-                                                <?php
-                                            }
-                                            ?>
-                                            <th>Amount</th>
+                                            <th style="width:4em">ID</th>
                                             <th>Donor</th>
                                             <th>Recipient</th>
+                                            <th>Amount</th>
                                             <th>Date</th>
                                             <th>Reason</th>
                                             <th>Type</th>
-                                            <th>#</th>
+                                            <th>Serial</th>
                                             <th>Note</th>
                                         </tr>
                                         </thead>
@@ -80,9 +74,6 @@ include_once "layout/header.php";
                                                 <td><!--search in info plus-->
                                                 </td>
                                                 <td class="details-control"></td>
-                                                <td>
-                                                    <?php echo $row22['tiid'] ?>
-                                                </td><!--order column-->
                                                 <td class="middle wrap">
                                                     <font size="3">
                                                         <?php
@@ -90,13 +81,10 @@ include_once "layout/header.php";
                                                             ?>
                                                             <a class="green" href="receipt.php?receiptid=<?php echo $row22['tiid'] ?>"><?php echo $row22['tiid'] ?></a>
                                                             <?php
+                                                        }else{
+                                                        echo $row22['tiid'];
                                                         }
                                                         ?>
-                                                    </font>
-                                                </td>
-                                                <td class="middle wrap">
-                                                    <font size="3">
-                                                        <?php echo $row22['tiamount'] ?>
                                                     </font>
                                                 </td>
                                                 <td class="middle wrap">
@@ -107,7 +95,7 @@ include_once "layout/header.php";
                                                         $result=mysqli_query($con, "select * FROM professors where prid = $row22[tidonor];");
                                                         while($x = mysqli_fetch_assoc($result))
                                                         {	?>
-                                                <a class="green" href="prprofile.php?profileid=<?php echo $x['prid'] ?>"><?php echo $x['prname'] ?></a>
+                                                <a class="green" href="professor.php?professorid=<?php echo $x['prid'] ?>"><?php echo $x['prname'] ?></a>
                                                 <?php
                                                 };
                                                 } elseif ($row22['tidonortype'] == "2")
@@ -115,7 +103,7 @@ include_once "layout/header.php";
                                                     $result=mysqli_query($con, "select * FROM students where stid = $row22[tidonor];");
                                                     while($x = mysqli_fetch_assoc($result))
                                                     {	?>
-                                                        <a class="green" href="stprofile.php?profileid=<?php echo $x['stid'] ?>"><?php echo $x['stname'] ?></a>
+                                                        <a class="green" href="stprofile.php?student_id=<?php echo $x['stid'] ?>"><?php echo $x['stname'] ?></a>
                                                         <?php
                                                     };
                                                 }
@@ -140,7 +128,7 @@ include_once "layout/header.php";
                                                         $result=mysqli_query($con, "select * FROM professors where prid = $row22[tirecipient];");
                                                         while($y = mysqli_fetch_assoc($result))
                                                         {	?>
-                                                <a class="green" href="prprofile.php?profileid=<?php echo $y['prid'] ?>"><?php echo $y['prname'] ?></a>
+                                                <a class="green" href="professor.php?professorid=<?php echo $y['prid'] ?>"><?php echo $y['prname'] ?></a>
                                                 <?php
                                                 };
                                                 } elseif ($row22['tirecipienttype'] == "2")
@@ -148,7 +136,7 @@ include_once "layout/header.php";
                                                     $result=mysqli_query($con, "select * FROM students where stid = $row22[tirecipient];");
                                                     while($y = mysqli_fetch_assoc($result))
                                                     {	?>
-                                                        <a class="green" href="stprofile.php?profileid=<?php echo $y['stid'] ?>"><?php echo $y['stname'] ?></a>
+                                                        <a class="green" href="stprofile.php?student_id=<?php echo $y['stid'] ?>"><?php echo $y['stname'] ?></a>
                                                         <?php
                                                     };
                                                 }
@@ -163,6 +151,11 @@ include_once "layout/header.php";
                                                 }
 
                                                 ?>
+                                                    </font>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php echo $row22['tiamount'] ?>
                                                     </font>
                                                 </td>
                                                 <td class="middle wrap">
@@ -218,6 +211,8 @@ include_once "layout/header.php";
                                                             echo "%دعم 25";
                                                         elseif($row22['titype'] == '50'):
                                                             echo "%دعم 50";
+                                                        elseif($row22['titype'] == '100'):
+                                                            echo "%دعم 100";
                                                         endif;
                                                         ?>
                                                     </font>
@@ -239,7 +234,6 @@ include_once "layout/header.php";
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -318,11 +312,22 @@ include_once "layout/modals.php";
                 targets: [ 1 ]
             }],
             columnDefs: [{
-                targets: [ 0,2 ],
+                targets: [ 0 ],
                 visible: false
             }],
-
-            order: [2, 'desc']
+            order: [9]
+            <?php
+            if($_SESSION['5inarch']['role'] < 3) {
+            ?>
+            ,
+            dom: 'Blfrtip'
+            ,
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+            <?php
+            }
+            ?>
         });
 
     });
@@ -376,7 +381,11 @@ include_once "layout/modals.php";
         $('.dual_select').bootstrapDualListbox({
             selectorMinimalHeight: 160
         });
-        $('.chosen-select').chosen({width: "100%"});
+        $('.chosen-select').chosen({
+            width: "100%",
+            placeholder: "",
+            allowClear: true
+        });
         $('.chosen-select2').chosen({width: "200px"});
         $(".category").select2({
             placeholder: "Select a category",
@@ -414,7 +423,7 @@ include_once "layout/modals.php";
         forceParse: false,
         calendarWeeks: true,
         autoclose: true,
-        format: 'm/d/yyyy'
+        format: 'yyyy-m-d'
     });
 </script>
 <script type="text/javascript">

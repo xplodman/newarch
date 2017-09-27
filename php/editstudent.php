@@ -25,16 +25,9 @@ $sttype2=$_POST['sttype2'];
 $materials=$_POST['materials'];
 $materialscount=count($materials);
 
-if ($sttype2 == "A") {
-    $stbalance = $materialscount * -175;
-} elseif ($sttype2 == "B") {
-    $stbalance = -750;
-} else {
-    $stbalance=$_POST['stbalance'];
-    $stbalance=$stbalance * -1;
-}
 
-$result1 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `stname` = '$stname',`stcode` = '$stcode', `stmob` = '$stmob', `sttel` = '$sttel', `stparenttype` = '$stparenttype', `stparentname` = '$stparentname', `stparentmob` = '$stparentmob', `stemail` = '$stemail', `staddress` = '$staddress', `stnationalid` = '$stnationalid', `sttype` = '$sttype',`stbalance` = '$stbalance',`sttype2` = '$sttype2', `styear` = '$styear', `stterm` = '$stterm', `stgroup` = '$stgroup' WHERE `students`.`stid` = $student_id;");
+
+$result1 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `stname` = '$stname',`stcode` = '$stcode', `stmob` = '$stmob', `sttel` = '$sttel', `stparenttype` = '$stparenttype', `stparentname` = '$stparentname', `stparentmob` = '$stparentmob', `stemail` = '$stemail', `staddress` = '$staddress', `stnationalid` = '$stnationalid', `sttype` = '$sttype',`sttype2` = '$sttype2', `styear` = '$styear', `stterm` = '$stterm', `stgroup` = '$stgroup' WHERE `students`.`stid` = $student_id;");
 
 $result2 = mysqli_query($con, "UPDATE `5inarch`.`stmat` SET `status` = '0' WHERE `students_stid` = $student_id;");
 

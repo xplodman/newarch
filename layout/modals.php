@@ -1,3 +1,31 @@
+<?php
+function sumincome($styear) {
+    $db = '5inarch';
+    $db_admin = 'root';
+    $db_password = 'root';
+    $con = mysqli_connect("localhost", "$db_admin", "$db_password", "$db");                                    $result = mysqli_query($con,"Select Sum(students.stbalance) As stbalance
+				From students
+				Where students.sttype2 != 'E' And students.styear = '$styear'");
+    $row = mysqli_fetch_assoc($result);
+    $sum = $row['stbalance'];
+    $sum=abs($sum);
+    echo $sum;
+}
+function sumallincome($titype) {
+    $db = '5inarch';
+    $db_admin = 'root';
+    $db_password = 'root';
+    $con = mysqli_connect("localhost", "$db_admin", "$db_password", "$db");                                    $result = mysqli_query($con,"Select Sum(students.stbalance) As stbalance
+				From students
+				Where students.sttype2 != 'E' And students.styear != '5'");
+    $row = mysqli_fetch_assoc($result);
+    $sum = $row['stbalance'];
+    if (is_null($row['stbalance']))
+    {echo "No data!";};
+    $sum=abs($sum);
+    echo $sum;
+};
+?>
 <font face="myFirstFont">
     <div class="modal inmodal" id="addprof" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -352,7 +380,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> الأسم </label>
                             <div class="col-sm-9">
-                                <input type="text" id="form-field-1" placeholder="الأسم" class="col-xs-10 col-sm-5"  name="stname"/>
+                                <input required type="text" id="form-field-1" placeholder="الأسم" class="col-xs-10 col-sm-5"  name="stname"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -362,7 +390,7 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="ace-icon fa fa-phone"></i>
                                                                 </span>
-                                    <input class="form-control input-mask-phone" type="text" id="form-field-2" name="stmob" />
+                                    <input required class="form-control input-mask-phone" type="text" id="form-field-2" name="stmob" />
                                 </div>
                             </div>
                         </div>
@@ -426,29 +454,29 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-10"> الحالة </label>
                             <div class="col-sm-9">
-                                <input name="sttype" type="radio" class="ace" value="1"  />
+                                <input required name="sttype" type="radio" class="ace" value="1"  />
                                 <span class="lbl"> إنتظام</span>
-                                &nbsp;&nbsp;
-                                <input name="sttype" type="radio" class="ace" value="2"  />
+                                <br>
+                                <input  required name="sttype" type="radio" class="ace" value="2"  />
                                 <span class="lbl"> إنتساب</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-10"> السنة </label>
                             <div class="col-sm-9">
-                                <input name="styear" type="radio" class="ace" value="1"  />
+                                <input required name="styear" type="radio" class="ace" value="1"  />
                                 <span class="lbl"> الأولى</span>
-                                &nbsp;&nbsp;
-                                <input name="styear" type="radio" class="ace" value="2"  />
+                                <br>
+                                <input required name="styear" type="radio" class="ace" value="2"  />
                                 <span class="lbl"> الثانية</span>
-                                &nbsp;&nbsp;
-                                <input name="styear" type="radio" class="ace" value="3"  />
+                                <br>
+                                <input required name="styear" type="radio" class="ace" value="3"  />
                                 <span class="lbl"> الثالثة</span>
-                                &nbsp;&nbsp;
-                                <input name="styear" type="radio" class="ace" value="4"  />
+                                <br>
+                                <input required name="styear" type="radio" class="ace" value="4"  />
                                 <span class="lbl"> الرابعة</span>
-                                &nbsp;&nbsp;
-                                <input name="styear" type="radio" class="ace" value="5"  />
+                                <br>
+                                <input required name="styear" type="radio" class="ace" value="5"  />
                                 <span class="lbl"> متخرج</span>
 
                             </div>
@@ -456,13 +484,13 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-11"> الترم </label>
                             <div class="col-sm-9">
-                                <input name="stterm" type="radio" class="ace" value="1" />
+                                <input required name="stterm" type="radio" class="ace" value="1" />
                                 <span class="lbl"> الأول</span>
-                                &nbsp;&nbsp;
-                                <input name="stterm" type="radio" class="ace" value="2" />
+                                <br>
+                                <input required name="stterm" type="radio" class="ace" value="2" />
                                 <span class="lbl"> الثاني</span>
-                                &nbsp;&nbsp;
-                                <input name="stterm" type="radio" class="ace" value="3" />
+                                <br>
+                                <input required name="stterm" type="radio" class="ace" value="3" />
                                 <span class="lbl"> صيف</span>
                             </div>
                         </div>
@@ -471,13 +499,13 @@
                             <div class="col-sm-9">
                                 <input name="stgroup" type="radio" class="ace"  value="A"/>
                                 <span class="lbl"> A</span>
-                                &nbsp;&nbsp;
+                                <br>
                                 <input name="stgroup" type="radio" class="ace"  value="B"/>
                                 <span class="lbl"> B</span>
-                                &nbsp;&nbsp;
+                                <br>
                                 <input name="stgroup" type="radio" class="ace"  value="C"/>
                                 <span class="lbl"> C</span>
-                                &nbsp;&nbsp;
+                                <br>
                                 <input name="stgroup" type="radio" class="ace"  value="E"/>
                                 <span class="lbl"> E</span>
                             </div>
@@ -491,7 +519,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-13"> المواد </label>
                             <div class="col-sm-8">
-                                <select class="dual_select" multiple="multiple" size="16" name="material_matid1[]" id="form-field-13">
+                                <select required class="dual_select" multiple="multiple" size="16" name="material_matid1[]" id="form-field-13">
                                     <?php
                                     $result2 = mysqli_query($con, "SELECT * FROM `material`");
                                     while ($row2 = $result2->fetch_assoc()) {
@@ -515,13 +543,13 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-12"> النوع </label>
                             <div class="col-sm-9">
-                                <input name="sttype2" type="radio" class="ace"  value="A"/>
+                                <input required name="sttype2" type="radio" class="ace"  value="A"/>
                                 <span class="lbl"> باقي إعادة</span>
-                                &nbsp;&nbsp;
-                                <input name="sttype2" type="radio" class="ace"  value="B"/>
+                                <br>
+                                <input required name="sttype2" type="radio" class="ace"  value="B"/>
                                 <span class="lbl"> مستجد</span>
-                                &nbsp;&nbsp;
-                                <input name="sttype2" type="radio" class="ace"  value="C"/>
+                                <br>
+                                <input required name="sttype2" type="radio" class="ace"  value="C"/>
                                 <span class="lbl"> مراجعة نهائية</span>
                             </div>
                         </div>
@@ -559,17 +587,18 @@
                 </div>
                 <div class="modal-body">
                     Information
-                    <form method="post" action="php/insertstudent.php" class="form-horizontal">
+                    <form method="post" action="php/insertreceipt.php" class="form-horizontal">
+                        <input type="hidden" name="receipttype" value="1">
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="form-field-2"> Number </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="form-field-2" name="number" />
+                                <input required class="form-control" type="text" id="form-field-2" name="number" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="form-field-2"> Recipint </label>
+                            <label class="col-sm-2 control-label" for="form-field-2"> Recipient </label>
                             <div class="col-sm-10">
-                                <select class="dual_select" multiple="multiple" size="16" name="material_matid1[]" id="form-field-13">
+                                <select required class="chosen-select" size="16" name="recipient" id="form-field-13">
                                     <?php
                                     $result2 = mysqli_query($con, "SELECT * FROM `professors`");
                                     while ($row2 = $result2->fetch_assoc()) {
@@ -582,7 +611,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="form-field-2"> Donor </label>
                             <div class="col-sm-10">
-                                <select class="dual_select" multiple="multiple" size="16" name="material_matid1[]" id="form-field-13">
+                                <select required class="chosen-select" size="16" name="donor" id="form-field-13">
                                     <?php
                                     $result2 = mysqli_query($con, "SELECT * FROM `students`");
                                     while ($row2 = $result2->fetch_assoc()) {
@@ -596,7 +625,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="form-field-2"> Amount </label>
                             <div class="col-sm-10">
-                                <input type="text" value="750" name="amount"/>
+                                <input required type="text" value="750" name="amount"/>
                             </div>
                         </div>
                         <div class="form-group" id="data_1">
@@ -616,16 +645,16 @@
                                 <div class="col-sm-10">
                                     <font size="3">
                                         <span class="lbl">Course</span>
-                                        <input name="reason" type="radio" class="ace" value="p1" />
+                                        <input required name="reason" type="radio" class="ace" value="p1" />
                                         &nbsp; &nbsp;
                                         <span class="lbl">Notes</span>
-                                        <input name="reason" type="radio" class="ace" value="p2" />
+                                        <input required name="reason" type="radio" class="ace" value="p2" />
                                         &nbsp; &nbsp;
                                         <span class="lbl">Final revesion</span>
-                                        <input name="reason" type="radio" class="ace" value="p3" />
+                                        <input required name="reason" type="radio" class="ace" value="p3" />
                                         &nbsp; &nbsp;
                                         <span class="lbl">Other</span>
-                                        <input name="reason" type="radio" class="ace" value="p4" />
+                                        <input required name="reason" type="radio" class="ace" value="p4" />
                                     </font>
                                 </div>
                             </div>
@@ -650,6 +679,255 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="addreceiptout" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Insert a receipt out</h4>
+                </div>
+                <div class="modal-body">
+                    Information
+                    <form method="post" action="php/insertreceipt.php" class="form-horizontal">
+                        <input type="hidden" name="receipttype" value="2">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Number </label>
+                            <div class="col-sm-10">
+                                <input required class="form-control" type="text" id="form-field-2" name="number" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Recipint </label>
+                            <div class="col-sm-10">
+                                <select required class="chosen-select" size="16" name="recipient" id="form-field-13">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `professors`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo $row2['prid'] ?>"> <?php echo $row2['prname'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Donor </label>
+                            <div class="col-sm-10">
+                                <select required class="chosen-select" size="16" name="donor" id="form-field-13">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `professors`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo $row2['prid'] ?>"> <?php echo $row2['prname'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Amount </label>
+                            <div class="col-sm-10">
+                                <input required type="text" value="750" name="amount"/>
+                            </div>
+                        </div>
+                        <div class="form-group" id="data_1">
+                            <label class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <input required type="text" class="form-control" name="date">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Reason </label>
+                            <div class="col-sm-10">
+                                <select required class="chosen-select" name="reason" id="form-field-13">
+                                    <option value="" selected disabled> select a reason </option>
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `expenses`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo 'm'.$row2['exid'] ?>"> <?php echo $row2['exname']?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Note </label>
+                            <div class="col-sm-10">
+                                <textarea required id="form-field-8" class="autosize-transition form-control" name="description" ></textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                                <button class="btn btn-info" type="Submit" name="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="addreceiptaid" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Insert aid receipt</h4>
+                </div>
+                <div class="modal-body">
+                    Information
+                    <form method="post" action="php/insertreceipt.php" class="form-horizontal">
+                        <input type="hidden" name="receipttype" value="3">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Number </label>
+                            <div class="col-sm-10">
+                                <input required class="form-control" type="text" id="form-field-2" name="number" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Recipient </label>
+                            <div class="col-sm-10">
+                                <select required class="chosen-select" size="16" name="recipient" id="form-field-13">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `students`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo $row2['stid'] ?>">
+                                            <?php echo $row2['stname']." - ".$row2['styear']." - ".$row2['stgroup'] ?> </option>
+                                    <?php } ?>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Donor </label>
+                            <div class="col-sm-10">
+                                <select required class="chosen-select" size="16" name="donor" id="form-field-13">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `professors`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo $row2['prid'] ?>"> <?php echo $row2['prname'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Aid percentage</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-10">
+                                    <font size="3">
+                                        <span class="lbl">25%</span>
+                                        <input required name="percent" type="radio" class="ace" value="25" />
+                                        &nbsp; &nbsp;
+                                        <span class="lbl">50%</span>
+                                        <input required name="percent" type="radio" class="ace" value="50" />
+                                        &nbsp; &nbsp;
+                                        <span class="lbl">100%</span>
+                                        <input required name="percent" type="radio" class="ace" value="100" />
+                                    </font>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Amount before aid </label>
+                            <div class="col-sm-10">
+                                <input required type="text" value="750" name="amount"/>
+                            </div>
+                        </div>
+                        <div class="form-group" id="data_1">
+                            <label class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <input required type="text" class="form-control" name="date">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Note </label>
+                            <div class="col-sm-10">
+                                <textarea id="form-field-8" class="autosize-transition form-control" name="description" ></textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                                <button class="btn btn-info" type="Submit" name="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="summary" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Reports</h4>
+                </div>
+                <div class="modal-body">
+                    Information
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> المطلوب من سنة 1 </label>
+                            <div class="col-sm-8">
+                                <input  id="form-field-1" type="text" class="input-sm" disabled value="<?php sumincome("1")?>"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> المطلوب من سنة 2 </label>
+                            <div class="col-sm-8">
+                                <input  id="form-field-1" type="text" class="input-sm" disabled value="<?php sumincome("2")?>"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> المطلوب من سنة 3</label>
+                            <div class="col-sm-8">
+                                <input  id="form-field-1" type="text" class="input-sm" disabled value="<?php sumincome("3")?>"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> المطلوب من سنة 4</label>
+                            <div class="col-sm-8">
+                                <input  id="form-field-1" type="text" class="input-sm" disabled value="<?php sumincome("4")?>"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">مجموع المطلوب</label>
+                            <div class="col-sm-8">
+                                <input  id="form-field-1" type="text" class="input-sm" disabled value="<?php sumallincome(1)?>"/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 </form>
             </div>

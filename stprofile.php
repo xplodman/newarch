@@ -53,7 +53,7 @@ include_once "layout/header.php";
                                         <font face="myFirstFont">
                                             <label class="col-sm-2 control-label">Student name</label>
                                             <div class="col-sm-10">
-                                                <input value="<?php echo $stinfores['stname'] ;?>" type="text" class="form-control" name="stname" >
+                                                <input required value="<?php echo $stinfores['stname'] ;?>" type="text" class="form-control" name="stname" >
                                             </div>
                                         </font>
                                     </div>
@@ -69,7 +69,7 @@ include_once "layout/header.php";
                                         <font face="myFirstFont">
                                             <label class="col-sm-2 control-label">Student number</label>
                                             <div class="col-sm-10">
-                                                <input value="<?php echo $stinfores['stmob'] ;?>" type="text" class="form-control" name="stmob" >
+                                                <input required value="<?php echo $stinfores['stmob'] ;?>" type="text" class="form-control" name="stmob" >
                                             </div>
                                         </font>
                                     </div>
@@ -101,7 +101,7 @@ include_once "layout/header.php";
                                         <font face="myFirstFont">
                                             <label class="col-sm-2 control-label">Student parent mob</label>
                                             <div class="col-sm-10">
-                                                <input value="<?php echo $stinfores['stparentmob'] ;?>" type="text" class="form-control" name="stparentmob" >
+                                                <input required value="<?php echo $stinfores['stparentmob'] ;?>" type="text" class="form-control" name="stparentmob" >
                                             </div>
                                         </font>
                                     </div>
@@ -133,7 +133,7 @@ include_once "layout/header.php";
                                         <font face="myFirstFont">
                                             <label class="col-sm-2 control-label">Student nature</label>
                                             <div class="col-sm-10">
-                                                <select class="multiselect" id="form-field-4" name="sttype" >
+                                                <select required class="multiselect" id="form-field-4" name="sttype" >
                                                     <option value="1" <?php if($ressttype=="1") echo 'selected="selected"'; ?>> إنتظام</option>
                                                     <option value="2" <?php if($ressttype=="2") echo 'selected="selected"'; ?>> إنتساب</option>
                                                 </select>
@@ -144,7 +144,7 @@ include_once "layout/header.php";
                                         <font face="myFirstFont">
                                             <label class="col-sm-2 control-label">Student year</label>
                                             <div class="col-sm-10">
-                                                <select class="multiselect" id="form-field-4" name="styear" >
+                                                <select required class="multiselect" id="form-field-4" name="styear" >
                                                     <option value="1" <?php if($resstyear=="1") echo 'selected="selected"'; ?>> الأولى</option>
                                                     <option value="2" <?php if($resstyear=="2") echo 'selected="selected"'; ?>> الثانية</option>
                                                     <option value="3" <?php if($resstyear=="3") echo 'selected="selected"'; ?>> الثالثة</option>
@@ -158,7 +158,7 @@ include_once "layout/header.php";
                                         <font face="myFirstFont">
                                             <label class="col-sm-2 control-label">Student term</label>
                                             <div class="col-sm-10">
-                                                <select class="multiselect" id="form-field-4" name="stterm" >
+                                                <select required class="multiselect" id="form-field-4" name="stterm" >
                                                     <option value="1" <?php if($resstterm=="1") echo 'selected="selected"'; ?>> الأول</option>
                                                     <option value="2" <?php if($resstterm=="2") echo 'selected="selected"'; ?>> الثاني</option>
                                                     <option value="3" <?php if($resstterm=="3") echo 'selected="selected"'; ?>> صيف</option>
@@ -183,7 +183,7 @@ include_once "layout/header.php";
                                         <font face="myFirstFont">
                                             <label class="col-sm-2 control-label">Student type</label>
                                             <div class="col-sm-10">
-                                                <select class="multiselect" id="form-field-4" name="sttype2" >
+                                                <select required class="multiselect" id="form-field-4" name="sttype2" >
                                                     <option value="A" <?php if($ressttype2=="A") echo 'selected="selected"'; ?>> باقي إعادة</option>
                                                     <option value="B" <?php if($ressttype2=="B") echo 'selected="selected"'; ?>> مستجد</option>
                                                     <option value="C" <?php if($ressttype2=="C") echo 'selected="selected"'; ?>> مراجعة نهائية</option>
