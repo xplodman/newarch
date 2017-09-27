@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="963a85fd-6368-4d6a-9939-3ce8ca069036" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php/deletereceipt.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/receipt.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reports.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/php/editprosecution.php" afterPath="$PROJECT_DIR$/php/edittiplus.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Receipts.php" afterPath="$PROJECT_DIR$/Receipts.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/menu.php" afterPath="$PROJECT_DIR$/layout/menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/modals.php" afterPath="$PROJECT_DIR$/layout/modals.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/materials.php" afterPath="$PROJECT_DIR$/materials.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/p.php" afterPath="$PROJECT_DIR$/p.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/checkauthentication.php" afterPath="$PROJECT_DIR$/php/checkauthentication.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/editstudent.php" afterPath="$PROJECT_DIR$/php/editstudent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/insertreceipt.php" afterPath="$PROJECT_DIR$/php/insertreceipt.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/insertstudent.php" afterPath="$PROJECT_DIR$/php/insertstudent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/professors.php" afterPath="$PROJECT_DIR$/professors.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stprofile.php" afterPath="$PROJECT_DIR$/stprofile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/students.php" afterPath="$PROJECT_DIR$/students.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.php" afterPath="$PROJECT_DIR$/test.php" />
-    </list>
+    <list default="true" id="963a85fd-6368-4d6a-9939-3ce8ca069036" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,53 +11,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Receipts.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Receipts.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="317" column="21" lean-forward="false" selection-start-line="317" selection-start-column="21" selection-end-line="317" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#5#0#PHP" expanded="true" />
-                <element signature="e#3355#3360#0#PHP" expanded="true" />
-                <element signature="e#4150#4155#0#PHP" expanded="true" />
-                <element signature="e#4420#4425#0#PHP" expanded="true" />
-                <element signature="e#4450#4455#0#PHP" expanded="true" />
-                <element signature="e#5117#5122#0#PHP" expanded="true" />
-                <element signature="e#5667#5672#0#PHP" expanded="true" />
-                <element signature="e#5693#5698#0#PHP" expanded="true" />
-                <element signature="e#6356#6361#0#PHP" expanded="true" />
-                <element signature="e#6382#6387#0#PHP" expanded="true" />
-                <element signature="e#7105#7110#0#PHP" expanded="true" />
-                <element signature="e#7132#7137#0#PHP" expanded="true" />
-                <element signature="e#7694#7699#0#PHP" expanded="true" />
-                <element signature="e#8252#8257#0#PHP" expanded="true" />
-                <element signature="e#8278#8283#0#PHP" expanded="true" />
-                <element signature="e#8949#8954#0#PHP" expanded="true" />
-                <element signature="e#8975#8980#0#PHP" expanded="true" />
-                <element signature="e#9705#9710#0#PHP" expanded="true" />
-                <element signature="e#9731#9736#0#PHP" expanded="true" />
-                <element signature="e#10292#10297#0#PHP" expanded="true" />
-                <element signature="e#10636#10641#0#PHP" expanded="true" />
-                <element signature="e#10982#10987#0#PHP" expanded="true" />
-                <element signature="e#13920#13925#0#PHP" expanded="true" />
-                <element signature="e#15180#15185#0#PHP" expanded="true" />
-                <element signature="e#15524#15529#0#PHP" expanded="true" />
-                <element signature="e#18744#18749#0#PHP" expanded="true" />
-                <marker date="1506475352256" expanded="true" signature="3432:3486" ph="SELECT * FRO... tickets" />
-                <marker date="1506475352256" expanded="true" signature="5355:5393" ph="select * FRO... professors" />
-                <marker date="1506475352256" expanded="true" signature="6047:6083" ph="select * FRO... students" />
-                <marker date="1506475352256" expanded="true" signature="6796:6832" ph="select * FRO... expenses" />
-                <marker date="1506475352256" expanded="true" signature="7936:7974" ph="select * FRO... professors" />
-                <marker date="1506475352256" expanded="true" signature="8636:8672" ph="select * FRO... students" />
-                <marker date="1506475352256" expanded="true" signature="9393:9429" ph="select * FRO... expenses" />
-                <marker date="1506475352256" expanded="true" signature="22429:22456" ph="SELECT * FRO... owncategory" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -334,18 +269,17 @@
       <workItem from="1506355844700" duration="8625000" />
       <workItem from="1506366016845" duration="90000" />
       <workItem from="1506366131056" duration="23107000" />
-      <workItem from="1506452553985" duration="13254000" />
+      <workItem from="1506452553985" duration="13257000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79957000" />
+    <option name="totallyTimeSpent" value="79960000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
