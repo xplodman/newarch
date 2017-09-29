@@ -566,11 +566,11 @@ function sumallincome($titype) {
                                 <input required name="sttype2" type="radio" class="ace"  value="B"/>
                                 <span class="lbl"> مستجد</span>
                                 <br>
-                                <input required name="sttype2" type="radio" class="ace"  value="C"/>
+                                <input id="final_revesion_check" required name="sttype2" type="radio" class="ace"  value="C"/>
                                 <span class="lbl"> مراجعة نهائية</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="final_revesion_content">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-13"> تكلفة المراجعة النهائية </label>
                             <div class="col-sm-8">
                                 <input type="text"  id="spinner6" placeholder="التكلفة" class="col-xs-10 col-sm-5" name="stbalance" />

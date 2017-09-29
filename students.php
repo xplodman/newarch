@@ -153,13 +153,19 @@ include_once "layout/header.php";
                                                 <td><?php echo $row4['stmob'] ?></td>
                                                 <td><?php
                                                     if($row4['stbalance'] > 0):
-                                                        $varb='<span class="btn btn-xs btn-success">';
+                                                        ?>
+                                                        <span class="btn btn-xs btn-success">
+                                                            <?php
                                                     elseif($row4['stbalance'] < 0):
-                                                        $varb='<span class="btn btn-xs btn-danger">';
+                                                        ?>
+                                                        <span class="btn btn-xs btn-danger">
+                                                            <?php
                                                     elseif($row4['stbalance'] == 0):
-                                                        $varb='<span class="btn btn-xs btn-warning">';
+                                                        ?>
+                                                        <span class="btn btn-xs btn-warning">
+                                                            <?php
                                                     endif;
-                                                    echo $varb.$row4['stbalance'];?></span>
+                                                    echo $row4['stbalance'];?></span>
                                                 </td>
                                             </tr>
                                             <?php
@@ -235,6 +241,26 @@ include_once "layout/modals.php";
     }
     $(document).ready(function() {
         $('.dataTables-example').DataTable({
+            initComplete: function () {
+                this.api().columns(':gt(3)').every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.header()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            },
             pageLength: 10,
             responsive: {
                 details: {
@@ -323,24 +349,7 @@ include_once "layout/modals.php";
             placeholder: "Select a prosecution",
             allowClear: true
         });
-        // Setup - add a text input to each footer cell
-        $('#example tfoot th').not(":eq(0)").each(function() {
-            var title = $(this).text();
-            $(this).html('<input type="text" />');
-        });
-        // DataTable
-        var table = $('#example').DataTable();
-        // Apply the search
-        table.columns().every(function() {
-            var that = this;
-            $('input', this.footer()).on('keyup change', function() {
-                if (that.search() !== this.value) {
-                    that
-                        .search(this.value)
-                        .draw();
-                }
-            });
-        });
+
     });
 
 </script>
@@ -352,47 +361,6 @@ include_once "layout/modals.php";
         calendarWeeks: true,
         autoclose: true,
         format: 'yyyy-m-d'
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var maxField = 15; //Input fields increment limitation
-        var addButton = $('.add_button'); //Add button selector
-        var wrapper = $('.field_wrapper'); //Input field wrapper
-        var fieldHTML = '<div>' +
-            '<input style="width: 50px" type="text" class="form-control" name="quantity[]"/>' +
-            '<select class="chosen-select2 form-control" name="category[]">' +
-            '<option></option>' +
-            <?php
-            $query6 = "SELECT * FROM `owncategory`";
-            $results6=mysqli_query($con, $query6);
-            //loop
-            foreach ($results6 as $owncategory){
-            ?>
-            '<option value="<?php echo $owncategory["owncategoryid"];?>"><?php echo $owncategory["owncategoryname"];?></option>' +
-            <?php
-            }
-            ?>
-            '</select>' +
-            '<input type="text" style="width: 250px" placeholder="item name" class="form-control" name="itemname[]">' +
-            '<button class="btn btn-danger remove_button" type="button">' +
-            '<i class="fa fa-minus"></i>' +
-            '</button>' +
-            '</div>'; //New input field html
-        var x = 1; //Initial field counter is 1
-        $(addButton).click(function(){ //Once add button is clicked
-            if(x < maxField){ //Check maximum number of input fields
-                x++; //Increment field counter
-                $(wrapper).append(fieldHTML); // Add field html
-                $('.chosen-select2').chosen({width: "200px"});
-
-            }
-        });
-        $(wrapper).on('click', '.remove_button', function(e){ //Once remove button is clicked
-            e.preventDefault();
-            $(this).parent('div').remove(); //Remove field html
-            x--; //Decrement field counter
-        });
     });
 </script>
 <script>
@@ -449,6 +417,15 @@ include_once "layout/modals.php";
             $('#nature_content').slideDown();
         else
             $('#nature_content').slideUp();
+    });
+    $(document).ready(function () {
+        $('#final_revesion_content').slideUp();
+    });
+    $('input[id="final_revesion_check"]').click(function(){
+        if(this.checked)
+            $('#final_revesion_content').slideDown();
+        else
+            $('#final_revesion_content').slideUp();
     });
 </script>
 <script>
