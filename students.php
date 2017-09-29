@@ -242,7 +242,7 @@ include_once "layout/modals.php";
     $(document).ready(function() {
         $('.dataTables-example').DataTable({
             initComplete: function () {
-                this.api().columns(':gt(3)').every( function () {
+                this.api().columns(':eq(4),:eq(5),:eq(6),:eq(7)').every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
                         .appendTo( $(column.header()).empty() )
