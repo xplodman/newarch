@@ -51,7 +51,7 @@ function active($currect_page){
                         </ul>
                     </div>
                     <div class="logo-element">
-                        <font color="red">PIC</font>AB<br><small>ref</small>
+                        <font color="red">5</font> in<br><small>ARCH</small>
                     </div>
                 </li>
                 <li class="<?php active('index.php');?>">

@@ -5,7 +5,7 @@ include_once "php/connection.php";
 <html>
 
 <?php
-$pageTitle = 'PICAB Team';
+$pageTitle = '5 In ARCH';
 include_once "layout/header.php";
 ?>
 <style>

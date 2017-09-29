@@ -7,7 +7,7 @@ include_once "php/functions.php";
 <html>
 
 <?php
-$pageTitle = 'PICAB Team';
+$pageTitle = 'Dashboard';
 include_once "layout/header.php";
 ?>
 <body class="animated fadeIn">

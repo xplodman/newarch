@@ -49,13 +49,14 @@ include_once "layout/header.php";
                                     <table id="example" class=" dataTables-example table table-striped table-hover dt-responsive" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
+                                            <th style="width:1em">Remove</th>
                                             <th>الأسم</th>
                                             <th>موبايل</th>
                                             <th>السنة</th>
                                             <th>المجموعة</th>
                                             <th>المادة</th>
                                             <th>التاريخ</th>
-                                            <th class="hidden-480">صفة - أسم - رقم ولي الأمر</th>
+                                            <th>صفة - أسم - رقم ولي الأمر</th>
                                         </tr>
                                         </thead>
 
@@ -66,20 +67,12 @@ include_once "layout/header.php";
                                         {
                                             ?>
                                             <tr>
-                                                <td><a class="green" href="stprofile.php?profileid=<?php echo $row4['stid'] ?>"><?php echo $row4['stname'] ?></a></td>
+                                                <td><a href="php/remove_student.php?absid=<?php echo $row4['absid'] ?>" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-remove"></i></a></td>
+                                                <td><a class="green" href="stprofile.php?student_id=<?php echo $row4['stid'] ?>"><?php echo $row4['stname'] ?></a></td>
                                                 <td><?php echo $row4['stmob'] ?></td>
                                                 <td><?php echo $row4['styear'] ?></td>
                                                 <td><?php echo $row4['stgroup'] ?></td>
-                                                <td>
-                                                    <?php
-                                                    $color = "purple";
-                                                    $productname = $row4['matname'];
-                                                    $matid = $row4['matid'];
-                                                    echo '<a href="'?>matprofile.php?profileid=<?php echo $matid ?> <?php echo'" class="btn btn-xs btn-'.$color.'">';
-                                                    echo $productname;
-                                                    echo '</a>'."&nbsp;&nbsp;&nbsp;";
-                                                    ?>
-                                                </td>
+                                                <td><?php echo $row4['matname']; ?></td>
                                                 <td><?php echo $row4['date'] ?></td>
                                                 <td><?php echo
                                                         '<span class="btn btn-xs btn-danger">'.
@@ -102,6 +95,7 @@ include_once "layout/header.php";
                                         </tbody>
                                         <tfoot>
                                         <tr>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -222,7 +216,7 @@ include_once "layout/modals.php";
             allowClear: true
         });
         // Setup - add a text input to each footer cell
-        $('#example tfoot th').not("").each(function() {
+        $('#example tfoot th').not(":eq(0),:eq(7)").each(function() {
             var title = $(this).text();
             $(this).html('<input type="text" />');
         });

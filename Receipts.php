@@ -164,58 +164,54 @@ include_once "layout/header.php";
                                                     </font>
                                                 </td>
                                                 <td class="middle wrap">
-                                                    <font size="3">
-                                                        <?php
-                                                        if($row22['tireason'] == 'p1'):
-                                                            echo "كورس";
-                                                        elseif($row22['tireason'] == 'p2'):
-                                                            echo "مذكرات";
-                                                        elseif($row22['tireason'] == 'p3'):
-                                                            echo "مراجعة نهائية";
-                                                        elseif($row22['tireason'] == 'p4'):
-                                                            echo "آخري";
-                                                        elseif($row22['tireason'] == 'm0'):
-                                                            echo "دعم";
-                                                        elseif($row22['tireason'] == 'm1'):
-                                                            echo "سلفة";
-                                                        elseif($row22['tireason'] == 'm2'):
-                                                            echo "محمول";
-                                                        elseif($row22['tireason'] == 'm3'):
-                                                            echo "راتب";
-                                                        elseif($row22['tireason'] == 'm4'):
-                                                            echo "تصوير";
-                                                        elseif($row22['tireason'] == 'm5'):
-                                                            echo "طباعة";
-                                                        elseif($row22['tireason'] == 'm6'):
-                                                            echo "مواصلات";
-                                                        elseif($row22['tireason'] == 'm7'):
-                                                            echo "دعاية";
-                                                        elseif($row22['tireason'] == 'm8'):
-                                                            echo "مكافأة";
-                                                        elseif($row22['tireason'] == 'm9'):
-                                                            echo "آخري";
-                                                        elseif($row22['tireason'] == 'm10'):
-                                                            echo "أدوات مكتبية";
-                                                        endif;
-                                                        ?>
-                                                    </font>
+                                                    <?php
+                                                    if($row22['tireason'] == 'p1'):
+                                                        echo "كورس";
+                                                    elseif($row22['tireason'] == 'p2'):
+                                                        echo "مذكرات";
+                                                    elseif($row22['tireason'] == 'p3'):
+                                                        echo "مراجعة نهائية";
+                                                    elseif($row22['tireason'] == 'p4'):
+                                                        echo "آخري";
+                                                    elseif($row22['tireason'] == 'm0'):
+                                                        echo "دعم";
+                                                    elseif($row22['tireason'] == 'm1'):
+                                                        echo "سلفة";
+                                                    elseif($row22['tireason'] == 'm2'):
+                                                        echo "محمول";
+                                                    elseif($row22['tireason'] == 'm3'):
+                                                        echo "راتب";
+                                                    elseif($row22['tireason'] == 'm4'):
+                                                        echo "تصوير";
+                                                    elseif($row22['tireason'] == 'm5'):
+                                                        echo "طباعة";
+                                                    elseif($row22['tireason'] == 'm6'):
+                                                        echo "مواصلات";
+                                                    elseif($row22['tireason'] == 'm7'):
+                                                        echo "دعاية";
+                                                    elseif($row22['tireason'] == 'm8'):
+                                                        echo "مكافأة";
+                                                    elseif($row22['tireason'] == 'm9'):
+                                                        echo "آخري";
+                                                    elseif($row22['tireason'] == 'm10'):
+                                                        echo "أدوات مكتبية";
+                                                    endif;
+                                                    ?>
                                                 </td>
                                                 <td class="middle wrap">
-                                                    <font size="3">
-                                                        <?php
-                                                        if($row22['titype'] == '1'):
-                                                            echo "إستلام";
-                                                        elseif($row22['titype'] == '2'):
-                                                            echo "صرف";
-                                                        elseif($row22['titype'] == '25'):
-                                                            echo "%دعم 25";
-                                                        elseif($row22['titype'] == '50'):
-                                                            echo "%دعم 50";
-                                                        elseif($row22['titype'] == '100'):
-                                                            echo "%دعم 100";
-                                                        endif;
-                                                        ?>
-                                                    </font>
+                                                    <?php
+                                                    if($row22['titype'] == '1'):
+                                                        echo "إستلام";
+                                                    elseif($row22['titype'] == '2'):
+                                                        echo "صرف";
+                                                    elseif($row22['titype'] == '25'):
+                                                        echo "%دعم 25";
+                                                    elseif($row22['titype'] == '50'):
+                                                        echo "%دعم 50";
+                                                    elseif($row22['titype'] == '100'):
+                                                        echo "%دعم 100";
+                                                    endif;
+                                                    ?>
                                                 </td>
                                                 <td class="middle wrap">
                                                     <font size="3">
@@ -294,11 +290,28 @@ include_once "layout/modals.php";
 
 <script src="js/plugins/dataTables/datatables.min.js"></script>
 <script>
-    function format(value) {
-        return '<div class="middle wrap col-sm-12"  >' + value + '</div>';
-    }
     $(document).ready(function() {
         $('.dataTables-example').DataTable({
+            initComplete: function () {
+                this.api().columns(':eq(7),:eq(8)').every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.header()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            },
             pageLength: 10,
             responsive: {
                 details: {
