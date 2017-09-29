@@ -29,7 +29,7 @@ include_once "layout/header.php";
                         <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptin"><i class="fa fa-plus"></i> In</button>
                         <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptout"><i class="fa fa-minus"></i> Out</button>
                         <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptaid"><i class="fa fa-medkit"></i> Aid</button>
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#summary"><i class="fa fa-list-alt"></i> Fast summary</button>
+                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#summary"><i class="fa fa-list-alt"></i> summary</button>
                     </div>
                 </font>
             </div>

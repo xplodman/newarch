@@ -1,26 +1,5 @@
 <?php
-function sumincome($styear) {
-    include "php/connection.php";
-    $result = mysqli_query($con,"Select Sum(students.stbalance) As stbalance
-				From students
-				Where students.sttype2 != 'E' And students.styear = '$styear'");
-    $row = mysqli_fetch_assoc($result);
-    $sum = $row['stbalance'];
-    $sum=abs($sum);
-    echo $sum;
-}
-function sumallincome($titype) {
-    include "php/connection.php";
-    $result = mysqli_query($con,"Select Sum(students.stbalance) As stbalance
-				From students
-				Where students.sttype2 != 'E' And students.styear != '5'");
-    $row = mysqli_fetch_assoc($result);
-    $sum = $row['stbalance'];
-    if (is_null($row['stbalance']))
-    {echo "No data!";};
-    $sum=abs($sum);
-    echo $sum;
-};
+include_once "php/functions.php";
 ?>
 <font face="myFirstFont">
     <div class="modal inmodal" id="addprof" tabindex="-1" role="dialog" aria-hidden="true">

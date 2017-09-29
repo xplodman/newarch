@@ -28,6 +28,44 @@ include_once "layout/header.php";
         <div class="wrapper wrapper-content animated bounceInDown">
             <div class="row">
                 <div class="col-lg-3">
+                    <div class="widget style1 yellow-bg">
+                        <div class="row vertical-align">
+                            <div class="col-xs-12 text-center">
+                                <h3 class="font-bold">Remain first year : <?php sumincome("1")?> جنيه</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="widget style1 yellow-bg">
+                        <div class="row vertical-align">
+                            <div class="col-xs-12 text-center">
+                                <h3 class="font-bold">Remain second year : <?php sumincome("2")?> جنيه</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="widget style1 yellow-bg">
+                        <div class="row vertical-align">
+                            <div class="col-xs-12 text-center">
+                                <h3 class="font-bold">Remain third year : <?php sumincome("3")?> جنيه</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="widget style1 yellow-bg">
+                        <div class="row vertical-align">
+                            <div class="col-xs-12 text-center">
+                                <h3 class="font-bold">Remain fourth year : <?php sumincome("4")?> جنيه</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>In first year</h5>
