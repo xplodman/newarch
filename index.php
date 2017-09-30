@@ -397,58 +397,15 @@ $php_data = array(
 
 </script>
 <?php
-$first_new = student_summary_detail(1,'students.sttype2','A');
-$second_new = student_summary_detail(2,'students.sttype2','A');
-$third_new = student_summary_detail(3,'students.sttype2','A');
-$fourth_new = student_summary_detail(4,'students.sttype2','A');
+$first_new = student_summary_detail(1,'students.sttype2','B');
+$second_new = student_summary_detail(2,'students.sttype2','B');
+$third_new = student_summary_detail(3,'students.sttype2','B');
+$fourth_new = student_summary_detail(4,'students.sttype2','B');
 
-$first_old = student_summary_detail(1,'students.sttype2','B');
-$second_old = student_summary_detail(2,'students.sttype2','B');
-$third_old = student_summary_detail(3,'students.sttype2','B');
-$fourth_old = student_summary_detail(4,'students.sttype2','B');
-
-$first_final = student_summary_detail(1,'students.sttype2','C');
-$second_final = student_summary_detail(2,'students.sttype2','C');
-$third_final = student_summary_detail(3,'students.sttype2','C');
-$fourth_final = student_summary_detail(4,'students.sttype2','C');
-unset($php_data);
-$php_data = array(
-    'x_labels' => array('First', 'Second', 'Third', 'Fourth', ),
-    'مستجد' => array($first_new, $second_new, $third_new, $fourth_new),
-    'باقي إعادة' => array($first_old, $second_old, $third_old, $fourth_old),
-    'مراجعة نهائية' => array($first_final, $second_final, $third_final, $fourth_final)
-);
-?>
-<script>
-    var json_data = <?php echo json_encode($php_data) ?>;
-    var chart2 = c3.generate({
-        bindto: "#chart2",
-        data: {
-            x: 'x_labels',
-            json: json_data,
-            type: 'bar',
-            groups: [
-                ['مستجد', 'باقي إعادة', 'مراجعة نهائية']
-            ]
-        },
-        axis: {
-            x: {
-                type: 'category'
-            },
-        }
-    });
-
-</script>
-<?php
-$first_new = student_summary_detail(1,'students.sttype2','A');
-$second_new = student_summary_detail(2,'students.sttype2','A');
-$third_new = student_summary_detail(3,'students.sttype2','A');
-$fourth_new = student_summary_detail(4,'students.sttype2','A');
-
-$first_old = student_summary_detail(1,'students.sttype2','B');
-$second_old = student_summary_detail(2,'students.sttype2','B');
-$third_old = student_summary_detail(3,'students.sttype2','B');
-$fourth_old = student_summary_detail(4,'students.sttype2','B');
+$first_old = student_summary_detail(1,'students.sttype2','A');
+$second_old = student_summary_detail(2,'students.sttype2','A');
+$third_old = student_summary_detail(3,'students.sttype2','A');
+$fourth_old = student_summary_detail(4,'students.sttype2','A');
 
 $first_final = student_summary_detail(1,'students.sttype2','C');
 $second_final = student_summary_detail(2,'students.sttype2','C');
@@ -480,36 +437,6 @@ $php_data = array(
             },
         }
     });
-
 </script>
-
-<?php
-$first_entezam = material_summary_detail(1,'students.sttype','1');
-$fourth_entesab = material_summary_detail(1,'students.sttype','2');
-?>
-<script>
-    var json_data = <?php echo json_encode($php_data) ?>;
-    var chart2 = c3.generate({
-        bindto: "#chart2",
-        data: {
-            x: 'x_labels',
-            json: json_data,
-            type: 'bar',
-            groups: [
-                ['مستجد', 'باقي إعادة', 'مراجعة نهائية']
-            ]
-        },
-        axis: {
-            x: {
-                type: 'category'
-            },
-        }
-    });
-
-</script>
-
 </body>
-<!-- Mirrored from webapplayers.com/inspinia_admin-v2.7.1/empty_page.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jul 2017 11:39:12 GMT -->
-
-
 </html>
