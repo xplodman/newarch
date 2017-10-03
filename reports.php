@@ -240,10 +240,9 @@ From tickets
   Inner Join students On students.stid = tickets.tidonor
 Where tickets.titype in ('1') And students.styear in ('1','2','3','4')");
                 $all_income = mysqli_fetch_assoc($result);
-                echo $all_income['amount'];
-                ?> (Received)
+                echo "(".$all_income['amount'].")";
+                ?> Received
 
-                Total :
                 <?php
                 $result = mysqli_query($con,"SELECT    
   Sum(tickets.tiamount) AS amount                 
@@ -251,10 +250,12 @@ From tickets
 Where tickets.titype = '2'");
                 $y = mysqli_fetch_assoc($result);
 
-                echo $y['amount'];
-                ?> (Expense)
+                echo "(".$y['amount'].")";
+                ?> (Spent)
                 =
-                <?php echo $all_income['amount'] + $y['amount'] ?> (Remaining in the wallet)
+                <?php $total = $all_income['amount'] + $y['amount'];
+                echo "(".$total.")";
+                ?> Total
             </div>
         </div>
         <div class="footer">
