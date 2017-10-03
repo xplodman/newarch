@@ -233,6 +233,19 @@ Where tickets.tireason = 'm0'");
                         </div>
                     </div>
                 </div>
+                <?php
+                $result = mysqli_query($con,"SELECT   
+  Sum(tickets.tiamount)  AS amount                 
+From tickets
+  Inner Join students On students.stid = tickets.tidonor
+Where tickets.titype in ('1') And students.styear in ('1','2','3','4')");
+                $all_income = mysqli_fetch_assoc($result);
+                echo $all_income['amount'];
+                ?> (Received)
+
+                <?php echo $y['amount'] ?> (Expense)
+                =
+                <?php echo $all_income['amount'] + $y['amount'] ?> (Remaining in the wallet)
             </div>
         </div>
         <div class="footer">
