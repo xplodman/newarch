@@ -243,7 +243,16 @@ Where tickets.titype in ('1') And students.styear in ('1','2','3','4')");
                 echo $all_income['amount'];
                 ?> (Received)
 
-                <?php echo $y['amount'] ?> (Expense)
+                Total :
+                <?php
+                $result = mysqli_query($con,"SELECT    
+  Sum(tickets.tiamount) AS amount                 
+From tickets
+Where tickets.titype = '2'");
+                $y = mysqli_fetch_assoc($result);
+
+                echo $y['amount'];
+                ?> (Expense)
                 =
                 <?php echo $all_income['amount'] + $y['amount'] ?> (Remaining in the wallet)
             </div>
