@@ -238,7 +238,7 @@ Where tickets.tireason = 'm0'");
   Sum(tickets.tiamount)  AS amount                 
 From tickets
   Inner Join students On students.stid = tickets.tidonor
-Where tickets.titype in ('1') And students.styear in ('1','2','3','4')");
+Where tickets.titype in ('1')");
                 $all_income = mysqli_fetch_assoc($result);
                 echo "(".$all_income['amount'].")";
                 ?> Received

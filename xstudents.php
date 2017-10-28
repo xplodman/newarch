@@ -91,7 +91,7 @@ include_once "layout/header.php";
                                                     <?php echo $row4['stid'] ?>
                                                 </td><!--order column-->
                                                 <td>
-                                                    <a class="green" href="stprofile.php?profileid=<?php echo $row4['stid'] ?>"><?php echo $row4['stname'] ?></a>
+                                                    <a class="green" href="stprofile.php?student_id=<?php echo $row4['stid'] ?>"><?php echo $row4['stname'] ?></a>
                                                 </td>
                                                 <td><?php
                                                     if($row4['sttype2'] == "C"):
