@@ -67,6 +67,8 @@ include_once "layout/header.php";
                                         echo "2";
                                     }elseif($receiptresult['titype'] == '25' or $receiptresult['titype'] == '50' or $receiptresult['titype'] == '100'){
                                         echo "3";
+                                    }elseif($receiptresult['titype'] == '99'){
+                                        echo "99";
                                     }
                                     ?>"/>
                                     <div class="form-group">
@@ -80,6 +82,8 @@ include_once "layout/header.php";
                                                     echo "Out";
                                                 }elseif($receiptresult['titype'] == '25' or $receiptresult['titype'] == '50' or $receiptresult['titype'] == '100'){
                                                     echo "Aid";
+                                                }elseif($receiptresult['titype'] == '99'){
+                                                    echo "خصم";
                                                 }
                                                 ?>"/>
                                             </div>
@@ -107,6 +111,14 @@ include_once "layout/header.php";
                                                         <option value="<?php echo $row2['prid'] ?>" <?php if($receiptresult['tirecipient']==$row2['prid']) echo 'selected="selected"'; ?> > <?php echo $row2['prname'] ?> </option>
                                                     <?php }
 
+                                                    }elseif($receiptresult['titype'] == '99'){ //خصم
+
+                                                        $result2 = mysqli_query($con, "SELECT * FROM `professors`");
+                                                        while ($row2 = $result2->fetch_assoc()) {
+                                                            ?>
+                                                            <option value="<?php echo $row2['prid'] ?>" <?php if($receiptresult['tirecipient']==$row2['prid']) echo 'selected="selected"'; ?> > <?php echo $row2['prname'] ?> </option>
+                                                        <?php }
+
                                                     }elseif($receiptresult['titype'] == '2'){ //out
 
                                                         $result2 = mysqli_query($con, "SELECT * FROM `professors`");
@@ -122,7 +134,6 @@ include_once "layout/header.php";
                                                             ?>
                                                             <option value="<?php echo $row2['stid'] ?>" <?php if($receiptresult['tirecipient']==$row2['stid']) echo 'selected="selected"'; ?> > <?php echo $row2['stname'] ?> </option>
                                                         <?php }
-
                                                     }
                                                     ?>
                                                 </select>
@@ -141,6 +152,14 @@ include_once "layout/header.php";
                                                         while ($row2 = $result2->fetch_assoc()) {
                                                             ?>
                                                             <option value="<?php echo $row2['stid'] ?>" <?php if($receiptresult['tidonor']==$row2['stid']) echo 'selected="selected"'; ?> > <?php echo $row2['stname'] ?> </option>
+                                                        <?php }
+
+                                                    }elseif($receiptresult['titype'] == '99'){ //خصم
+
+                                                        $result2 = mysqli_query($con, "SELECT * FROM `professors`");
+                                                        while ($row2 = $result2->fetch_assoc()) {
+                                                            ?>
+                                                            <option value="<?php echo $row2['prid'] ?>" <?php if($receiptresult['tidonor']==$row2['prid']) echo 'selected="selected"'; ?> > <?php echo $row2['prname'] ?> </option>
                                                         <?php }
 
                                                     }elseif($receiptresult['titype'] == '2'){ //out

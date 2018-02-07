@@ -87,6 +87,24 @@ function active($currect_page){
                     <?php
                 }
                 ?>
+                <?php
+                if ($_SESSION['5inarch']['role'] == 1){
+                    ?>
+                    <li class="<?php active('payroll.php');?>">
+                        <a href="payroll.php"><i class="fa fa-paypal fa-1x"></i> <span class="nav-label">Payroll </span></a>
+                    </li>
+                    <?php
+                }
+                ?>
+                <?php
+                if ($_SESSION['5inarch']['role'] == 1){
+                    ?>
+                    <li class="<?php active('config.php');?>">
+                        <a href="config.php"><i class="fa fa-cogs fa-1x"></i> <span class="nav-label">Config</span></a>
+                    </li>
+                    <?php
+                }
+                ?>
 
             </ul>
         </font>

@@ -1,5 +1,6 @@
 <?php
 include_once "connection.php";
+include_once "application_setting.php";
 
 
 $character = array(" ", "	", "(", ")", "-", "/");
@@ -27,11 +28,11 @@ $material_matid=$_POST['material_matid1'];
 $material_matidcount=count($material_matid);
 
 if ($sttype2 == "A") {
-    $stbalance = $material_matidcount * -175;
+    $stbalance = $material_matidcount * -$application_settings_info['one_material_price'];
 } elseif ($sttype2 == "B") {
-    $stbalance = -750;
-} else {
-    $stbalance=$_POST['stbalance'];
+    $stbalance = -$application_settings_info['course_price'];
+} elseif ($sttype2 == "C"){
+    $stbalance=-$_POST['stbalance'];
 }
 
 $result1 = mysqli_query($con, "INSERT INTO `5inarch`.`students` (`stid`, `stcode`, `stname`, `stmob`, `sttel`, `stparenttype`, `stparentname`, `stparentmob`, `stemail`, `staddress`, `stnationalid`, `sttype`, `styear`, `stterm`, `stgroup`, `stbalance`, `sttype2`) VALUES (NULL, '$stcode', '$stname', '$stmob', '$sttel', '$stparenttype', '$stparentname', '	$stparentmob', '$stemail', '$staddress', '$stnationalid', '$sttype', '$styear', '$stterm', '$stgroup', '$stbalance', '$sttype2');");

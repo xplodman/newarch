@@ -1,6 +1,7 @@
 <?php
 include_once "php/connection.php";
 include_once "php/checkauthentication.php";
+include_once "php/application_setting.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -81,7 +82,7 @@ include_once "layout/header.php";
                                         <tbody>
 
                                         <?php
-                                        $query="select t1.* from students t1 where t1.sttype2 not in ('c','e') and t1.styear not in ('5')";
+                                        $query="select t1.* from students t1 where t1.sttype2 not in ('e') and t1.styear not in ('5')";
                                         if($_SESSION['5inarch']['role']=="3"){
                                             $query .= " AND  t1.stbalance < 0";
                                         }
@@ -102,12 +103,65 @@ include_once "layout/header.php";
 
                                                 echo $productname.' & ';
                                             };
+                                        $student_tickets = mysqli_query($con,"SELECT
+  tickets.tidonortype,
+  tickets.tidonor,
+  tickets.tirecipienttype,
+  tickets.tirecipient,
+  tickets.tiid,
+  tickets.tiamount,
+  tickets.tirealdate,
+  tickets.tisysdate,
+  tickets.tireason,
+  tickets.tinumber,
+  tickets.titype,
+  tickets.tidescription
+  
+FROM
+  tickets
+WHERE
+  (tickets.tidonortype = 2 AND
+  tickets.tidonor = $row4[stid]) or (tickets.tirecipienttype = 2 AND
+  tickets.tirecipient = $row4[stid])
+ORDER BY
+  tickets.tiid DESC") or die(mysqli_error($con));
+                                        while($student_tickets_info = mysqli_fetch_assoc($student_tickets)) {
                                             ?>
+                                            <?php
+                                        if($student_tickets_info['tireason'] == 'p1'):
+                                                echo "كورس";
+                                            elseif($student_tickets_info['tireason'] == 'm0'):
+                                                echo "دعم";
+                                            endif;
+                                            echo " - ";
+                                            if($student_tickets_info['titype'] == '1'):
+                                                echo "إستلام";
+                                            elseif($student_tickets_info['titype'] == '2'):
+                                                echo "صرف";
+                                            elseif($student_tickets_info['titype'] == '25'):
+                                                echo "دعم 25%";
+                                            elseif($student_tickets_info['titype'] == '50'):
+                                                echo "دعم 50%";
+                                            elseif($student_tickets_info['titype'] == '100'):
+                                                echo "%دعم 100";
+                                            endif;
+                                            echo " - ";
+                                            if($student_tickets_info['tireason'] == 'p1'):
+                                                echo $student_tickets_info['tiamount'];
+                                            elseif($student_tickets_info['tireason'] == 'm0'):
+                                                echo $student_tickets_info['tiamount']*-1;
+                                            endif;
+                                            if (mysqli_num_rows($student_tickets) > 1) {
+                                                echo "<br>";
+                                            }
+                                        }
+                                            ?>
+
                                             "> <!--info plus-->
                                                 <td><!--search in info plus-->
-
                                                 </td>
-                                                <td class="details-control"></td>
+                                                <td class="details-control">
+                                                </td>
                                                 <td>
                                                     <?php echo $row4['stid'] ?>
                                                 </td><!--order column-->
@@ -201,9 +255,7 @@ include_once "layout/header.php";
         </div>
     </div>
 </div>
-<?php
-include_once "layout/modals.php";
-?>
+<?php include_once "layout/modals.php"; ?>
 <!-- Mainly scripts -->
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

@@ -26,6 +26,17 @@ if ($receipttype=="1"){
 
     $result1 = mysqli_query($con, "UPDATE `5inarch`.`tickets` SET `tiamount` = '$amount', `tidonor` = '$donor', `tirecipient` = '$recipient', `tirealdate` = '$date', `tireason` = '$reason', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
 
+}elseif ($receipttype=="99"){
+    $number=$_POST['number'];
+    $recipient=$_POST['recipient'];
+    $donor=$_POST['donor'];
+    $date=$_POST['date'];
+    $description=$_POST['description'];
+    $amount=$_POST['amount'];
+    $reason="99";
+
+    $result1 = mysqli_query($con, "UPDATE `5inarch`.`tickets` SET `tiamount` = '$amount', `tidonor` = '$donor', `tirecipient` = '$recipient', `tirealdate` = '$date', `tireason` = '$reason', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
+
 }elseif ($receipttype=="3"){
     $number=$_POST['number'];
     $donor=$_POST['donor'];

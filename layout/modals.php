@@ -1,5 +1,6 @@
 <?php
 include_once "php/functions.php";
+include_once "php/application_setting.php";
 ?>
 <font face="myFirstFont">
     <div class="modal inmodal" id="addprof" tabindex="-1" role="dialog" aria-hidden="true">
@@ -552,7 +553,7 @@ include_once "php/functions.php";
                         <div class="form-group" id="final_revesion_content">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-13"> تكلفة المراجعة النهائية </label>
                             <div class="col-sm-8">
-                                <input type="text"  id="spinner6" placeholder="التكلفة" class="col-xs-10 col-sm-5" name="stbalance" />
+                                <input type="text"  id="spinner6" placeholder="التكلفة" class="col-xs-10 col-sm-5" name="stbalance"value="<?php echo $application_settings_info['final_revision_price'] ?>"/>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -621,7 +622,7 @@ include_once "php/functions.php";
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="form-field-2"> Amount </label>
                             <div class="col-sm-10">
-                                <input required type="text" value="750" name="amount"/>
+                                <input required type="text" value="<?php echo $application_settings_info['course_price'] ?>" name="amount"/>
                             </div>
                         </div>
                         <div class="form-group" id="data_1">
@@ -752,6 +753,90 @@ include_once "php/functions.php";
                                         <option value="<?php echo 'm'.$row2['exid'] ?>"> <?php echo $row2['exname']?> </option>
                                     <?php } ?>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Note </label>
+                            <div class="col-sm-10">
+                                <textarea required id="form-field-8" class="autosize-transition form-control" name="description" ></textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                                <button class="btn btn-info" type="Submit" name="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="add_deduction" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Insert a deduction</h4>
+                </div>
+                <div class="modal-body">
+                    Information
+                    <form method="post" action="php/insert_deduction.php" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Number </label>
+                            <div class="col-sm-10">
+                                <input required class="form-control" type="text" id="form-field-2" name="number" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> deduction on </label>
+                            <div class="col-sm-10">
+                                <select required class="chosen-select" size="16" name="recipient" id="form-field-13">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `professors`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo $row2['prid'] ?>"> <?php echo $row2['prname'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> deduction by </label>
+                            <div class="col-sm-10">
+                                <select required class="chosen-select" size="16" name="donor" id="form-field-13">
+                                    <?php
+                                    $result2 = mysqli_query($con, "SELECT * FROM `professors`");
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?php echo $row2['prid'] ?>"> <?php echo $row2['prname'] ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="form-field-2"> Amount </label>
+                            <div class="col-sm-10">
+                                <input required type="text" value="" name="amount"/>
+                            </div>
+                        </div>
+                        <div class="form-group" id="data_1">
+                            <label class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <input required type="text" class="form-control" name="date">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -979,6 +1064,53 @@ include_once "php/functions.php";
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info"  type="Submit"  name="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="add_expenses" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Add expenses</h4>
+                </div>
+                <div class="modal-body">
+                    Information
+                    <form class="form-horizontal" method="post" action="php/insertexp.php">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> name </label>
+                            <div class="col-sm-10">
+                                <input required type="text" id="form-field-1" placeholder="name" class="col-xs-10 col-sm-5" name="name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> description </label>
+                            <div class="col-sm-10">
+                                <input required type="text" id="form-field-1" placeholder="description" class="col-xs-10 col-sm-5" name="description"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> code </label>
+                            <div class="col-sm-10">
+                                <input required type="text" id="form-field-1" placeholder="excode" class="col-xs-10 col-sm-5" name="excode"/>
                             </div>
                         </div>
                         <div class="clearfix form-actions">

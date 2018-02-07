@@ -59,22 +59,12 @@ Group By tickets.titype,
 
 function summary_all_out($id) {
     include "php/connection.php";
-    $result = mysqli_query($con,"SELECT 
-CASE 
-    WHEN tickets.tireason = 'm1' then 'سلفة'
-    WHEN tickets.tireason = 'm2' then 'محمول'
-    WHEN tickets.tireason = 'm3' then 'راتب'
-    WHEN tickets.tireason = 'm4' then 'تصوير'
-    WHEN tickets.tireason = 'm5' then 'طباعة'
-    WHEN tickets.tireason = 'm6' then 'مواصلات'
-    WHEN tickets.tireason = 'm7' then 'دعاية'
-    WHEN tickets.tireason = 'm8' then 'مكافأة'
-    WHEN tickets.tireason = 'm9' then 'آخري'
-    WHEN tickets.tireason = 'm10' then 'أدوات مكتبية'   
-    ELSE 'Maybe'                                 
-END AS reason ,    
-  Sum(tickets.tiamount) AS amount                 
-From tickets
+    $result = mysqli_query($con,"SELECT
+  Sum(tickets.tiamount) AS amount,
+  expenses.exname AS reason
+FROM
+  tickets
+  INNER JOIN expenses ON tickets.tireason = expenses.excode
 Where tickets.titype in ('$id') 
 Group By tickets.titype,
   tickets.tireason");
@@ -83,12 +73,8 @@ Group By tickets.titype,
 
 function summary_all_aid () {
     include "php/connection.php";
-    $result = mysqli_query($con,"SELECT 
-CASE 
-    WHEN tickets.tireason = 'm0' then 'دعم'   
-    ELSE 'Maybe'                                 
-END AS reason ,    
-  Sum(tickets.tiamount)  AS amount,
+    $result = mysqli_query($con,"SELECT
+Sum(tickets.tiamount)  AS amount,
   CASE 
     WHEN students.styear = '1' then 'First'   
     WHEN students.styear = '2' then 'Second'   
@@ -98,7 +84,7 @@ END AS reason ,
 END AS year                  
 From tickets
   Inner Join students On students.stid = tickets.tirecipient
-Where tickets.tireason = 'm0' 
+Where tickets.tireason = 'm0'
 Group By tickets.titype,
   tickets.tireason,
   students.styear");

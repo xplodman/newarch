@@ -1,13 +1,13 @@
 <?php
 include_once "php/connection.php";
 include_once "php/checkauthentication.php";
-include_once "php/application_setting.php";
+include_once "php/functions.php";
 ?>
 <!DOCTYPE html>
 <html>
 
 <?php
-$pageTitle = 'Receipts';
+$pageTitle = 'Payroll';
 include_once "layout/header.php";
 ?>
 
@@ -22,15 +22,12 @@ include_once "layout/header.php";
         ?>
         <div class="row wrapper border-bottom white-bg page-heading animated fadeInLeftBig">
             <div class="col-sm-4">
-                <h2><p>Receipts</p></h2>
+                <h2><p>Payroll</p></h2>
             </div>
             <div class="col-sm-8">
                 <font face="myFirstFont">
                     <div class="title-action">
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptin"><i class="fa fa-plus"></i> In</button>
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptout"><i class="fa fa-minus"></i> Out</button>
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addreceiptaid"><i class="fa fa-medkit"></i> Aid</button>
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#summary"><i class="fa fa-list-alt"></i> summary</button>
+                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#add_deduction"><i class="fa fa-minus-circle"></i> Add deduction</button>
                     </div>
                 </font>
             </div>
@@ -40,7 +37,7 @@ include_once "layout/header.php";
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Search and view receipts informations</h5>
+                            <h5>Search and view salary and payroll details</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -69,12 +66,10 @@ include_once "layout/header.php";
                                         <tbody>
                                         <?php
                                         $result22 = mysqli_query($con,"SELECT
-  expenses.exname,
   tickets.*
 FROM
   tickets
-  left JOIN expenses ON tickets.tireason = expenses.excode
-  where tickets.tireason != 99 /* خصم من المرتب */
+      where tickets.tireason in (99 , 'm1' , 'm3') 
 ORDER BY
   tickets.tiid DESC") or die(mysqli_error($con));
                                         while($row22 = mysqli_fetch_assoc($result22)) {
@@ -91,7 +86,7 @@ ORDER BY
                                                             <a class="green" href="receipt.php?receiptid=<?php echo $row22['tiid'] ?>"><?php echo $row22['tiid'] ?></a>
                                                             <?php
                                                         }else{
-                                                        echo $row22['tiid'];
+                                                            echo $row22['tiid'];
                                                         }
                                                         ?>
                                                     </font>
@@ -101,32 +96,32 @@ ORDER BY
                                                         <?php
                                                         if ($row22['tidonortype'] == "1")
                                                         {
-                                                        $result=mysqli_query($con, "select * FROM professors where prid = $row22[tidonor];");
-                                                        while($x = mysqli_fetch_assoc($result))
-                                                        {	?>
-                                                <a class="green" href="professor.php?professorid=<?php echo $x['prid'] ?>"><?php echo $x['prname'] ?></a>
-                                                <?php
-                                                };
-                                                } elseif ($row22['tidonortype'] == "2")
-                                                {
-                                                    $result=mysqli_query($con, "select * FROM students where stid = $row22[tidonor];");
-                                                    while($x = mysqli_fetch_assoc($result))
-                                                    {	?>
-                                                        <a class="green" href="stprofile.php?student_id=<?php echo $x['stid'] ?>"><?php echo $x['stname'] ?></a>
-                                                        <?php
-                                                    };
-                                                }
-                                                elseif ($row22['tidonortype'] == "3")
-                                                {
-                                                    $result=mysqli_query($con, "select * FROM expenses where exid = $row22[tidonor];");
-                                                    while($x = mysqli_fetch_assoc($result))
-                                                    {	?>
-                                                        <a class="green" href="matprofile.php?profileid=<?php echo $x['matid'] ?>"><?php echo $x['matname'] ?></a>
-                                                        <?php
-                                                    };
-                                                }
+                                                            $result=mysqli_query($con, "select * FROM professors where prid = $row22[tidonor];");
+                                                            while($x = mysqli_fetch_assoc($result))
+                                                            {	?>
+                                                                <a class="green" href="professor.php?professorid=<?php echo $x['prid'] ?>"><?php echo $x['prname'] ?></a>
+                                                                <?php
+                                                            };
+                                                        } elseif ($row22['tidonortype'] == "2")
+                                                        {
+                                                            $result=mysqli_query($con, "select * FROM students where stid = $row22[tidonor];");
+                                                            while($x = mysqli_fetch_assoc($result))
+                                                            {	?>
+                                                                <a class="green" href="stprofile.php?student_id=<?php echo $x['stid'] ?>"><?php echo $x['stname'] ?></a>
+                                                                <?php
+                                                            };
+                                                        }
+                                                        elseif ($row22['tidonortype'] == "3")
+                                                        {
+                                                            $result=mysqli_query($con, "select * FROM expenses where exid = $row22[tidonor];");
+                                                            while($x = mysqli_fetch_assoc($result))
+                                                            {	?>
+                                                                <a class="green" href="matprofile.php?profileid=<?php echo $x['matid'] ?>"><?php echo $x['matname'] ?></a>
+                                                                <?php
+                                                            };
+                                                        }
 
-                                                ?>
+                                                        ?>
                                                     </font>
                                                 </td>
                                                 <td class="middle wrap">
@@ -134,32 +129,32 @@ ORDER BY
                                                         <?php
                                                         if ($row22['tirecipienttype'] == "1")
                                                         {
-                                                        $result=mysqli_query($con, "select * FROM professors where prid = $row22[tirecipient];");
-                                                        while($y = mysqli_fetch_assoc($result))
-                                                        {	?>
-                                                <a class="green" href="professor.php?professorid=<?php echo $y['prid'] ?>"><?php echo $y['prname'] ?></a>
-                                                <?php
-                                                };
-                                                } elseif ($row22['tirecipienttype'] == "2")
-                                                {
-                                                    $result=mysqli_query($con, "select * FROM students where stid = $row22[tirecipient];");
-                                                    while($y = mysqli_fetch_assoc($result))
-                                                    {	?>
-                                                        <a class="green" href="stprofile.php?student_id=<?php echo $y['stid'] ?>"><?php echo $y['stname'] ?></a>
-                                                        <?php
-                                                    };
-                                                }
-                                                elseif ($row22['tirecipienttype'] == "3")
-                                                {
-                                                    $result=mysqli_query($con, "select * FROM expenses where exid = $row22[tirecipient];");
-                                                    while($y = mysqli_fetch_assoc($result))
-                                                    {	?>
-                                                        <a class="green" href="exprofile.php?profileid=<?php echo $y['exid'] ?>"><?php echo $y['exname'] ?></a>
-                                                        <?php
-                                                    };
-                                                }
+                                                            $result=mysqli_query($con, "select * FROM professors where prid = $row22[tirecipient];");
+                                                            while($y = mysqli_fetch_assoc($result))
+                                                            {	?>
+                                                                <a class="green" href="professor.php?professorid=<?php echo $y['prid'] ?>"><?php echo $y['prname'] ?></a>
+                                                                <?php
+                                                            };
+                                                        } elseif ($row22['tirecipienttype'] == "2")
+                                                        {
+                                                            $result=mysqli_query($con, "select * FROM students where stid = $row22[tirecipient];");
+                                                            while($y = mysqli_fetch_assoc($result))
+                                                            {	?>
+                                                                <a class="green" href="stprofile.php?student_id=<?php echo $y['stid'] ?>"><?php echo $y['stname'] ?></a>
+                                                                <?php
+                                                            };
+                                                        }
+                                                        elseif ($row22['tirecipienttype'] == "3")
+                                                        {
+                                                            $result=mysqli_query($con, "select * FROM expenses where exid = $row22[tirecipient];");
+                                                            while($y = mysqli_fetch_assoc($result))
+                                                            {	?>
+                                                                <a class="green" href="exprofile.php?profileid=<?php echo $y['exid'] ?>"><?php echo $y['exname'] ?></a>
+                                                                <?php
+                                                            };
+                                                        }
 
-                                                ?>
+                                                        ?>
                                                     </font>
                                                 </td>
                                                 <td class="middle wrap">
@@ -174,7 +169,13 @@ ORDER BY
                                                 </td>
                                                 <td class="middle wrap">
                                                     <?php
-                                                    echo $row22['exname']
+                                                    if($row22['tireason'] == 'm1'):
+                                                        echo "سلفة";
+                                                    elseif($row22['tireason'] == 'm3'):
+                                                        echo "مرتب";
+                                                    elseif($row22['tireason'] == '99'):
+                                                        echo "خصم";
+                                                    endif;
                                                     ?>
                                                 </td>
                                                 <td class="middle wrap">
@@ -183,12 +184,8 @@ ORDER BY
                                                         echo "إستلام";
                                                     elseif($row22['titype'] == '2'):
                                                         echo "صرف";
-                                                    elseif($row22['titype'] == '25'):
-                                                        echo "%دعم 25";
-                                                    elseif($row22['titype'] == '50'):
-                                                        echo "%دعم 50";
-                                                    elseif($row22['titype'] == '100'):
-                                                        echo "%دعم 100";
+                                                    elseif($row22['titype'] == '99'):
+                                                        echo "خصم";
                                                     endif;
                                                     ?>
                                                 </td>
@@ -266,6 +263,8 @@ include_once "layout/modals.php";
 <!-- Toastr -->
 <script src="js/plugins/toastr/toastr.min.js"></script>
 
+<!-- iCheck -->
+<script src="js/plugins/iCheck/icheck.min.js"></script>
 
 <script src="js/plugins/dataTables/datatables.min.js"></script>
 <script>
@@ -321,9 +320,44 @@ include_once "layout/modals.php";
         });
 
     });
+    $(document).ready(function() {
+        var table = $('.dataTables-example').DataTable();
+        // Add event listener for opening and closing details
+        $('#example').on('click', 'td.details-control', function() {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            } else {
+                // Open this row
+                row.child(format(tr.data('child-value'))).show();
+                tr.addClass('shown');
+            }
+        });
+    });
+
 </script>
 <script>
     $(document).ready(function() {
+        $('#example tfoot th').not(":eq(0)").each(function() {
+            var title = $(this).text();
+            $(this).html('<input type="text" />');
+        });
+        // DataTable
+        var table = $('#example').DataTable();
+        // Apply the search
+        table.columns().every(function() {
+            var that = this;
+            $('input', this.footer()).on('keyup change', function() {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
         <?php
         if (isset($_GET['backresult'])){
         $backresult=$_GET['backresult'];
@@ -371,11 +405,7 @@ include_once "layout/modals.php";
         $('.dual_select').bootstrapDualListbox({
             selectorMinimalHeight: 160
         });
-        $('.chosen-select').chosen({
-            width: "100%",
-            placeholder: "",
-            allowClear: true
-        });
+        $('.chosen-select').chosen({width: "100%"});
         $('.chosen-select2').chosen({width: "200px"});
         $(".category").select2({
             placeholder: "Select a category",
@@ -386,7 +416,7 @@ include_once "layout/modals.php";
             allowClear: true
         });
         // Setup - add a text input to each footer cell
-        $('#example tfoot th').not(":eq(0)").each(function() {
+        $('#example tfoot th').not("").each(function() {
             var title = $(this).text();
             $(this).html('<input type="text" />');
         });
@@ -422,9 +452,9 @@ include_once "layout/modals.php";
         var addButton = $('.add_button'); //Add button selector
         var wrapper = $('.field_wrapper'); //Input field wrapper
         var fieldHTML = '<div>' +
-            '<input style="width: 50px" type="text" class="form-control" name="itemquantity[]"/>' +
-            '<select class="chosen-select2 form-control" name="itemcategory[]">' +
-                '<option></option>' +
+            '<input style="width: 50px" type="text" class="form-control" name="quantity[]"/>' +
+            '<select class="chosen-select2 form-control" name="category[]">' +
+            '<option></option>' +
             <?php
             $query6 = "SELECT * FROM `owncategory`";
             $results6=mysqli_query($con, $query6);
@@ -454,6 +484,14 @@ include_once "layout/modals.php";
             e.preventDefault();
             $(this).parent('div').remove(); //Remove field html
             x--; //Decrement field counter
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
         });
     });
 </script>
