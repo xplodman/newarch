@@ -23,6 +23,23 @@ function student_summary_detail($styear , $clause , $condition) {
     return $sum;
 }
 
+function profesor_payroll_detail($profesor_id , $type , $month) {
+    include "php/connection.php";
+    $result = mysqli_query($con,"SELECT
+  Coalesce(Sum(tickets.tiamount), 0) As amount
+FROM
+  tickets
+WHERE
+  Month(tickets.tirealdate) = '$month' AND
+  tickets.tireason = '$type' AND
+  tickets.tirecipient = '$profesor_id'");
+    $row = mysqli_fetch_assoc($result);
+    $sum = $row['amount'];
+    return $sum;
+}
+
+
+
 function material_summary_detail($id , $clause , $condition) {
     include "php/connection.php";
     $result = mysqli_query($con,"Select Count(students.stid) As student_count,
@@ -113,3 +130,8 @@ function sumallincome($titype) {
     $sum=abs($sum);
     echo $sum;
 };
+
+function array_push_assoc($array, $key, $value){
+    $array[$key] = $value;
+    return $array;
+}

@@ -88,7 +88,7 @@ function active($currect_page){
                 }
                 ?>
                 <?php
-                if ($_SESSION['5inarch']['role'] == 1){
+                if ($_SESSION['5inarch']['role'] < 3){
                     ?>
                     <li class="<?php active('payroll.php');?>">
                         <a href="payroll.php"><i class="fa fa-paypal fa-1x"></i> <span class="nav-label">Payroll </span></a>

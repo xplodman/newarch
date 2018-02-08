@@ -37,6 +37,119 @@ include_once "layout/header.php";
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
+                            <h5>Chart that can help you to see the statistics</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="tabs-container">
+                                    <div class="tabs-top">
+                                        <ul class="nav nav-tabs">
+                                            <?php
+                                            $professors_query = mysqli_query($con, "SELECT (@cnt := @cnt + 1) AS rowNumber, professors.prid, professors.prname FROM professors CROSS JOIN (SELECT @cnt := 0) AS dummy");
+                                            while($professors_info = mysqli_fetch_assoc($professors_query)) {
+                                                ?>
+                                                <li class=""><a data-toggle="tab" href="#tab-<?php echo $professors_info['rowNumber'] ?>">
+                                                        <font face="myFirstFont">
+                                                            <?php echo $professors_info['prname'] ?>
+                                                        </font>
+                                                    </a></li>
+                                                <?php
+                                            }
+                                            ?>
+                                        </ul>
+                                        <!-- d3 and c3 charts -->
+                                        <script src="js/plugins/d3/d3.min.js"></script>
+                                        <script src="js/plugins/c3/c3.min.js"></script>
+                                        <div class="tab-content ">
+                                            <?php
+                                            $professors_query = mysqli_query($con, "SELECT (@cnt := @cnt + 1) AS rowNumber, professors.prid, professors.prname FROM professors CROSS JOIN (SELECT @cnt := 0) AS dummy");
+                                            while($professors_info = mysqli_fetch_assoc($professors_query)) {
+                                                $php_data= array();
+                                                $php_data['x_labels']= array();
+                                                $php_data['خصم']= array();
+                                                $php_data['سلفة']= array();
+                                                $php_data['مرتب']= array();
+                                                $month_name = array();
+                                                $month_number = array();
+                                                $i = -3;
+
+                                                while ($i <= 1) {
+                                                    $month_name = date('F', strtotime("+$i month"));
+                                                    $month_number = date('m', strtotime("+$i month"));
+
+                                                    $type_99 = profesor_payroll_detail($professors_info['prid'], '99', $month_number);
+                                                    $type_m1 = profesor_payroll_detail($professors_info['prid'], 'm1', $month_number);
+                                                    $type_m3 = profesor_payroll_detail($professors_info['prid'], 'm3', $month_number);
+                                                    array_push($php_data['x_labels'], $month_name);
+                                                    array_push($php_data['خصم'], $type_99 * -1);
+                                                    array_push($php_data['سلفة'], $type_m1 * -1);
+                                                    array_push($php_data['مرتب'], $type_m3 * -1);
+                                                    $i++;
+                                                }
+                                                ?>
+                                                <div style="height: 390" id="tab-<?php echo $professors_info['rowNumber']?>" class="tab-pane">
+                                                    <div class="panel-body">
+                                                        <div  id="chart<?php echo $professors_info['rowNumber']?>"></div>
+                                                    </div>
+<!--                                                    <div class="col-sm-12">-->
+<!--                                                    --><?PHP
+//                                                    $x=-3;
+//                                                    while ($x <= 1) {
+//                                                        $month_name = date('F', strtotime("+$x month"));
+//?>
+<!--                                                        <div class="col-lg-offset-1 col-lg-1">-->
+<!--                                                            <font face="myFirstFont">-->
+<!--                                                                <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#add_deduction">--><?php //echo $month_name ?><!-- مرتب </button>-->
+<!--                                                            </font>-->
+<!--                                                        </div>-->
+<!---->
+<!--                                                        --><?PHP
+//                                                            $x++;
+//                                                        }
+//                                                        ?>
+<!--                                                    </div>-->
+                                                </div>
+                                                <script>
+                                                    var json_data = <?php echo json_encode($php_data) ?>;
+                                                    var chart<?php echo $professors_info['rowNumber'] ?> = c3.generate({
+                                                        bindto: "#chart<?php echo $professors_info['rowNumber'] ?>",
+
+                                                        data: {
+                                                            x: 'x_labels',
+                                                            json: json_data,
+                                                            type: 'bar',
+                                                            groups: [
+                                                                ['خصم', 'سلفة', 'مرتب']
+                                                            ]
+                                                        },
+                                                        axis: {
+                                                            x: {
+                                                                type: 'category'
+                                                            },
+                                                        }
+                                                    });
+
+                                                </script>
+                                                <?php
+                                            }
+                                            ?>
+                                            <div style="height: 390px;" class="tab-pane fade in active">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
                             <h5>Search and view salary and payroll details</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
@@ -253,6 +366,8 @@ include_once "layout/modals.php";
 
 <!-- Select2 -->
 <script src="js/plugins/select2/select2.full.min.js"></script>
+
+
 
 <!-- Chosen -->
 <script src="js/plugins/chosen/chosen.jquery.js"></script>
@@ -495,5 +610,7 @@ include_once "layout/modals.php";
         });
     });
 </script>
+
+
 </body>
 </html>
