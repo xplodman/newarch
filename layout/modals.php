@@ -307,6 +307,12 @@ include_once "php/application_setting.php";
                                     </div>
                                     <div class="i-checks">
                                         <label>
+                                            <input type="radio" value="D" name="type">
+                                            مراجعة
+                                        </label>
+                                    </div>
+                                    <div class="i-checks">
+                                        <label>
                                             <input type="radio" value="E" name="type">
                                             منسحب
                                         </label>
@@ -546,14 +552,11 @@ include_once "php/application_setting.php";
                                 <input required name="sttype2" type="radio" class="ace"  value="B"/>
                                 <span class="lbl"> مستجد</span>
                                 <br>
-                                <input id="final_revesion_check" required name="sttype2" type="radio" class="ace"  value="C"/>
+                                <input required name="sttype2" type="radio" class="ace"  value="C"/>
                                 <span class="lbl"> مراجعة نهائية</span>
-                            </div>
-                        </div>
-                        <div class="form-group" id="final_revesion_content">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-13"> تكلفة المراجعة النهائية </label>
-                            <div class="col-sm-8">
-                                <input type="text"  id="spinner6" placeholder="التكلفة" class="col-xs-10 col-sm-5" name="stbalance"value="<?php echo $application_settings_info['final_revision_price'] ?>"/>
+                                <br>
+                                <input required name="sttype2" type="radio" class="ace"  value="D"/>
+                                <span class="lbl"> مراجعة</span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -1099,18 +1102,6 @@ include_once "php/application_setting.php";
                             <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> name </label>
                             <div class="col-sm-10">
                                 <input required type="text" id="form-field-1" placeholder="name" class="col-xs-10 col-sm-5" name="name"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> description </label>
-                            <div class="col-sm-10">
-                                <input required type="text" id="form-field-1" placeholder="description" class="col-xs-10 col-sm-5" name="description"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> code </label>
-                            <div class="col-sm-10">
-                                <input required type="text" id="form-field-1" placeholder="excode" class="col-xs-10 col-sm-5" name="excode"/>
                             </div>
                         </div>
                         <div class="clearfix form-actions">

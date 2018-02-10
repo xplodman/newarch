@@ -1,5 +1,7 @@
 <?php
 include_once "connection.php";
+$database_name=$_SESSION['5inarch']['database_name'];
+
 session_start();
 $messagedata=$_POST['usermsg'];
 $administratorid=$_SESSION['administratorid'];

@@ -1,5 +1,6 @@
 <?php
 include_once "connection.php";
+$database_name=$_SESSION['5inarch']['database_name'];
 
 $categoryname=$_POST['categoryname'];
 

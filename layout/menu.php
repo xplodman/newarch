@@ -99,6 +99,15 @@ function active($currect_page){
                 <?php
                 if ($_SESSION['5inarch']['role'] == 1){
                     ?>
+                    <li class="<?php active('backup_restore.php');?>">
+                        <a href="backup_restore.php"><i class="fa fa-archive fa-1x"></i> <span class="nav-label">Backup and restore</span></a>
+                    </li>
+                    <?php
+                }
+                ?>
+                <?php
+                if ($_SESSION['5inarch']['role'] == 1){
+                    ?>
                     <li class="<?php active('config.php');?>">
                         <a href="config.php"><i class="fa fa-cogs fa-1x"></i> <span class="nav-label">Config</span></a>
                     </li>

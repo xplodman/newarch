@@ -73,8 +73,6 @@ include_once "layout/header.php";
 </style>
 <?php
 if(isset($_POST['submit'])) {
-    session_start();
-
     $username = $_POST['username'];
     $password = $_POST['password'];
 

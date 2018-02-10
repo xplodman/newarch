@@ -7,6 +7,7 @@ include_once "php/application_setting.php";
 <html>
 
 <?php
+
 $pageTitle = 'Receipts';
 include_once "layout/header.php";
 ?>
@@ -458,4 +459,5 @@ include_once "layout/modals.php";
     });
 </script>
 </body>
+<?php include_once "layout/scripts.php"; ?>
 </html>

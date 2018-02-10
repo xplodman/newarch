@@ -1,6 +1,7 @@
 <?php
 include_once "connection.php";
 //var_dump(get_defined_vars());
+$database_name=$_SESSION['5inarch']['database_name'];
 
 $receiptid=$_GET['receiptid'];
 
@@ -13,7 +14,7 @@ $receiptresult = mysqli_fetch_assoc($result);
         $student = mysqli_fetch_assoc($student);
         $newbalance=$newbalance+$student['stbalance'];
 
-        $result2 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `stbalance` = '$newbalance' WHERE `students`.`stid` = $receiptresult[tidonor];");
+        $result2 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `stbalance` = '$newbalance' WHERE `students`.`stid` = $receiptresult[tidonor];");
         $result3 = mysqli_query($con, "DELETE FROM `tickets` WHERE `tiid`=$receiptid;");
         mysqli_commit($con);
     }
@@ -23,7 +24,7 @@ $receiptresult = mysqli_fetch_assoc($result);
         $student = mysqli_fetch_assoc($student);
         $newbalance= $receiptresult['tiamount'];
         $newbalance=$newbalance+$student['stbalance'];
-        $result2 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `stbalance` = '$newbalance' WHERE `students`.`stid` = $receiptresult[tirecipient];");
+        $result2 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `stbalance` = '$newbalance' WHERE `students`.`stid` = $receiptresult[tirecipient];");
         $result3 = mysqli_query($con, "DELETE FROM `tickets` WHERE `tiid`=$receiptid;");
         mysqli_commit($con);
     }

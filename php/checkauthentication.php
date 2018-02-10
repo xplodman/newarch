@@ -1,7 +1,6 @@
 <meta http-equiv="refresh" content="600;url=login.php" />
 
 <?php
-session_start();
 if (!isset($_SESSION['5inarch']['authenticate']) or $_SESSION['5inarch']['authenticate']!="true")
 {
     header('Location: login.php');

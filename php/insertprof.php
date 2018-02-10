@@ -1,5 +1,7 @@
 <?php
 include_once "connection.php";
+$database_name=$_SESSION['5inarch']['database_name'];
+
 $character = array(" ", "	", "(", ")", "-", "/");
 
 $materials=$_POST['materials'];
@@ -32,7 +34,7 @@ if (!empty($materials)) {
     $maxprmatid = implode("", $maxprmatid);
     $maxprmatid =$maxprmatid+1;
     for($x=0 ; $x < $len ; $x++){
-        $query2 = mysqli_query($con, "INSERT INTO `5inarch`.`prmat` (`prmatid`, `professors_prid`, `material_matid`) VALUES ('$maxprmatid', '$maxprid', '$materials[$x]');");
+        $query2 = mysqli_query($con, "INSERT INTO `$database_name`.`prmat` (`prmatid`, `professors_prid`, `material_matid`) VALUES ('$maxprmatid', '$maxprid', '$materials[$x]');");
         $maxprmatid =$maxprmatid+1;
     }
 }else{

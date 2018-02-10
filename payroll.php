@@ -613,4 +613,5 @@ include_once "layout/modals.php";
 
 
 </body>
+<?php include_once "layout/scripts.php"; ?>
 </html>

@@ -1,25 +1,26 @@
--- MySQL Workbench Synchronization
--- Generated: 2018-02-07 07:03
--- Model: New Model
--- Version: 1.0
--- Project: Name of the project
--- Author: Ahmed
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
-ALTER SCHEMA `5inarch`  DEFAULT COLLATE utf8_general_ci ;
-
-CREATE TABLE IF NOT EXISTS `5inarch`.`application_setting` (
-  `id` INT(11) NOT NULL,
-  `course_price` INT(11) NULL DEFAULT NULL,
-  `final_revision_price` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+CREATE TABLE IF NOT EXISTS `5inarch`.`black_list_students` (
+  `stid` INT(5) NULL,
+  `stcode` VARCHAR(20) CHARACTER SET 'utf8' NULL,
+  `stname` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `stmob` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `sttel` VARCHAR(11) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `stparenttype` VARCHAR(15) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `stparentname` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `stparentmob` VARCHAR(22) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `stemail` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `staddress` VARCHAR(30) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `stnationalid` VARCHAR(14) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `sttype` INT(2) NULL,
+  `sttype2` VARCHAR(6) CHARACTER SET 'utf8' NULL,
+  `styear` VARCHAR(15) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `stterm` VARCHAR(15) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `stgroup` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `stbalance` VARCHAR(15) CHARACTER SET 'utf8' NULL DEFAULT '-',
+  `archive_name` VARCHAR(45) NULL)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+ALTER TABLE `5inarch`.`application_setting` 
+COLLATE = utf8_general_ci ,
+ADD COLUMN `revision_price` INT(11) NULL DEFAULT NULL AFTER `one_material_price`

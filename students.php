@@ -42,6 +42,9 @@ include_once "layout/header.php";
                             <a href="xstudents.php" class="btn btn-primary">
                                 <b>X students</b>
                             </a>
+                            <a href="black_listed_students.php" class="btn btn-primary">
+                                <i class="fa fa-crosshairs"></i> <b> Black listed students</b>
+                            </a>
                         </div>
                     </font>
                 </div>
@@ -177,6 +180,8 @@ ORDER BY
                                                         echo "باقي إعادة";
                                                     elseif($row4['sttype2'] == "B"):
                                                         echo "مستجد";
+                                                    elseif($row4['sttype2'] == "D"):
+                                                        echo "مراجعة";
                                                     else:
                                                         echo "???????";
                                                     endif;
@@ -490,4 +495,5 @@ ORDER BY
 </script>
 
 </body>
+<?php include_once "layout/scripts.php"; ?>
 </html>

@@ -1,5 +1,6 @@
 <?php
 //var_dump(get_defined_vars());
+$database_name=$_SESSION['5inarch']['database_name'];
 
 include_once "connection.php";
 $uri_parts = explode('?', $_SERVER['HTTP_REFERER'], 2);
@@ -13,7 +14,7 @@ $amount=$_POST['amount']*-1;
 $date=$_POST['date'];
 $description=$_POST['description'];
 
-$result1 = mysqli_query($con, "INSERT INTO `5inarch`.`tickets` (`tiid`, `tiamount`, `tidonor`, `tidonortype`, `tirecipient`, `tirecipienttype`, `tirealdate`, `tisysdate`, `tireason`, `tinumber`, `tidescription`, `titype`) VALUES (NULL, '$amount', '$donor', '1', '$recipient', '1', '$date', now(), '$reason', '$number', '$description', '$receipttype');");
+$result1 = mysqli_query($con, "INSERT INTO `$database_name`.`tickets` (`tiid`, `tiamount`, `tidonor`, `tidonortype`, `tirecipient`, `tirecipienttype`, `tirealdate`, `tisysdate`, `tireason`, `tinumber`, `tidescription`, `titype`) VALUES (NULL, '$amount', '$donor', '1', '$recipient', '1', '$date', now(), '$reason', '$number', '$description', '$receipttype');");
 
 
 // return back with backresult

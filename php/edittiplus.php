@@ -1,7 +1,7 @@
 <?php
 include_once "connection.php";
 //var_dump(get_defined_vars());
-
+$database_name=$_SESSION['5inarch']['database_name'];
 $receipttype=$_POST['receipttype'];
 $receiptid=$_GET['receiptid'];
 
@@ -12,7 +12,7 @@ if ($receipttype=="1"){
     $reason=$_POST['reason'];
     $description=$_POST['description'];
 
-    $result1 = mysqli_query($con, "UPDATE `5inarch`.`tickets` SET `tirecipient` = '$recipient', `tirealdate` = '$date', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
+    $result1 = mysqli_query($con, "UPDATE `$database_name`.`tickets` SET `tirecipient` = '$recipient', `tirealdate` = '$date', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
 
 
 }elseif ($receipttype=="2"){
@@ -24,7 +24,7 @@ if ($receipttype=="1"){
     $amount=$_POST['amount'];
     $reason=$_POST['reason'];
 
-    $result1 = mysqli_query($con, "UPDATE `5inarch`.`tickets` SET `tiamount` = '$amount', `tidonor` = '$donor', `tirecipient` = '$recipient', `tirealdate` = '$date', `tireason` = '$reason', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
+    $result1 = mysqli_query($con, "UPDATE `$database_name`.`tickets` SET `tiamount` = '$amount', `tidonor` = '$donor', `tirecipient` = '$recipient', `tirealdate` = '$date', `tireason` = '$reason', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
 
 }elseif ($receipttype=="99"){
     $number=$_POST['number'];
@@ -35,7 +35,7 @@ if ($receipttype=="1"){
     $amount=$_POST['amount'];
     $reason="99";
 
-    $result1 = mysqli_query($con, "UPDATE `5inarch`.`tickets` SET `tiamount` = '$amount', `tidonor` = '$donor', `tirecipient` = '$recipient', `tirealdate` = '$date', `tireason` = '$reason', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
+    $result1 = mysqli_query($con, "UPDATE `$database_name`.`tickets` SET `tiamount` = '$amount', `tidonor` = '$donor', `tirecipient` = '$recipient', `tirealdate` = '$date', `tireason` = '$reason', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
 
 }elseif ($receipttype=="3"){
     $number=$_POST['number'];
@@ -44,7 +44,7 @@ if ($receipttype=="1"){
     $description=$_POST['description'];
     $titype=$_POST['titype'];
 
-    $result1 = mysqli_query($con, "UPDATE `5inarch`.`tickets` SET `tidonor` = '$donor', `tirealdate` = '$date', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
+    $result1 = mysqli_query($con, "UPDATE `$database_name`.`tickets` SET `tidonor` = '$donor', `tirealdate` = '$date', `tinumber` = '$number', `tidescription` = '$description' WHERE `tickets`.`tiid` = $receiptid;");
 }
 
 

@@ -4,7 +4,7 @@ include_once "php/checkauthentication.php";
 include_once "php/functions.php";
 ?>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <?php
 $pageTitle = 'Dashboard';
@@ -411,12 +411,18 @@ $first_final = student_summary_detail(1,'students.sttype2','C');
 $second_final = student_summary_detail(2,'students.sttype2','C');
 $third_final = student_summary_detail(3,'students.sttype2','C');
 $fourth_final = student_summary_detail(4,'students.sttype2','C');
+
+$first_revision = student_summary_detail(1,'students.sttype2','D');
+$second_revision = student_summary_detail(2,'students.sttype2','D');
+$third_revision = student_summary_detail(3,'students.sttype2','D');
+$fourth_revision = student_summary_detail(4,'students.sttype2','D');
 unset($php_data);
 $php_data = array(
     'x_labels' => array('First', 'Second', 'Third', 'Fourth', ),
     'مستجد' => array($first_new, $second_new, $third_new, $fourth_new),
     'باقي إعادة' => array($first_old, $second_old, $third_old, $fourth_old),
-    'مراجعة نهائية' => array($first_final, $second_final, $third_final, $fourth_final)
+    'مراجعة نهائية' => array($first_final, $second_final, $third_final, $fourth_final),
+    'مراجعة' => array($first_revision, $second_revision, $third_revision, $fourth_revision)
 );
 ?>
 <script>
@@ -428,7 +434,7 @@ $php_data = array(
             json: json_data,
             type: 'bar',
             groups: [
-                ['مستجد', 'باقي إعادة', 'مراجعة نهائية']
+                ['مستجد', 'باقي إعادة', 'مراجعة نهائية', 'مراجعة']
             ]
         },
         axis: {
@@ -439,4 +445,5 @@ $php_data = array(
     });
 </script>
 </body>
+<?php include_once "layout/scripts.php"; ?>
 </html>

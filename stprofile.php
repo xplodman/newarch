@@ -187,6 +187,7 @@ include_once "layout/header.php";
                                                     <option value="A" <?php if($ressttype2=="A") echo 'selected="selected"'; ?>> باقي إعادة</option>
                                                     <option value="B" <?php if($ressttype2=="B") echo 'selected="selected"'; ?>> مستجد</option>
                                                     <option value="C" <?php if($ressttype2=="C") echo 'selected="selected"'; ?>> مراجعة نهائية</option>
+                                                    <option value="D" <?php if($ressttype2=="D") echo 'selected="selected"'; ?>> مراجعة</option>
                                                     <option value="E" <?php if($ressttype2=="E") echo 'selected="selected"'; ?>> منسحب</option>
                                                 </select>
                                             </div>
@@ -351,4 +352,5 @@ include_once "layout/modals.php";
     });
 </script>
 </body>
+<?php include_once "layout/scripts.php"; ?>
 </html>

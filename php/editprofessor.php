@@ -1,6 +1,8 @@
 <meta charset="utf-8">
 
 <?php
+$database_name=$_SESSION['5inarch']['database_name'];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     require 'connection.php';
     $character = array(" ", "	", "(", ")", "-", "/");
@@ -21,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $professorsapppw =$_POST['professorsapppw'];
     $professorsrole =$_POST['professorsrole'];
 
-    $query = mysqli_query($con, "UPDATE `5inarch`.`professors` SET `prname` = '$prname', `prmob` = '$prmob', `prtel` = '$prtel', `prparentname` = '$prparentname', `prparentmob` = '$prparentmob', `premail` = '$premail', `prbalance` = '$prbalance', `professorsappid` = '$professorsappid', `professorsapppw` = '$professorsapppw', `professorsrole` = '$professorsrole' WHERE `professors`.`prid` ='$professorid';");
+    $query = mysqli_query($con, "UPDATE `$database_name`.`professors` SET `prname` = '$prname', `prmob` = '$prmob', `prtel` = '$prtel', `prparentname` = '$prparentname', `prparentmob` = '$prparentmob', `premail` = '$premail', `prbalance` = '$prbalance', `professorsappid` = '$professorsappid', `professorsapppw` = '$professorsapppw', `professorsrole` = '$professorsrole' WHERE `professors`.`prid` ='$professorid';");
 
     if (!empty($materials)) {
         $len = count($materials);

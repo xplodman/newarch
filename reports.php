@@ -560,4 +560,5 @@ Where tickets.titype = '2'");
     });
 </script>
 </body>
+<?php include_once "layout/scripts.php"; ?>
 </html>

@@ -1,6 +1,8 @@
 <meta charset="utf-8">
 
 <?php
+$database_name=$_SESSION['5inarch']['database_name'];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     require 'connection.php';
     $errors=0;
@@ -10,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     for($z=0 ; $z < $len ; $z++){
 
         if (isset($_POST['materials_check'])) {
-            $query = mysqli_query($con, "UPDATE `5inarch`.`stmat` SET `status` = '0' WHERE `students_stid` = '$students[$z]';");
+            $query = mysqli_query($con, "UPDATE `$database_name`.`stmat` SET `status` = '0' WHERE `students_stid` = '$students[$z]';");
             if (!$query){
                 $errors.=1;
             }
@@ -28,35 +30,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
         if (isset($_POST['year_check'])) {
             $year =$_POST['year'];
-            $query3 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `styear` = $year WHERE `students`.`stid` = '$students[$z]';");
+            $query3 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `styear` = $year WHERE `students`.`stid` = '$students[$z]';");
             if (!$query3){
                 $errors.=1;
             }
         }
         if (isset($_POST['term_check'])) {
             $term =$_POST['term'];
-            $query4 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `stterm` = $term WHERE `students`.`stid` = '$students[$z]';");
+            $query4 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `stterm` = $term WHERE `students`.`stid` = '$students[$z]';");
             if (!$query4){
                 $errors.=1;
             }
         }
         if (isset($_POST['type_check'])) {
             $type =$_POST['type'];
-            $query5 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `sttype2` = '$type' WHERE `students`.`stid` = '$students[$z]';");
+            $query5 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `sttype2` = '$type' WHERE `students`.`stid` = '$students[$z]';");
             if (!$query5){
                 $errors.=1;
             }
         }
         if (isset($_POST['nature_check'])) {
             $nature =$_POST['nature'];
-            $query5 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `sttype` = '$nature' WHERE `students`.`stid` = '$students[$z]';");
+            $query5 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `sttype` = '$nature' WHERE `students`.`stid` = '$students[$z]';");
             if (!$query5){
                 $errors.=1;
             }
         }
         if (isset($_POST['balance_check'])) {
             $balance =$_POST['balance'];
-            $query6 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `stbalance` = `stbalance`+$balance WHERE `students`.`stid` = '$students[$z]';");
+            $query6 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `stbalance` = `stbalance`+$balance WHERE `students`.`stid` = '$students[$z]';");
             if (!$query6){
                 $errors.=1;
             }

@@ -1,11 +1,13 @@
 <?php
 include_once "connection.php";
+$database_name=$_SESSION['5inarch']['database_name'];
 
 $course_price=$_POST['course_price'];
 $final_revision_price=$_POST['final_revision_price'];
 $one_material_price=$_POST['one_material_price'];
+$revision_price=$_POST['revision_price'];
 
-$update_application_setting = mysqli_query($con, "UPDATE `application_setting` SET `course_price` = '$course_price', `final_revision_price` = '$final_revision_price', `one_material_price` = '$one_material_price' WHERE `application_setting`.`id` = 0;
+$update_application_setting = mysqli_query($con, "UPDATE `application_setting` SET `course_price` = '$course_price', `final_revision_price` = '$final_revision_price', `revision_price` = '$revision_price', `one_material_price` = '$one_material_price' WHERE `application_setting`.`id` = 1;
 ")or die(mysqli_error($con));
 
 

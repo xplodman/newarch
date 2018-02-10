@@ -1,5 +1,6 @@
 <?php
 //var_dump(get_defined_vars());
+$database_name=$_SESSION['5inarch']['database_name'];
 
 include_once "connection.php";
 
@@ -27,9 +28,9 @@ $materialscount=count($materials);
 
 
 
-$result1 = mysqli_query($con, "UPDATE `5inarch`.`students` SET `stname` = '$stname',`stcode` = '$stcode', `stmob` = '$stmob', `sttel` = '$sttel', `stparenttype` = '$stparenttype', `stparentname` = '$stparentname', `stparentmob` = '$stparentmob', `stemail` = '$stemail', `staddress` = '$staddress', `stnationalid` = '$stnationalid', `sttype` = '$sttype',`sttype2` = '$sttype2', `styear` = '$styear', `stterm` = '$stterm', `stgroup` = '$stgroup' WHERE `students`.`stid` = $student_id;");
+$result1 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `stname` = '$stname',`stcode` = '$stcode', `stmob` = '$stmob', `sttel` = '$sttel', `stparenttype` = '$stparenttype', `stparentname` = '$stparentname', `stparentmob` = '$stparentmob', `stemail` = '$stemail', `staddress` = '$staddress', `stnationalid` = '$stnationalid', `sttype` = '$sttype',`sttype2` = '$sttype2', `styear` = '$styear', `stterm` = '$stterm', `stgroup` = '$stgroup' WHERE `students`.`stid` = $student_id;");
 
-$result2 = mysqli_query($con, "UPDATE `5inarch`.`stmat` SET `status` = '0' WHERE `students_stid` = $student_id;");
+$result2 = mysqli_query($con, "UPDATE `$database_name`.`stmat` SET `status` = '0' WHERE `students_stid` = $student_id;");
 
 $len = count($materials);
     for($x=0 ; $x < $len ; $x++){

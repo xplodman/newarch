@@ -1,5 +1,6 @@
 <?php
 //var_dump(get_defined_vars());
+$database_name=$_SESSION['5inarch']['database_name'];
 
 include_once "connection.php";
 
@@ -11,7 +12,7 @@ $matname=$_POST['matname'];
 $matyear=$_POST['matyear'];
 $matterm=$_POST['matterm'];
 
-$result1 = mysqli_query($con, "UPDATE `5inarch`.`material` SET `matname` = '$matname', `matyear` = '$matyear', `matterm` = '$matterm' WHERE `material`.`matid` = '$materialid';");
+$result1 = mysqli_query($con, "UPDATE `$database_name`.`material` SET `matname` = '$matname', `matyear` = '$matyear', `matterm` = '$matterm' WHERE `material`.`matid` = '$materialid';");
 
 
 $uri_parts = explode('?', $_SERVER['HTTP_REFERER'], 2);

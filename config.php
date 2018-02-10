@@ -66,7 +66,15 @@ SELECT * FROM `application_setting`
                                     </div>
                                     <div class="form-group">
                                         <font face="myFirstFont">
-                                            <label class="col-sm-4 control-label">سعر المراجعة النهائية</label>
+                                            <label class="col-sm-4 control-label">سعر المادة في المراجعة </label>
+                                            <div class="col-sm-8">
+                                                <input type="text" name="revision_price" class="form-control" value="<?php echo $application_settings_info['revision_price'] ?>">
+                                            </div>
+                                        </font>
+                                    </div>
+                                    <div class="form-group">
+                                        <font face="myFirstFont">
+                                            <label class="col-sm-4 control-label">سعر المادة في المراجعة النهائية </label>
                                             <div class="col-sm-8">
                                                 <input type="text" name="final_revision_price" class="form-control" value="<?php echo $application_settings_info['final_revision_price'] ?>">
                                             </div>
@@ -404,4 +412,5 @@ include_once "layout/modals.php";
     });
 </script>
 </body>
+<?php include_once "layout/scripts.php"; ?>
 </html>

@@ -419,4 +419,5 @@ include_once "layout/modals.php";
 </script>
 
 </body>
+<?php include_once "layout/scripts.php"; ?>
 </html>

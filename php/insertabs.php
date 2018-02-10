@@ -1,5 +1,6 @@
 <?php
 include_once "connection.php";
+$database_name=$_SESSION['5inarch']['database_name'];
 
 $students_stid=$_POST['students_stid'];
 $material_matid=$_POST['material_matid'];

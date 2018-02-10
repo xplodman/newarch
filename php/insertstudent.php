@@ -1,6 +1,7 @@
 <?php
 include_once "connection.php";
 include_once "application_setting.php";
+$database_name=$_SESSION['5inarch']['database_name'];
 
 
 $character = array(" ", "	", "(", ")", "-", "/");
@@ -32,10 +33,12 @@ if ($sttype2 == "A") {
 } elseif ($sttype2 == "B") {
     $stbalance = -$application_settings_info['course_price'];
 } elseif ($sttype2 == "C"){
-    $stbalance=-$_POST['stbalance'];
+    $stbalance = $material_matidcount * -$application_settings_info['final_revision_price'];
+} elseif ($sttype2 == "D"){
+    $stbalance = $material_matidcount * -$application_settings_info['revision_price'];
 }
 
-$result1 = mysqli_query($con, "INSERT INTO `5inarch`.`students` (`stid`, `stcode`, `stname`, `stmob`, `sttel`, `stparenttype`, `stparentname`, `stparentmob`, `stemail`, `staddress`, `stnationalid`, `sttype`, `styear`, `stterm`, `stgroup`, `stbalance`, `sttype2`) VALUES (NULL, '$stcode', '$stname', '$stmob', '$sttel', '$stparenttype', '$stparentname', '	$stparentmob', '$stemail', '$staddress', '$stnationalid', '$sttype', '$styear', '$stterm', '$stgroup', '$stbalance', '$sttype2');");
+$result1 = mysqli_query($con, "INSERT INTO `$database_name`.`students` (`stid`, `stcode`, `stname`, `stmob`, `sttel`, `stparenttype`, `stparentname`, `stparentmob`, `stemail`, `staddress`, `stnationalid`, `sttype`, `styear`, `stterm`, `stgroup`, `stbalance`, `sttype2`) VALUES (NULL, '$stcode', '$stname', '$stmob', '$sttel', '$stparenttype', '$stparentname', '	$stparentmob', '$stemail', '$staddress', '$stnationalid', '$sttype', '$styear', '$stterm', '$stgroup', '$stbalance', '$sttype2');");
 
 $maxid = mysqli_query($con, "SELECT MAX(stid) FROM students");
 $maxidrow = mysqli_fetch_row($maxid);
@@ -43,7 +46,7 @@ $comma_separated = implode("", $maxidrow);
 $len = count($material_matid);
 
 for($x=0 ; $x < $len ; $x++){
-    $result133 = mysqli_query($con, "INSERT INTO `5inarch`.`stmat` (`stmatid`, `material_matid`, `students_stid`, `status`) VALUES (NULL, '$material_matid[$x]', '$comma_separated', '1');");
+    $result133 = mysqli_query($con, "INSERT INTO `$database_name`.`stmat` (`stmatid`, `material_matid`, `students_stid`, `status`) VALUES (NULL, '$material_matid[$x]', '$comma_separated', '1');");
 }
 
 
