@@ -1,8 +1,8 @@
 <?php
 //var_dump(get_defined_vars());
-$database_name=$_SESSION['5inarch']['database_name'];
 
 include_once "connection.php";
+$database_name=$_SESSION['5inarch']['database_name'];
 
 
 $character = array(" ", "	", "(", ")", "-", "/");
