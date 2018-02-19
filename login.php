@@ -92,7 +92,7 @@ Where professors.professorsappid = '$username' And professors.professorsapppw = 
 
         $row = mysqli_fetch_assoc($result);
 
-
+        $_SESSION['5inarch']['database_name']='5inarch';
         $_SESSION['5inarch']['timestamp'] = time();
         $_SESSION['5inarch']['authenticate'] = "true";
         $_SESSION['5inarch']['role'] = $row[professorsrole];

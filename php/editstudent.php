@@ -21,6 +21,7 @@ $stnationalid=$_POST['stnationalid'];
 $sttype=$_POST['sttype'];
 $styear=$_POST['styear'];
 $stterm=$_POST['stterm'];
+$stbalance=$_POST['stbalance'];
 $stgroup=$_POST['stgroup'];
 $sttype2=$_POST['sttype2'];
 $materials=$_POST['materials'];
@@ -28,7 +29,7 @@ $materialscount=count($materials);
 
 
 
-$result1 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `stname` = '$stname',`stcode` = '$stcode', `stmob` = '$stmob', `sttel` = '$sttel', `stparenttype` = '$stparenttype', `stparentname` = '$stparentname', `stparentmob` = '$stparentmob', `stemail` = '$stemail', `staddress` = '$staddress', `stnationalid` = '$stnationalid', `sttype` = '$sttype',`sttype2` = '$sttype2', `styear` = '$styear', `stterm` = '$stterm', `stgroup` = '$stgroup' WHERE `students`.`stid` = $student_id;");
+$result1 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `stname` = '$stname',`stcode` = '$stcode', `stmob` = '$stmob', `sttel` = '$sttel', `stparenttype` = '$stparenttype', `stparentname` = '$stparentname', `stparentmob` = '$stparentmob', `stemail` = '$stemail', `staddress` = '$staddress', `stnationalid` = '$stnationalid', `sttype` = '$sttype', `stbalance` = '$stbalance',`sttype2` = '$sttype2', `styear` = '$styear', `stterm` = '$stterm', `stgroup` = '$stgroup' WHERE `students`.`stid` = $student_id;");
 
 $result2 = mysqli_query($con, "UPDATE `$database_name`.`stmat` SET `status` = '0' WHERE `students_stid` = $student_id;");
 
@@ -56,3 +57,22 @@ else {
     fwrite($fh, $_SERVER['REMOTE_ADDR'].' '.date('c')."\n");
     fclose($fh);
     exit;}
+?>
+<!--<table>-->
+<?php
+//    foreach ($_POST as $key => $value) {
+//        echo "<tr>";
+//        echo "<td>";
+//        echo $key;
+//        echo "</td>";
+//        echo "<td>";
+//        if (is_array($value)){
+//            print_r($value);
+//        }else{
+//            echo $value;
+//        }
+//        echo "</td>";
+//        echo "</tr>";
+//    }
+//    ?>
+<!--</table>-->

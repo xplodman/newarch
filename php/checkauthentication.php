@@ -21,7 +21,7 @@ if (($_SESSION['5inarch']['authenticate']))
 }
 
 $admin_security = array("reports.php", "receipt.php", "config.php");
-$power_security = array("stprofile.php", "receipts.php", "payroll.php");
+$power_security = array("receipts.php", "payroll.php");
 
 // Validate user is authorize to access this page
 if (in_array(basename($_SERVER['PHP_SELF']), $admin_security)) {

@@ -1,5 +1,4 @@
 <meta charset="utf-8">
-
 <?php
 $database_name=$_SESSION['5inarch']['database_name'];
 
@@ -23,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $professorsapppw =$_POST['professorsapppw'];
     $professorsrole =$_POST['professorsrole'];
 
-    $query = mysqli_query($con, "UPDATE `$database_name`.`professors` SET `prname` = '$prname', `prmob` = '$prmob', `prtel` = '$prtel', `prparentname` = '$prparentname', `prparentmob` = '$prparentmob', `premail` = '$premail', `prbalance` = '$prbalance', `professorsappid` = '$professorsappid', `professorsapppw` = '$professorsapppw', `professorsrole` = '$professorsrole' WHERE `professors`.`prid` ='$professorid';");
+    $query = mysqli_query($con, "UPDATE `professors` SET `prname` = '$prname', `prmob` = '$prmob', `prtel` = '$prtel', `prparentname` = '$prparentname', `prparentmob` = '$prparentmob', `premail` = '$premail', `prbalance` = '$prbalance', `professorsappid` = '$professorsappid', `professorsapppw` = '$professorsapppw', `professorsrole` = '$professorsrole' WHERE `professors`.`prid` ='$professorid';");
 
     if (!empty($materials)) {
         $len = count($materials);
@@ -54,3 +53,22 @@ else {
     fclose($fh);
     exit;
 }
+?>
+<!--<table>-->
+<?php
+//    foreach ($_POST as $key => $value) {
+//        echo "<tr>";
+//        echo "<td>";
+//        echo $key;
+//        echo "</td>";
+//        echo "<td>";
+//        if (is_array($value)){
+//            print_r($value);
+//        }else{
+//            echo $value;
+//        }
+//        echo "</td>";
+//        echo "</tr>";
+//    }
+//    ?>
+<!--</table>-->

@@ -1,8 +1,9 @@
 <?php
+include_once "connection.php";
+
 //var_dump(get_defined_vars());
 $database_name=$_SESSION['5inarch']['database_name'];
 
-include_once "connection.php";
 $uri_parts = explode('?', $_SERVER['HTTP_REFERER'], 2);
 
 $receipttype=$_POST['receipttype'];

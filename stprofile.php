@@ -200,7 +200,7 @@ include_once "layout/header.php";
                                                 <?php
                                                     if($_SESSION['5inarch']['role']=="1"){
                                                         ?>
-                                                        <input value="<?php echo $stinfores['stbalance'] ;?>" type="number" class="form-control" name="stbalance" >
+                                                        <input value="<?php echo $stinfores['stbalance'] ;?>" class="form-control" name="stbalance" >
                                                         <?php
                                                 }else{
                                                     if($stinfores['stbalance'] > 0):
