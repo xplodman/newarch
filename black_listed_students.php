@@ -62,23 +62,8 @@ include_once "layout/header.php";
                                         while($row4 = mysqli_fetch_assoc($result4))
                                         {
                                             ?>
-                                                <?php
-                                                $matresult = mysqli_query($con, "SELECT * FROM `stmatall` where stid='".$row4['stid']."'");
-                                                $color = "purple";
-
-                                                ?>
-                                            <tr data-child-value="
-                                            <?php
-                                            while ($row = $matresult->fetch_assoc()) {
-                                                $matid= $row['matid'];
-                                                $productname = $row['matname'];
-
-                                                echo $productname.' & ';
-                                            };
-                                            ?>
-                                            "> <!--info plus-->
+                                            <tr data-child-value=""> <!--info plus-->
                                                 <td><!--search in info plus-->
-
                                                 </td>
                                                 <td class="details-control"></td>
                                                 <td>

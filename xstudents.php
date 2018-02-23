@@ -69,7 +69,36 @@ include_once "layout/header.php";
                                         {
                                             ?>
                                                 <?php
-                                                $matresult = mysqli_query($con, "SELECT * FROM `stmatall` where stid='".$row4['stid']."'");
+                                                $matresult = mysqli_query($con, "
+SELECT
+  material.matid,
+  students.stcode,
+  students.stname,
+  students.stmob,
+  students.sttel,
+  students.stparenttype,
+  students.stparentname,
+  students.stparentmob,
+  students.stemail,
+  students.staddress,
+  students.stnationalid,
+  students.sttype,
+  students.sttype2,
+  students.styear,
+  students.stterm,
+  students.stgroup,
+  students.stbalance,
+  material.matname,
+  material.matyear,
+  material.matterm,
+  students.stid
+FROM
+  students
+  INNER JOIN stmat ON stmat.students_stid = students.stid
+  INNER JOIN material ON stmat.material_matid = material.matid
+WHERE
+  stmat.status = 1 AND
+  students.stid = '$row4[stid]'");
                                                 $color = "purple";
 
                                                 ?>

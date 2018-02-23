@@ -84,7 +84,27 @@ include_once "layout/header.php";
                                             <label class="col-sm-2 control-label">Professor name</label>
                                             <div class="col-sm-10">
                                                 <?php
-                                                $result=mysqli_query($con, "SELECT * FROM `prmatall` where `matid`=$materialid");
+                                                $result=mysqli_query($con, "SELECT
+  professors.prid,
+  professors.prname,
+  professors.prmob,
+  professors.prtel,
+  professors.prparentname,
+  professors.prparentmob,
+  professors.premail,
+  professors.prbalance,
+  professors.professorsappid,
+  professors.professorsapppw,
+  professors.professorsrole,
+  material.matid,
+  material.matname,
+  material.matyear,
+  material.matterm
+FROM
+  professors
+  INNER JOIN prmat ON prmat.professors_prid = professors.prid
+  INNER JOIN material ON prmat.material_matid = material.matid
+  where `matid`=$materialid");
                                                 while($prmatinfores = mysqli_fetch_assoc($result))
                                                 {
                                                     if (!empty($prmatinfores)) {
@@ -99,7 +119,27 @@ include_once "layout/header.php";
                                             <label class="col-sm-2 control-label">Professor number</label>
                                             <div class="col-sm-10">
                                                 <?php
-                                                $result=mysqli_query($con, "SELECT * FROM `prmatall` where `matid`=$materialid");
+                                                $result=mysqli_query($con, "SELECT
+  professors.prid,
+  professors.prname,
+  professors.prmob,
+  professors.prtel,
+  professors.prparentname,
+  professors.prparentmob,
+  professors.premail,
+  professors.prbalance,
+  professors.professorsappid,
+  professors.professorsapppw,
+  professors.professorsrole,
+  material.matid,
+  material.matname,
+  material.matyear,
+  material.matterm
+FROM
+  professors
+  INNER JOIN prmat ON prmat.professors_prid = professors.prid
+  INNER JOIN material ON prmat.material_matid = material.matid
+  where `matid`=$materialid");
                                                 while($prmatinfores = mysqli_fetch_assoc($result))
                                                 {
                                                 if (!empty($prmatinfores)) {
@@ -114,7 +154,15 @@ include_once "layout/header.php";
                                             <label class="col-sm-2 control-label">Student count</label>
                                             <div class="col-sm-10">
                                                 <?php
-                                                $result=mysqli_query($con, "Select Count(stmatall.matid) as Count From stmatall Where stmatall.matid =$materialid");
+                                                $result=mysqli_query($con, "SELECT
+  Count(stmat.stmatid) AS Count
+FROM
+  students
+  INNER JOIN stmat ON stmat.students_stid = students.stid
+  INNER JOIN material ON stmat.material_matid = material.matid
+WHERE
+  stmat.status = 1 AND
+  material.matid = '$materialid'");
                                                 $prmatinfores = mysqli_fetch_assoc($result);
                                                 echo $prmatinfores['Count'];
                                                 ?>                                            </div>

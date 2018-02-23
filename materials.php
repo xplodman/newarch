@@ -63,7 +63,28 @@ include_once "layout/header.php";
                                                 <td><?php echo $row4['matyear'] ?></td>
                                                 <td><?php echo $row4['matterm'] ?></td>
                                                 <td><?php
-                                                    $result=mysqli_query($con, "SELECT * FROM `prmatall` where `matid`=$row4[matid]");
+                                                    $result=mysqli_query($con, "
+SELECT
+  professors.prid,
+  professors.prname,
+  professors.prmob,
+  professors.prtel,
+  professors.prparentname,
+  professors.prparentmob,
+  professors.premail,
+  professors.prbalance,
+  professors.professorsappid,
+  professors.professorsapppw,
+  professors.professorsrole,
+  material.matid,
+  material.matname,
+  material.matyear,
+  material.matterm
+FROM
+  professors
+  INNER JOIN prmat ON prmat.professors_prid = professors.prid
+  INNER JOIN material ON prmat.material_matid = material.matid
+  where `matid`=$row4[matid]");
                                                     while($prmatinfores = mysqli_fetch_assoc($result))
                                                     {
                                                         if (!empty($prmatinfores)) {
@@ -73,20 +94,89 @@ include_once "layout/header.php";
                                                 </td>
                                                 <td>
                                                     <?php
-                                                    $result=mysqli_query($con, "SELECT * FROM `prmatall` where `matid`=$row4[matid]");
+                                                    $result=mysqli_query($con, "SELECT
+  professors.prid,
+  professors.prname,
+  professors.prmob,
+  professors.prtel,
+  professors.prparentname,
+  professors.prparentmob,
+  professors.premail,
+  professors.prbalance,
+  professors.professorsappid,
+  professors.professorsapppw,
+  professors.professorsrole,
+  material.matid,
+  material.matname,
+  material.matyear,
+  material.matterm
+FROM
+  professors
+  INNER JOIN prmat ON prmat.professors_prid = professors.prid
+  INNER JOIN material ON prmat.material_matid = material.matid
+  where `matid`=$row4[matid]");
                                                     while($prmatinfores = mysqli_fetch_assoc($result))
                                                     {
                                                         echo $prmatinfores['prmob']  .'<br>';};?>
                                                 </td>
                                                 <td>
                                                     <?php
-                                                    $result=mysqli_query($con, "SELECT * FROM `prmatall` where `matid`=$row4[matid]");
+                                                    $result=mysqli_query($con, "SELECT
+  professors.prid,
+  professors.prname,
+  professors.prmob,
+  professors.prtel,
+  professors.prparentname,
+  professors.prparentmob,
+  professors.premail,
+  professors.prbalance,
+  professors.professorsappid,
+  professors.professorsapppw,
+  professors.professorsrole,
+  material.matid,
+  material.matname,
+  material.matyear,
+  material.matterm
+FROM
+  professors
+  INNER JOIN prmat ON prmat.professors_prid = professors.prid
+  INNER JOIN material ON prmat.material_matid = material.matid
+  where `matid`=$row4[matid]");
                                                     while($prmatinfores = mysqli_fetch_assoc($result))
                                                     {
                                                         echo $prmatinfores['prtel']  .'<br>';};?>
                                                 </td>
                                                 <td><span id="age"><?php
-                                                        $studentscount=mysqli_query($con, "SELECT * FROM `stmatall` where `matid`=$row4[matid]");
+                                                        $studentscount=mysqli_query($con, "
+SELECT
+  material.matid,
+  students.stcode,
+  students.stname,
+  students.stmob,
+  students.sttel,
+  students.stparenttype,
+  students.stparentname,
+  students.stparentmob,
+  students.stemail,
+  students.staddress,
+  students.stnationalid,
+  students.sttype,
+  students.sttype2,
+  students.styear,
+  students.stterm,
+  students.stgroup,
+  students.stbalance,
+  material.matname,
+  material.matyear,
+  material.matterm,
+  students.stid
+FROM
+  students
+  INNER JOIN stmat ON stmat.students_stid = students.stid
+  INNER JOIN material ON stmat.material_matid = material.matid
+WHERE
+  stmat.status = 1 AND
+  material.matid = '$row4[matid]'");
                                                         $num_rows = mysqli_num_rows($studentscount);;
                                                         echo $num_rows;
                                                         ;?></span></td>

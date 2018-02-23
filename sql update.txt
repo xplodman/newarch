@@ -1,26 +1,25 @@
-CREATE TABLE IF NOT EXISTS `5inarch`.`black_list_students` (
-  `stid` INT(5) NULL,
-  `stcode` VARCHAR(20) CHARACTER SET 'utf8' NULL,
-  `stname` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `stmob` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `sttel` VARCHAR(11) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `stparenttype` VARCHAR(15) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `stparentname` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `stparentmob` VARCHAR(22) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `stemail` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `staddress` VARCHAR(30) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `stnationalid` VARCHAR(14) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `sttype` INT(2) NULL,
-  `sttype2` VARCHAR(6) CHARACTER SET 'utf8' NULL,
-  `styear` VARCHAR(15) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `stterm` VARCHAR(15) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `stgroup` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `stbalance` VARCHAR(15) CHARACTER SET 'utf8' NULL DEFAULT '-',
-  `archive_name` VARCHAR(45) NULL)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-ALTER TABLE `5inarch`.`application_setting` 
-COLLATE = utf8_general_ci ,
-ADD COLUMN `revision_price` INT(11) NULL DEFAULT NULL AFTER `one_material_price`
+
+--
+-- Structure for view `absall`
+--
+DROP TABLE IF EXISTS `absall`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `absall` AS select `students`.`stid` AS `stid`,`students`.`stname` AS `stname`,`students`.`stmob` AS `stmob`,`students`.`sttel` AS `sttel`,`students`.`stparenttype` AS `stparenttype`,`students`.`stparentname` AS `stparentname`,`students`.`stparentmob` AS `stparentmob`,`students`.`stemail` AS `stemail`,`students`.`staddress` AS `staddress`,`students`.`stnationalid` AS `stnationalid`,`students`.`styear` AS `styear`,`students`.`stterm` AS `stterm`,`students`.`stgroup` AS `stgroup`,`students`.`stbalance` AS `stbalance`,`material`.`matid` AS `matid`,`material`.`matname` AS `matname`,`material`.`matyear` AS `matyear`,`material`.`matterm` AS `matterm`,`absence`.`absid` AS `absid`,`absence`.`date` AS `date`,`absence`.`students_stid` AS `students_stid`,`absence`.`material_matid` AS `material_matid` from ((`absence` join `material` on((`material`.`matid` = `absence`.`material_matid`))) join `students` on((`absence`.`students_stid` = `students`.`stid`))) order by `absence`.`date` desc;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `prmatall`
+--
+DROP TABLE IF EXISTS `prmatall`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prmatall` AS select `professors`.`prname` AS `prname`,`professors`.`prmob` AS `prmob`,`professors`.`prtel` AS `prtel`,`professors`.`prparentname` AS `prparentname`,`professors`.`premail` AS `premail`,`professors`.`prparentmob` AS `prparentmob`,`professors`.`prbalance` AS `prbalance`,`material`.`matyear` AS `matyear`,`material`.`matterm` AS `matterm`,`professors`.`prid` AS `prid`,`material`.`matid` AS `matid`,`material`.`matname` AS `matname` from ((`material` join `prmat` on((`material`.`matid` = `prmat`.`material_matid`))) join `professors` on((`prmat`.`professors_prid` = `professors`.`prid`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `stmatall`
+--
+DROP TABLE IF EXISTS `stmatall`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `stmatall` AS select `students`.`stname` AS `stname`,`students`.`stmob` AS `stmob`,`students`.`styear` AS `styear`,`students`.`stterm` AS `stterm`,`students`.`stgroup` AS `stgroup`,`students`.`stbalance` AS `stbalance`,`material`.`matname` AS `matname`,`material`.`matid` AS `matid`,`material`.`matyear` AS `matyear`,`material`.`matterm` AS `matterm`,`students`.`sttel` AS `sttel`,`students`.`stparenttype` AS `stparenttype`,`students`.`stparentname` AS `stparentname`,`students`.`stparentmob` AS `stparentmob`,`students`.`stemail` AS `stemail`,`students`.`staddress` AS `staddress`,`students`.`stnationalid` AS `stnationalid`,`students`.`stid` AS `stid` from ((`students` join `stmat` on((`students`.`stid` = `stmat`.`students_stid`))) join `material` on((`material`.`matid` = `stmat`.`material_matid`))) where (`stmat`.`status` = 1);

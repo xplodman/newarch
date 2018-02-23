@@ -49,7 +49,7 @@ include_once "layout/header.php";
                                     <table id="example" class=" dataTables-example table table-striped table-hover dt-responsive" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
-                                            <th style="width:1em">Remove</th>
+                                            <th style="width:1em"></th>
                                             <th>الأسم</th>
                                             <th>موبايل</th>
                                             <th>السنة</th>
@@ -62,7 +62,7 @@ include_once "layout/header.php";
 
                                         <tbody>
                                         <?php
-                                        $result4 = mysqli_query($con, "SELECT * FROM `absall`");
+                                        $result4 = mysqli_query($con, "select `5inarch`.`students`.`stid` AS `stid`,`5inarch`.`students`.`stname` AS `stname`,`5inarch`.`students`.`stmob` AS `stmob`,`5inarch`.`students`.`sttel` AS `sttel`,`5inarch`.`students`.`stparenttype` AS `stparenttype`,`5inarch`.`students`.`stparentname` AS `stparentname`,`5inarch`.`students`.`stparentmob` AS `stparentmob`,`5inarch`.`students`.`stemail` AS `stemail`,`5inarch`.`students`.`staddress` AS `staddress`,`5inarch`.`students`.`stnationalid` AS `stnationalid`,`5inarch`.`students`.`styear` AS `styear`,`5inarch`.`students`.`stterm` AS `stterm`,`5inarch`.`students`.`stgroup` AS `stgroup`,`5inarch`.`students`.`stbalance` AS `stbalance`,`5inarch`.`material`.`matid` AS `matid`,`5inarch`.`material`.`matname` AS `matname`,`5inarch`.`material`.`matyear` AS `matyear`,`5inarch`.`material`.`matterm` AS `matterm`,`5inarch`.`absence`.`absid` AS `absid`,`5inarch`.`absence`.`date` AS `date`,`5inarch`.`absence`.`students_stid` AS `students_stid`,`5inarch`.`absence`.`material_matid` AS `material_matid` from ((`5inarch`.`absence` join `5inarch`.`material` on((`5inarch`.`material`.`matid` = `5inarch`.`absence`.`material_matid`))) join `5inarch`.`students` on((`5inarch`.`absence`.`students_stid` = `5inarch`.`students`.`stid`))) order by `5inarch`.`absence`.`date` desc");
                                         while($row4 = mysqli_fetch_assoc($result4))
                                         {
                                             ?>

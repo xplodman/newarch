@@ -160,7 +160,28 @@ include_once "layout/header.php";
                                             <div class="col-sm-10">
                                                 <select class="form-control dual_select" name="materials[]" multiple>
                                                     <?php
-                                                    $result2 = mysqli_query($con, "SELECT * FROM `prmatall` where prid=$professorid");
+                                                    $result2 = mysqli_query($con, "
+SELECT
+  professors.prid,
+  professors.prname,
+  professors.prmob,
+  professors.prtel,
+  professors.prparentname,
+  professors.prparentmob,
+  professors.premail,
+  professors.prbalance,
+  professors.professorsappid,
+  professors.professorsapppw,
+  professors.professorsrole,
+  material.matid,
+  material.matname,
+  material.matyear,
+  material.matterm
+FROM
+  professors
+  INNER JOIN prmat ON prmat.professors_prid = professors.prid
+  INNER JOIN material ON prmat.material_matid = material.matid
+  where prid=$professorid");
                                                     while ($row2 = $result2->fetch_assoc()) {
                                                         unset($id2, $name2);
                                                         $matid = $row2['matid'];

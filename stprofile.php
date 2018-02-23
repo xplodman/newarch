@@ -223,7 +223,36 @@ include_once "layout/header.php";
                                             <div class="col-sm-10">
                                                 <select class="form-control dual_select" name="materials[]" multiple>
                                                     <?php
-                                                    $result2 = mysqli_query($con, "SELECT * FROM `stmatall` where stid=$student_id");
+                                                    $result2 = mysqli_query($con, "
+SELECT
+  material.matid,
+  students.stcode,
+  students.stname,
+  students.stmob,
+  students.sttel,
+  students.stparenttype,
+  students.stparentname,
+  students.stparentmob,
+  students.stemail,
+  students.staddress,
+  students.stnationalid,
+  students.sttype,
+  students.sttype2,
+  students.styear,
+  students.stterm,
+  students.stgroup,
+  students.stbalance,
+  material.matname,
+  material.matyear,
+  material.matterm,
+  students.stid
+FROM
+  students
+  INNER JOIN stmat ON stmat.students_stid = students.stid
+  INNER JOIN material ON stmat.material_matid = material.matid
+WHERE
+  stmat.status = 1 AND
+  students.stid = '$student_id'");
                                                     while ($row2 = $result2->fetch_assoc()) {
                                                         unset($id2, $name2);
                                                         $matid = $row2['matid'];
