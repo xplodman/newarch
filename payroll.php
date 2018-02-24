@@ -32,7 +32,7 @@ include_once "layout/header.php";
                 </font>
             </div>
         </div>
-        <div class="wrapper wrapper-content animated fadeInRightBig">
+        <div class="wrapper animated fadeInRightBig">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
@@ -96,23 +96,23 @@ include_once "layout/header.php";
                                                     <div class="panel-body">
                                                         <div  id="chart<?php echo $professors_info['rowNumber']?>"></div>
                                                     </div>
-<!--                                                    <div class="col-sm-12">-->
-<!--                                                    --><?PHP
-//                                                    $x=-3;
-//                                                    while ($x <= 1) {
-//                                                        $month_name = date('F', strtotime("+$x month"));
-//?>
-<!--                                                        <div class="col-lg-offset-1 col-lg-1">-->
-<!--                                                            <font face="myFirstFont">-->
-<!--                                                                <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#add_deduction">--><?php //echo $month_name ?><!-- مرتب </button>-->
-<!--                                                            </font>-->
-<!--                                                        </div>-->
-<!---->
-<!--                                                        --><?PHP
-//                                                            $x++;
-//                                                        }
-//                                                        ?>
-<!--                                                    </div>-->
+                                                    <!--                                                    <div class="col-sm-12">-->
+                                                    <!--                                                    --><?PHP
+                                                    //                                                    $x=-3;
+                                                    //                                                    while ($x <= 1) {
+                                                    //                                                        $month_name = date('F', strtotime("+$x month"));
+                                                    //?>
+                                                    <!--                                                        <div class="col-lg-offset-1 col-lg-1">-->
+                                                    <!--                                                            <font face="myFirstFont">-->
+                                                    <!--                                                                <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#add_deduction">--><?php //echo $month_name ?><!-- مرتب </button>-->
+                                                    <!--                                                            </font>-->
+                                                    <!--                                                        </div>-->
+                                                    <!---->
+                                                    <!--                                                        --><?PHP
+                                                    //                                                            $x++;
+                                                    //                                                        }
+                                                    //                                                        ?>
+                                                    <!--                                                    </div>-->
                                                 </div>
                                                 <script>
                                                     var json_data = <?php echo json_encode($php_data) ?>;
@@ -142,6 +142,122 @@ include_once "layout/header.php";
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>That can help you to see the payroll to all professors</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="table-responsive">
+                                    <table id="example2" class=" dataTables-example2 table table-striped table-hover dt-responsive" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <?php
+                                            $i = -3;
+                                            while ($i <= 1) {
+                                                $month_name = date('F', strtotime("+$i month"));
+                                                $month_number = date('m', strtotime("+$i month"));
+                                                ?>
+                                                <th><?php echo $month_name ?></th>
+                                                <?php
+                                                $i++;
+                                            }
+                                            ?>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $result22 = mysqli_query($con,"
+                                                Select professors.prid,
+                                                  professors.prname,
+                                                  professors.prmob,
+                                                  professors.prtel,
+                                                  professors.prparentname,
+                                                  professors.prparentmob,
+                                                  professors.premail,
+                                                  professors.prbalance,
+                                                  professors.professorsrole
+                                                From professors") or die(mysqli_error($con));
+                                        while($row22 = mysqli_fetch_assoc($result22)) {
+                                            ?>
+                                            <td class="middle wrap">
+                                                <font size="3">
+                                                    <a class="green" href="professor.php?professorid=<?php echo $row22['prid'] ?>">
+                                                        <?php
+                                                        echo $row22['prname'];
+                                                        ?>
+                                                </font>
+                                            </td>
+                                            <?php
+                                            $i = -3;
+                                            while ($i <= 1) {
+                                                $month_name = date('F', strtotime("+$i month"));
+                                                $date_name = date('Y-m', strtotime("+$i month"));
+                                                $month_number = date('m', strtotime("+$i month"));
+                                                ?>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <?php
+                                                        $type_99 = profesor_payroll_detail($row22['prid'], '99', $month_number);
+                                                        $type_m1 = profesor_payroll_detail($row22['prid'], 'm1', $month_number);
+                                                        $type_m3 = profesor_payroll_detail($row22['prid'], 'm3', $month_number);
+                                                        $prof_salary=$row22['prbalance'];
+                                                        if($type_99+$type_m1+$type_m3+$prof_salary <= 0){
+                                                            ?>
+                                                        <span class="btn btn-xs btn-warning">
+                                                            <font size="3">
+                                                            <?php
+                                                            echo "تم صرف المرتب هذا الشهر";
+                                                            ?>
+                                                                </font>
+                                                            </span>
+                                                            <?php
+                                                        }else{
+                                                            $salary_net=$type_99+$type_m1+$type_m3+$prof_salary;
+                                                            ?>
+                                                            <a data-toggle='modal' class='btn btn-primary fa fa-check' href='#professor_salary_receive' data-prof_id="<?php echo $row22['prid'] ?>" data-date_name="<?php echo $date_name ?>" data-payroll="<?php echo $salary_net ?>"></a>
+                                                        <span class="btn btn-xs btn-danger">
+                                                            <font size="3">
+                                                            <?php
+                                                            echo $salary_net;
+                                                            ?>
+                                                                </font>
+                                                        </span>
+                                                            <?php
+                                                            }
+                                                        ?>
+                                                    </font>
+                                                </td>
+                                                <?php
+                                                $i++;
+                                            }
+                                            ?>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -453,6 +569,60 @@ include_once "layout/modals.php";
         });
     });
 
+    $(document).ready(function() {
+        $('.dataTables-example2').DataTable({
+            initComplete: function () {
+                this.api().columns(':eq(7),:eq(8)').every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.header()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            },
+            pageLength: 10,
+            responsive: {
+                details: {
+                    type: 'column',
+                    target: 'tr'
+                }
+            },
+            columnDefs: [{
+                className: 'control',
+                orderable: false,
+                targets: [ 1 ]
+            }],
+        });
+
+    });
+    $(document).ready(function() {
+        var table = $('.dataTables-example2').DataTable();
+        // Add event listener for opening and closing details
+        $('#example2').on('click', 'td.details-control', function() {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            } else {
+                // Open this row
+                row.child(format(tr.data('child-value'))).show();
+                tr.addClass('shown');
+            }
+        });
+    });
 </script>
 <script>
     $(document).ready(function() {
@@ -551,16 +721,6 @@ include_once "layout/modals.php";
     });
 
 </script>
-<script>
-    $('#data_1 .input-group.date').datepicker({
-        todayBtn: "linked",
-        keyboardNavigation: false,
-        forceParse: false,
-        calendarWeeks: true,
-        autoclose: true,
-        format: 'yyyy-m-d'
-    });
-</script>
 <script type="text/javascript">
     $(document).ready(function(){
         var maxField = 15; //Input fields increment limitation
@@ -604,13 +764,27 @@ include_once "layout/modals.php";
 </script>
 <script>
     $(document).ready(function () {
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
+        $('#professor_salary_receive').on('show.bs.modal', function(e) {
+            var prof_id = $(e.relatedTarget).data('prof_id');
+            var payroll = $(e.relatedTarget).data('payroll');
+            var date_name = $(e.relatedTarget).data('date_name');
+            var date_name =date_name+'-'+'1';
+            $(e.currentTarget).find('input[name="prof_id"]').val(prof_id);
+            $(e.currentTarget).find('input[name="payroll"]').val(payroll);
+            $(e.currentTarget).find('input[name="date_payroll"]').val(date_name);
         });
     });
 </script>
-
+<script>
+    $('#data_1 .input-group.date').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true,
+        format: 'yyyy-m-d'
+    });
+</script>
 
 </body>
 <?php include_once "layout/scripts.php"; ?>

@@ -1123,6 +1123,52 @@ include_once "php/application_setting.php";
             </div>
         </div>
     </div>
+    <div class="modal inmodal" id="professor_salary_receive" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Pay professor salary</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="post" action="php/pay_prof.php">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right"> صافي المرتب</label>
+                            <div class="col-sm-10">
+                                <input required type="text" id="payroll" class="col-xs-10 col-sm-5" name="payroll" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right"> الرقم الآلي للمحاضر </label>
+                            <div class="col-sm-10">
+                                <input required type="text" id="prof_id" class="col-xs-10 col-sm-5" name="prof_id" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right">تاريخ الصرف</label>
+                            <div class="col-sm-10">
+                                <input required type="text" id="date" class="col-xs-10 col-sm-5" name="date_payroll" readonly/>
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info"  type="Submit"  name="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </font>
 <div id="blueimp-gallery" class="blueimp-gallery">
     <div class="slides"></div>
