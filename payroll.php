@@ -598,6 +598,7 @@ include_once "layout/modals.php";
                     target: 'tr'
                 }
             },
+            "ordering": false,
             columnDefs: [{
                 className: 'control',
                 orderable: false,

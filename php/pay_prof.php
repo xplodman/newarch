@@ -4,8 +4,9 @@ $payroll=$_POST['payroll'];
 $prof_id=$_POST['prof_id'];
 $date_payroll=$_POST['date_payroll'];
 $donor=$_SESSION['5inarch']['professorsid'];
+$database_name=$_SESSION['5inarch']['database_name'];
 
-$result1 = mysqli_query($con, "INSERT INTO `tickets` (`tiid`, `tiamount`, `tidonor`, `tidonortype`, `tirecipient`, `tirecipienttype`, `tirealdate`, `tisysdate`, `tireason`, `tinumber`, `tidescription`, `titype`) VALUES (NULL, -$payroll, '$donor', '1', '$prof_id', '1', '$date_payroll', now(), 'm3', '', '', '2');")or die(mysqli_error($con));;
+$result1 = mysqli_query($con, "INSERT INTO `$database_name`.`tickets` (`tiid`, `tiamount`, `tidonor`, `tidonortype`, `tirecipient`, `tirecipienttype`, `tirealdate`, `tisysdate`, `tireason`, `tinumber`, `tidescription`, `titype`) VALUES (NULL, -$payroll, '$donor', '1', '$prof_id', '1', '$date_payroll', now(), 'm3', '', '', '2');")or die(mysqli_error($con));;
 
 $uri_parts = explode('?', $_SERVER['HTTP_REFERER'], 2);
 if ($result1) {
