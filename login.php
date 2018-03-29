@@ -129,17 +129,19 @@ Where professors.professorsappid = '$username' And professors.professorsapppw = 
                 <button type="Submit"  name="submit" class="btn btn-primary block full-width m-b">Login</button>
             </form>
             <?php
-            if (isset($_GET['backresult'])){
-                $backresult=$_GET['backresult'];
-                if ($backresult ==  "0") {
-                    ?>
-                    <div class="alert alert-danger alert-dismissable">
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                        Check your username and password.
-                    </div>
-                    <?php
+            if
+                (isset($_GET['backresult']))
+                {
+                    $backresult=$_GET['backresult'];
+                    if ($backresult ==  "0") {
+                        ?>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            Check your username and password.
+                        </div>
+                        <?php
+                    }
                 }
-            }
             ?>
         </div>
     </div>
