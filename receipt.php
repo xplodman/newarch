@@ -221,6 +221,9 @@ include_once "layout/header.php";
                                                     <input disabled name="reason" type="radio" class="ace" value="p3" <?php if($receiptresult['tireason']=="p3") echo 'checked="checked"'; ?>/>
                                                     <span disabled class="lbl">Final revision</span>
                                                     &nbsp; &nbsp; &nbsp; &nbsp;
+                                                    <input disabled name="reason" type="radio" class="ace" value="p5" <?php if($receiptresult['tireason']=="p5") echo 'checked="checked"'; ?>/>
+                                                    <span disabled class="lbl">Revision</span>
+                                                    &nbsp; &nbsp; &nbsp; &nbsp;
                                                     <input disabled name="reason" type="radio" class="ace" value="p4" <?php if($receiptresult['tireason']=="p4") echo 'checked="checked"'; ?>/>
                                                     <span class="lbl"> Others</span>
                                                     <?php

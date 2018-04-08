@@ -653,6 +653,9 @@ include_once "php/application_setting.php";
                                         <span class="lbl">Final revesion</span>
                                         <input required name="reason" type="radio" class="ace" value="p3" />
                                         &nbsp; &nbsp;
+                                        <span class="lbl">Revesion</span>
+                                        <input required name="reason" type="radio" class="ace" value="p5" />
+                                        &nbsp; &nbsp;
                                         <span class="lbl">Other</span>
                                         <input required name="reason" type="radio" class="ace" value="p4" />
                                     </font>

@@ -61,6 +61,7 @@ CASE
     WHEN tickets.tireason = 'p1' then 'كورس'
     WHEN tickets.tireason = 'p2' then 'مذكرات'
     WHEN tickets.tireason = 'p3' then 'مراجعة نهائية' 
+    WHEN tickets.tireason = 'p5' then 'مراجعة' 
     WHEN tickets.tireason = 'p4' then 'آخري'   
     ELSE 'Maybe'                                 
 END AS reason ,    
