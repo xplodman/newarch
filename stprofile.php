@@ -200,9 +200,12 @@ include_once "layout/header.php";
                                                 <?php
                                                     if($_SESSION['5inarch']['role']=="1"){
                                                         ?>
-                                                        <input value="<?php echo $stinfores['stbalance'] ;?>" class="form-control" name="stbalance" >
+                                                        <input value="<?php echo $stinfores['stbalance'] ;?>" class="form-control" name="stbalance">
                                                         <?php
                                                 }else{
+                                                        ?>
+                                                        <input value="<?php echo $stinfores['stbalance'] ;?>" class="hidden" name="stbalance">
+                                                        <?php
                                                     if($stinfores['stbalance'] > 0):
                                                         $varb='<a href="" class="btn btn-xs btn-success">';
                                                     elseif($stinfores['stbalance'] < 0):
