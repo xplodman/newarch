@@ -78,7 +78,7 @@ include_once "layout/header.php";
                                                 $month_number = array();
                                                 $i = -3;
 
-                                                while ($i <= 1) {
+                                                while ($i <= 3) {
                                                     $month_name = date('F', strtotime("+$i month"));
                                                     $month_number = date('m', strtotime("+$i month"));
 
@@ -166,7 +166,7 @@ include_once "layout/header.php";
                                             <th>Name</th>
                                             <?php
                                             $i = -3;
-                                            while ($i <= 1) {
+                                            while ($i <= 3) {
                                                 $month_name = date('F', strtotime("+$i month"));
                                                 $month_number = date('m', strtotime("+$i month"));
                                                 ?>
@@ -202,7 +202,7 @@ include_once "layout/header.php";
                                             </td>
                                             <?php
                                             $i = -3;
-                                            while ($i <= 1) {
+                                            while ($i <= 3) {
                                                 $month_name = date('F', strtotime("+$i month"));
                                                 $date_name = date('Y-m', strtotime("+$i month"));
                                                 $month_number = date('m', strtotime("+$i month"));
@@ -219,7 +219,7 @@ include_once "layout/header.php";
                                                         <span class="btn btn-xs btn-warning">
                                                             <font size="3">
                                                             <?php
-                                                            echo "تم صرف المرتب هذا الشهر";
+                                                            echo "تم الصرف";
                                                             ?>
                                                                 </font>
                                                             </span>
@@ -251,6 +251,9 @@ include_once "layout/header.php";
                                         </tbody>
                                         <tfoot>
                                         <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -572,7 +575,7 @@ include_once "layout/modals.php";
     $(document).ready(function() {
         $('.dataTables-example2').DataTable({
             initComplete: function () {
-                this.api().columns(':eq(7),:eq(8)').every( function () {
+                this.api().columns(':eq(99),:eq(88)').every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
                         .appendTo( $(column.header()).empty() )
