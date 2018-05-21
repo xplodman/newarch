@@ -18,7 +18,7 @@ if ($receipttype=="1"){
     $description=$_POST['description'];
     $result1 = mysqli_query($con, "INSERT INTO `$database_name`.`tickets` (`tiid`, `tiamount`, `tidonor`, `tidonortype`, `tirecipient`, `tirecipienttype`, `tirealdate`, `tisysdate`, `tireason`, `tinumber`, `tidescription`, `titype`) VALUES (NULL, '$amount', '$donor', '2', '$recipient', '1', '$date', now(), '$reason', '$number', '$description', '1');");
 
-    if ($reason == "p1") {
+    if ($reason == "p1" or $reason == "p3" or $reason == "p4" or $reason == "p5") {
         $result2 = mysqli_query($con, "UPDATE `$database_name`.`students` SET `stbalance` = `stbalance`+$amount WHERE `students`.`stid` = $donor;");
     };
 }elseif ($receipttype=="2"){
