@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2018 at 06:04 PM
+-- Generation Time: Nov 12, 2018 at 03:22 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -23,34 +23,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `absall`
+-- Stand-in structure for view `absall`
 --
-
 CREATE TABLE IF NOT EXISTS `absall` (
-  `stid` tinyint(4) NOT NULL,
-  `stname` tinyint(4) NOT NULL,
-  `stmob` tinyint(4) NOT NULL,
-  `sttel` tinyint(4) NOT NULL,
-  `stparenttype` tinyint(4) NOT NULL,
-  `stparentname` tinyint(4) NOT NULL,
-  `stparentmob` tinyint(4) NOT NULL,
-  `stemail` tinyint(4) NOT NULL,
-  `staddress` tinyint(4) NOT NULL,
-  `stnationalid` tinyint(4) NOT NULL,
-  `styear` tinyint(4) NOT NULL,
-  `stterm` tinyint(4) NOT NULL,
-  `stgroup` tinyint(4) NOT NULL,
-  `stbalance` tinyint(4) NOT NULL,
-  `matid` tinyint(4) NOT NULL,
-  `matname` tinyint(4) NOT NULL,
-  `matyear` tinyint(4) NOT NULL,
-  `matterm` tinyint(4) NOT NULL,
-  `absid` tinyint(4) NOT NULL,
-  `date` tinyint(4) NOT NULL,
-  `students_stid` tinyint(4) NOT NULL,
-  `material_matid` tinyint(4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
+`stid` int(5)
+,`stname` varchar(25)
+,`stmob` varchar(25)
+,`sttel` varchar(11)
+,`stparenttype` varchar(15)
+,`stparentname` varchar(25)
+,`stparentmob` varchar(22)
+,`stemail` varchar(25)
+,`staddress` varchar(30)
+,`stnationalid` varchar(14)
+,`styear` varchar(15)
+,`stterm` varchar(15)
+,`stgroup` varchar(25)
+,`stbalance` varchar(15)
+,`matid` int(4)
+,`matname` varchar(45)
+,`matyear` varchar(15)
+,`matterm` varchar(15)
+,`absid` int(10)
+,`date` date
+,`students_stid` int(5)
+,`material_matid` int(4)
+);
 -- --------------------------------------------------------
 
 --
@@ -65,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `absence` (
   PRIMARY KEY (`absid`,`students_stid`,`material_matid`),
   KEY `fk_absence_students1_idx` (`students_stid`),
   KEY `fk_absence_material1_idx` (`material_matid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `absence`
@@ -78,7 +76,44 @@ INSERT INTO `absence` (`absid`, `date`, `students_stid`, `material_matid`) VALUE
 (7, '2017-09-26', 37, 30),
 (8, '2017-09-26', 40, 30),
 (9, '2017-09-26', 45, 30),
-(10, '2017-09-26', 46, 30);
+(10, '2017-09-26', 46, 30),
+(11, '2018-02-22', 2, 1),
+(12, '2018-02-22', 3, 1),
+(13, '2018-02-22', 4, 1),
+(14, '2018-02-22', 5, 1),
+(15, '2018-02-22', 6, 1),
+(16, '2018-02-22', 7, 1),
+(17, '2018-02-22', 8, 1),
+(18, '2018-02-23', 1, 1),
+(19, '2018-02-23', 2, 1),
+(20, '2018-02-23', 3, 1),
+(21, '2018-02-23', 4, 1),
+(22, '2018-02-23', 5, 1),
+(23, '2018-02-23', 6, 1),
+(24, '2018-02-23', 8, 1),
+(25, '2018-02-23', 9, 1),
+(26, '2018-02-23', 11, 1),
+(27, '2018-02-23', 13, 1),
+(28, '2018-02-23', 14, 1),
+(29, '2018-02-23', 15, 1),
+(30, '2018-02-23', 16, 1),
+(31, '2018-02-23', 17, 1),
+(32, '2018-02-23', 18, 1),
+(33, '2018-02-23', 19, 1),
+(34, '2018-02-23', 20, 1),
+(35, '2018-02-23', 21, 1),
+(36, '2018-02-23', 22, 1),
+(43, '2018-02-28', 1, 1),
+(44, '2018-02-28', 2, 1),
+(45, '2018-02-28', 3, 1),
+(46, '2018-02-28', 4, 1),
+(47, '2018-02-28', 5, 1),
+(48, '2018-02-28', 6, 1),
+(49, '2018-02-28', 1, 1),
+(50, '2018-02-28', 2, 1),
+(51, '2018-02-28', 3, 1),
+(52, '2018-02-28', 4, 1),
+(53, '2018-02-28', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -111,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `application_setting` (
   `course_price` int(11) DEFAULT NULL,
   `final_revision_price` int(11) DEFAULT NULL,
   `one_material_price` int(11) DEFAULT NULL,
+  `revision_price` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -118,8 +154,8 @@ CREATE TABLE IF NOT EXISTS `application_setting` (
 -- Dumping data for table `application_setting`
 --
 
-INSERT INTO `application_setting` (`id`, `course_price`, `final_revision_price`, `one_material_price`) VALUES
-(1, 750, 900, 150);
+INSERT INTO `application_setting` (`id`, `course_price`, `final_revision_price`, `one_material_price`, `revision_price`) VALUES
+(1, 750, 900, 150, 100);
 
 -- --------------------------------------------------------
 
@@ -160,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `expenses` (
   `exdesc` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `excode` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`exid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `expenses`
@@ -178,7 +214,8 @@ INSERT INTO `expenses` (`exid`, `exname`, `exdesc`, `excode`) VALUES
 (9, 'أخرى', '', 'm9'),
 (10, 'أدوات مكتبية', '', 'm10'),
 (12, 'name', 'desc', 'm12'),
-(13, 'klj', 'klj', 'm33');
+(13, 'klj', 'klj', 'm33'),
+(14, '23', '', 'm34');
 
 -- --------------------------------------------------------
 
@@ -289,24 +326,22 @@ INSERT INTO `prmat` (`prmatid`, `professors_prid`, `material_matid`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prmatall`
+-- Stand-in structure for view `prmatall`
 --
-
 CREATE TABLE IF NOT EXISTS `prmatall` (
-  `prname` tinyint(4) NOT NULL,
-  `prmob` tinyint(4) NOT NULL,
-  `prtel` tinyint(4) NOT NULL,
-  `prparentname` tinyint(4) NOT NULL,
-  `premail` tinyint(4) NOT NULL,
-  `prparentmob` tinyint(4) NOT NULL,
-  `prbalance` tinyint(4) NOT NULL,
-  `matyear` tinyint(4) NOT NULL,
-  `matterm` tinyint(4) NOT NULL,
-  `prid` tinyint(4) NOT NULL,
-  `matid` tinyint(4) NOT NULL,
-  `matname` tinyint(4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
+`prname` varchar(25)
+,`prmob` varchar(11)
+,`prtel` varchar(11)
+,`prparentname` varchar(25)
+,`premail` varchar(40)
+,`prparentmob` varchar(11)
+,`prbalance` varchar(10)
+,`matyear` varchar(15)
+,`matterm` varchar(15)
+,`prid` int(4)
+,`matid` int(4)
+,`matname` varchar(45)
+);
 -- --------------------------------------------------------
 
 --
@@ -1778,7 +1813,7 @@ INSERT INTO `stmat` (`stmatid`, `material_matid`, `students_stid`, `status`) VAL
 (1415, 2, 285, 1),
 (1416, 3, 285, 1),
 (1417, 4, 285, 1),
-(1418, 3, 286, 1),
+(1418, 3, 286, 0),
 (1419, 1, 287, 1),
 (1420, 2, 287, 1),
 (1421, 3, 287, 1),
@@ -1795,42 +1830,40 @@ INSERT INTO `stmat` (`stmatid`, `material_matid`, `students_stid`, `status`) VAL
 (1432, 6, 288, 1),
 (1433, 7, 288, 1),
 (1434, 8, 288, 1),
-(1435, 1, 289, 1),
-(1436, 2, 289, 1),
-(1437, 3, 289, 1),
-(1438, 4, 289, 1),
-(1439, 5, 289, 1),
-(1440, 6, 289, 1),
-(1441, 7, 289, 1),
-(1442, 8, 289, 1);
+(1435, 1, 289, 0),
+(1436, 2, 289, 0),
+(1437, 3, 289, 0),
+(1438, 4, 289, 0),
+(1439, 5, 289, 0),
+(1440, 6, 289, 0),
+(1441, 7, 289, 0),
+(1442, 8, 289, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stmatall`
+-- Stand-in structure for view `stmatall`
 --
-
 CREATE TABLE IF NOT EXISTS `stmatall` (
-  `stname` tinyint(4) NOT NULL,
-  `stmob` tinyint(4) NOT NULL,
-  `styear` tinyint(4) NOT NULL,
-  `stterm` tinyint(4) NOT NULL,
-  `stgroup` tinyint(4) NOT NULL,
-  `stbalance` tinyint(4) NOT NULL,
-  `matname` tinyint(4) NOT NULL,
-  `matid` tinyint(4) NOT NULL,
-  `matyear` tinyint(4) NOT NULL,
-  `matterm` tinyint(4) NOT NULL,
-  `sttel` tinyint(4) NOT NULL,
-  `stparenttype` tinyint(4) NOT NULL,
-  `stparentname` tinyint(4) NOT NULL,
-  `stparentmob` tinyint(4) NOT NULL,
-  `stemail` tinyint(4) NOT NULL,
-  `staddress` tinyint(4) NOT NULL,
-  `stnationalid` tinyint(4) NOT NULL,
-  `stid` tinyint(4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
+`stname` varchar(25)
+,`stmob` varchar(25)
+,`styear` varchar(15)
+,`stterm` varchar(15)
+,`stgroup` varchar(25)
+,`stbalance` varchar(15)
+,`matname` varchar(45)
+,`matid` int(4)
+,`matyear` varchar(15)
+,`matterm` varchar(15)
+,`sttel` varchar(11)
+,`stparenttype` varchar(15)
+,`stparentname` varchar(25)
+,`stparentmob` varchar(22)
+,`stemail` varchar(25)
+,`staddress` varchar(30)
+,`stnationalid` varchar(14)
+,`stid` int(5)
+);
 -- --------------------------------------------------------
 
 --
@@ -1864,7 +1897,7 @@ CREATE TABLE IF NOT EXISTS `students` (
 
 INSERT INTO `students` (`stid`, `stcode`, `stname`, `stmob`, `sttel`, `stparenttype`, `stparentname`, `stparentmob`, `stemail`, `staddress`, `stnationalid`, `sttype`, `sttype2`, `styear`, `stterm`, `stgroup`, `stbalance`) VALUES
 (1, '', 'احمد محمد عساف', '01141035135', '', '', '', '	01014054821', '', 'كليوباترا', '29602090201017', 2, 'B', '4', '1', 'A', '0'),
-(2, '', 'لطيفة انور سعيد', '01205294873', '', '', '', '	01205294876', '', 'محرم بك', '', 1, 'B', '4', '1', 'A', '0'),
+(2, '', 'لطيفة انور سعيد', '01205294873', '', '', '', '	01205294876', '', 'محرم بك', '', 1, 'B', '4', '1', 'A', '1500'),
 (3, '', 'يمنى حسام الدين احمد', '01022291317', '', '', '', '0105200508', '', 'سبورتنج', '29604130200101', 2, 'B', '4', '1', 'A', '0'),
 (4, '', 'اية اشرف عيسى', '01283666148', '', '', '', '01021276359', '', 'الابراهيمية', '29410010214907', 1, 'B', '4', '1', 'A', '0'),
 (5, '', 'مريم احمد محمود', '01206113094', '', '', '', '	01123355227', '', 'مصطفى كامل', '29404300201001', 1, 'B', '4', '1', 'A', '0'),
@@ -2146,10 +2179,10 @@ INSERT INTO `students` (`stid`, `stcode`, `stname`, `stmob`, `sttel`, `stparentt
 (283, '098', 'jkhkljhjklhjkl', '897987', '89070987', 'kljlk', 'lkjlkj', '	987987', 'a@a.com', 'kjlkj', '987897', 1, 'C', '3', '2', 'B', '100'),
 (284, '098', 'jkhkljhjklhjkl', '897987', '89070987', 'kljlk', 'lkjlkj', '	987987', 'a@a.com', 'kjlkj', '987897', 1, 'C', '3', '2', 'B', '100'),
 (285, '098', 'jkhkljhjklhjkl', '897987', '89070987', 'kljlk', 'lkjlkj', '	987987', 'a@a.com', 'kjlkj', '987897', 1, 'C', '3', '2', 'B', '100'),
-(286, 'Al Iskandarîyah', 'kljlk;j', '897', '987', 'jh', 'kjh', '	098', '', '098', '07', 2, 'C', '2', '2', 'B', '100'),
+(286, 'Al Iskandarîyah', 'kljlk;j', '897', '987', 'jh', 'kjh', '	098', '', '098', '07', 2, 'C', '2', '2', 'B', '-50'),
 (287, '2', 'KLJ', '987', '897', 'kuj', 'iuiu', '	898', 'a@a.com', 'kj', '897', 1, 'B', '3', '2', 'B', '-750'),
 (288, '2', 'KLJ', '987', '897', 'kuj', 'iuiu', '	898', 'a@a.com', 'kj', '897', 1, 'C', '3', '2', 'B', '-100'),
-(289, '2', 'KLJ', '987', '897', 'kuj', 'iuiu', '	898', 'a@a.com', 'kj', '897', 1, 'C', '3', '2', 'B', '-900');
+(289, '2', 'KLJ', '987', '897', 'kuj', 'iuiu', '	898', 'a@a.com', 'kj', '897', 1, 'C', '3', '2', 'B', '-500');
 
 -- --------------------------------------------------------
 
@@ -2171,7 +2204,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `tidescription` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `titype` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`tiid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=922 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=926 ;
 
 --
 -- Dumping data for table `tickets`
@@ -3084,7 +3117,38 @@ INSERT INTO `tickets` (`tiid`, `tiamount`, `tidonor`, `tidonortype`, `tirecipien
 (918, -7, '3', 1, '4', 1, '2018-02-21', '2018-02-07 19:09:24', '99', '76', '2', '99'),
 (919, -700, '3', 1, '4', 1, '2018-02-21', '2018-02-07 19:11:14', '99', '76', '2', '99'),
 (920, -900, '4', 1, '2', 1, '2018-01-31', '2018-02-08 01:20:33', '99', '123', 'e', '99'),
-(921, -1500, '4', 1, '6', 1, '2018-02-14', '2018-02-08 02:35:18', 'm3', 'asdjkh', '.', '2');
+(921, -1500, '4', 1, '6', 1, '2018-02-14', '2018-02-08 02:35:18', 'm3', 'asdjkh', '.', '2'),
+(922, 750, '2', 2, '2', 1, '2018-01-30', '2018-02-17 00:34:32', 'p1', '8', 'as', '1'),
+(923, 750, '2', 2, '2', 1, '2018-01-30', '2018-02-17 00:36:53', 'p1', '8', 'as', '1'),
+(924, 50, '286', 2, '1', 1, '2018-02-16', '2018-02-23 21:37:53', 'p1', '2e4', '213', '1'),
+(925, -575, '2', 1, '2', 1, '2018-12-01', '2018-10-26 19:19:44', 'm3', '', '', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `absall`
+--
+DROP TABLE IF EXISTS `absall`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `absall` AS select `students`.`stid` AS `stid`,`students`.`stname` AS `stname`,`students`.`stmob` AS `stmob`,`students`.`sttel` AS `sttel`,`students`.`stparenttype` AS `stparenttype`,`students`.`stparentname` AS `stparentname`,`students`.`stparentmob` AS `stparentmob`,`students`.`stemail` AS `stemail`,`students`.`staddress` AS `staddress`,`students`.`stnationalid` AS `stnationalid`,`students`.`styear` AS `styear`,`students`.`stterm` AS `stterm`,`students`.`stgroup` AS `stgroup`,`students`.`stbalance` AS `stbalance`,`material`.`matid` AS `matid`,`material`.`matname` AS `matname`,`material`.`matyear` AS `matyear`,`material`.`matterm` AS `matterm`,`absence`.`absid` AS `absid`,`absence`.`date` AS `date`,`absence`.`students_stid` AS `students_stid`,`absence`.`material_matid` AS `material_matid` from ((`absence` join `material` on((`material`.`matid` = `absence`.`material_matid`))) join `students` on((`absence`.`students_stid` = `students`.`stid`))) order by `absence`.`date` desc;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `prmatall`
+--
+DROP TABLE IF EXISTS `prmatall`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prmatall` AS select `professors`.`prname` AS `prname`,`professors`.`prmob` AS `prmob`,`professors`.`prtel` AS `prtel`,`professors`.`prparentname` AS `prparentname`,`professors`.`premail` AS `premail`,`professors`.`prparentmob` AS `prparentmob`,`professors`.`prbalance` AS `prbalance`,`material`.`matyear` AS `matyear`,`material`.`matterm` AS `matterm`,`professors`.`prid` AS `prid`,`material`.`matid` AS `matid`,`material`.`matname` AS `matname` from ((`material` join `prmat` on((`material`.`matid` = `prmat`.`material_matid`))) join `professors` on((`prmat`.`professors_prid` = `professors`.`prid`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `stmatall`
+--
+DROP TABLE IF EXISTS `stmatall`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `stmatall` AS select `students`.`stname` AS `stname`,`students`.`stmob` AS `stmob`,`students`.`styear` AS `styear`,`students`.`stterm` AS `stterm`,`students`.`stgroup` AS `stgroup`,`students`.`stbalance` AS `stbalance`,`material`.`matname` AS `matname`,`material`.`matid` AS `matid`,`material`.`matyear` AS `matyear`,`material`.`matterm` AS `matterm`,`students`.`sttel` AS `sttel`,`students`.`stparenttype` AS `stparenttype`,`students`.`stparentname` AS `stparentname`,`students`.`stparentmob` AS `stparentmob`,`students`.`stemail` AS `stemail`,`students`.`staddress` AS `staddress`,`students`.`stnationalid` AS `stnationalid`,`students`.`stid` AS `stid` from ((`students` join `stmat` on((`students`.`stid` = `stmat`.`students_stid`))) join `material` on((`material`.`matid` = `stmat`.`material_matid`))) where (`stmat`.`status` = 1);
 
 --
 -- Constraints for dumped tables
